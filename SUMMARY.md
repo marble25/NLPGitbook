@@ -7,6 +7,7 @@
 * [Text Analysis란?](chapter-1/what_is_text_analysis.md)
 * [Garbage in, Garbage out](chapter-1/importance_of_input.md)
 * [Text Analysis를 시작하자!](chapter-1/importance_of_text_analysis.md)
+* [Python?](chapter-1/why_python.md)
 
 ### Chapter 2 - Language Model
 
