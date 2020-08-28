@@ -4,7 +4,9 @@
 
 ### Chapter 1 - Text Analysis
 
-* NLP란
+* [Text Analysis란?](chapter-1/what_is_text_analysis.md)
+* [Garbage in, Garbage out](chapter-1/importance_of_input.md)
+* [Text Analysis의 중요성](chapter-1/importance_of_text_analysis.md)
 
 ### Chapter 2 - Language Model
 
