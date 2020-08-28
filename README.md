@@ -17,5 +17,22 @@
 
 ---
 
+패키지 설치하기
+
+1. Python   
+Python Version은 3.6을 기준으로 작성되었습니다.    
+Ubuntu나 macOS는 기본적으로 설치가 되어 있습니다.    
+
+1. spaCy   
+`pip install spacy`
+1. Gensim   
+`pip install gensim`
+1. Keras   
+`pip install keras`
+1. scikit-learn   
+`pip install scikit-learn`
+
+---
+
 NLP 기본 자료 : Natural Language Processing and Computational Linguistics: A practical guide to text analysis with Python, Gensim, spaCy, and Keras (by Bhargav Srinivasa-Desikan)   
 NLP 참고 자료 : [딥러닝을 이용한 자연어 처리 입문](https://wikidocs.net/book/2155)
