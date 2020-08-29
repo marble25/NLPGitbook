@@ -16,8 +16,7 @@ spaCy는 실제 production code에서 사용될 수 있습니다.
 spaCy의 특징은 다음과 같습니다.   
 
 * Tokenization
-* 21개 이상의 자연어 지원
-* 5개의 언어에 대해서는 6개의 통계적 모델 지원
+* 21개 이상의 언어 지원
 * 미리 학습된 word vectors
 * Deep Learning과 쉬운 접목
 * POS Tagging
