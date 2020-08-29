@@ -338,7 +338,35 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="&#xD14D;&#xC2A4;&#xD2B8;-&#xC804;&#xCC98;&#xB9AC;">&#xD14D;&#xC2A4;&#xD2B8; &#xC804;&#xCC98;&#xB9AC;</h2>
+<hr>
+<h3 id="stop-words">Stop words</h3>
+<p>Stop words(&#xBD88;&#xC6A9;&#xC5B4;)&#xB294; &#xC5B4;&#xB5A4; &#xC815;&#xBCF4;&#xB3C4; &#xC81C;&#xACF5;&#xD574;&#xC8FC;&#xC9C0; &#xC54A;&#xB294; &#xB9D0;&#xC744; &#xC758;&#xBBF8;&#xD569;&#xB2C8;&#xB2E4;.<br>Stop words&#xB294; NLP algorithm&#xC744; &#xC801;&#xC6A9;&#xD558;&#xAE30; &#xC804;&#xC5D0; &#xC81C;&#xAC70;&#xB429;&#xB2C8;&#xB2E4;.<br>&#xB2E4;&#xC2DC; &#xB9D0;&#xD558;&#xC9C0;&#xB9CC;, &#xBAA8;&#xB4E0; &#xACBD;&#xC6B0;&#xC5D0; &#xC801;&#xC6A9;&#xB418;&#xB294; &#xAC83;&#xC740; &#xC544;&#xB2D9;&#xB2C8;&#xB2E4;.   </p>
+<p>spaCy&#xC5D0;&#xC11C;&#xB294; stop words&#xB294; &#xAD49;&#xC7A5;&#xD788; &#xC54C;&#xAE30; &#xC27D;&#xC2B5;&#xB2C8;&#xB2E4;.<br>is_stop&#xC774;&#xB77C;&#xB294; &#xC18D;&#xC131;&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xB294; token&#xC740; stop word&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC6B0;&#xB9AC;&#xC758; stop word&#xB97C; &#xCD94;&#xAC00;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>my_stop_words = [u&apos;say&apos;, u&apos;be&apos;, u&apos;said&apos;, u&apos;says&apos;, u&apos;saying&apos;]
+for stopword in my_stop_words:
+    lexeme = nlp.vocab[stopword]
+    lexeme.is_stop = True
+</code></pre><p>&#xAE30;&#xBCF8;&#xC801;&#xC778; stop word&#xC5D0;&#xB294; &#xC5B4;&#xB5A4; &#xAC83;&#xC774; &#xC788;&#xB294;&#xC9C0; &#xD655;&#xC778;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>from spacy.lang.en.stop_words import STOP_WORDS
+print(STOP_WORDS)
+</code></pre><h3 id="stemming&#xACFC;-lemmatization">Stemming&#xACFC; Lemmatization</h3>
+<p>saying&#xACFC; say, says&#xB294; &#xBB38;&#xBC95;&#xC801;&#xC778; &#xCC28;&#xC774;&#xB9CC; &#xC788;&#xC744; &#xBFD0;, &#xC804;&#xB2EC;&#xD558;&#xB294; &#xC758;&#xBBF8;&#xB294; &#xB3D9;&#xC77C;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB7F0; &#xB2E8;&#xC5B4;&#xB4E4;&#xC744; &#xCC98;&#xB9AC;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xC5D0;&#xB294; stemming&#xACFC; lemmatization&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>Stemming&#xC740; &#xB2E8;&#xC5B4;&#xC758; &#xB05D;&#xC744; &#xC9C0;&#xC6B0;&#xB294; &#xBC29;&#xC2DD;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, saying&#xACFC; say, says&#xB294; &#xBAA8;&#xB450; say&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>Lemmatization&#xC740; &#xD615;&#xD0DC;&#xD559;&#xC801; &#xBD84;&#xC11D;&#xC744; &#xD1B5;&#xD574; root word&#xB97C; &#xCC3E;&#xC544;&#xAC00;&#xB294; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, is&#xC640; are, were&#xB294; &#xBAA8;&#xB450; &apos;be&apos;&#xB77C;&#xB294; root word&#xB97C; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC2E4;&#xC81C;&#xB85C;, preprocessing&#xC744; &#xC9C4;&#xD589;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.<br>&#xC774; &#xCF54;&#xB4DC;&#xB294; stop word&#xB97C; &#xCD94;&#xAC00;&#xD55C; &#xC774;&#xD6C4; &#xC9C4;&#xD589;&#xB418;&#xB294; &#xCF54;&#xB4DC;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>doc = nlp(u&apos;the horse galloped down the field and past the river. &apos;)
+sentence = []
+for w in doc:
+    if not w.is_stop and not w.is_punct and not w.like_num:
+        sentence.append(w.lemma_)
+
+print(sentence)
+</code></pre><p>&#xC704;&#xC5D0;&#xC11C; <code>is_stop</code>&#xACFC; <code>is_punct</code>, <code>like_num</code>&#xC744; &#xD1B5;&#xD574; &#xBD88;&#xC6A9;&#xC5B4;&#xC640; &#xAD6C;&#xB450;&#xC810;, &#xC22B;&#xC790; &#xD45C;&#xD604;&#xC744; &#xC81C;&#xAC70;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[&apos;horse&apos;, &apos;gallop&apos;, &apos;past&apos;, &apos;river&apos;]
+</code></pre><p>&#xC704; &#xC608;&#xC2DC;&#xC5D0;&#xC11C;&#xB294; &#xC22B;&#xC790;&#xB97C; &#xC911;&#xC694;&#xD558;&#xC9C0; &#xC54A;&#xC740; &#xC815;&#xBCF4;&#xB85C; &#xCDE8;&#xAE09;&#xD588;&#xC9C0;&#xB9CC;, &#xB2E4;&#xB978; &#xACBD;&#xC6B0;&#xC5D0;&#xB294; &#xC911;&#xC694;&#xD55C; &#xC815;&#xBCF4;&#xC77C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -377,7 +405,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"텍스트 전처리","level":"3.6","depth":1,"previous":{"title":"NER 태깅","level":"3.5","depth":1,"path":"chapter-2/ner_tagging.md","ref":"chapter-2/ner_tagging.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-2/preprocessing.md","mtime":"2020-08-29T08:34:45.626Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-29T15:54:48.548Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"텍스트 전처리","level":"3.6","depth":1,"previous":{"title":"NER 태깅","level":"3.5","depth":1,"path":"chapter-2/ner_tagging.md","ref":"chapter-2/ner_tagging.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-2/preprocessing.md","mtime":"2020-08-29T16:12:27.849Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-29T16:12:31.383Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
