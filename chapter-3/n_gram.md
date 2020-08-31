@@ -11,7 +11,7 @@ N-gram은 text에서 연속된 n개의 item을 의미합니다.
 bi-gram이란 *n=2*인 경우를 말합니다.   
 
 bi-gram이 text에서 이전 token이 있을 때 그 다음 token이 나올 확률로 계산될 수도 있고, bi-gram이 pair로 나타날 확률로 계산될 수도 있습니다.   
-예를 들어, *New York*나 *Machine Learning*이 bi-gram에 의해 생긴 단어입니다.   
+예를 들어, *New York*이나 *Machine Learning*이 bi-gram에 의해 생긴 단어입니다.   
 다시 말해서, training data에 따라, 우리는 *New* 다음에는 *York*가 올 확률이 높다는 것을 알 수 있고, *New York* 자체를 하나의 객체로 인식하는 편이 좋겠다고 생각할 수 있습니다.   
 우리는 bi-gram 모델을 돌리기 전에 필요없는 stop words를 제거해야 합니다.   
 Gensim의 경우 bi-gram 모델은 pair가 나타날 확률을 바탕으로 하고 있습니다.   
