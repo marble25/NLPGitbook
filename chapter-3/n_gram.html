@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>NER 태깅 · GitBook</title>
+        <title>N-gram과 전처리 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="preprocessing.html" />
     
-    
-    <link rel="prev" href="pos_tagging.html" />
+    <link rel="prev" href="vector_transformation_in_gensim.html" />
     
 
     </head>
@@ -181,9 +179,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="install_lm.html">
+        <li class="chapter " data-level="3.2" data-path="../chapter-2/install_lm.html">
             
-                <a href="install_lm.html">
+                <a href="../chapter-2/install_lm.html">
             
                     
                     Language Model 설치
@@ -194,9 +192,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="tokenize_text.html">
+        <li class="chapter " data-level="3.3" data-path="../chapter-2/tokenize_text.html">
             
-                <a href="tokenize_text.html">
+                <a href="../chapter-2/tokenize_text.html">
             
                     
                     텍스트 토큰화
@@ -207,9 +205,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.4" data-path="pos_tagging.html">
+        <li class="chapter " data-level="3.4" data-path="../chapter-2/pos_tagging.html">
             
-                <a href="pos_tagging.html">
+                <a href="../chapter-2/pos_tagging.html">
             
                     
                     POS 태깅
@@ -220,9 +218,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.5" data-path="ner_tagging.html">
+        <li class="chapter " data-level="3.5" data-path="../chapter-2/ner_tagging.html">
             
-                <a href="ner_tagging.html">
+                <a href="../chapter-2/ner_tagging.html">
             
                     
                     NER 태깅
@@ -233,9 +231,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.6" data-path="preprocessing.html">
+        <li class="chapter " data-level="3.6" data-path="../chapter-2/preprocessing.html">
             
-                <a href="preprocessing.html">
+                <a href="../chapter-2/preprocessing.html">
             
                     
                     텍스트 전처리
@@ -253,9 +251,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../chapter-3/gensim.html">
+        <li class="chapter " data-level="4.1" data-path="gensim.html">
             
-                <a href="../chapter-3/gensim.html">
+                <a href="gensim.html">
             
                     
                     Gensim
@@ -266,9 +264,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../chapter-3/bow.html">
+        <li class="chapter " data-level="4.2" data-path="bow.html">
             
-                <a href="../chapter-3/bow.html">
+                <a href="bow.html">
             
                     
                     Bag-of-words
@@ -279,9 +277,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="../chapter-3/tf_idf.html">
+        <li class="chapter " data-level="4.3" data-path="tf_idf.html">
             
-                <a href="../chapter-3/tf_idf.html">
+                <a href="tf_idf.html">
             
                     
                     TF-IDF
@@ -292,9 +290,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.4" data-path="../chapter-3/vector_transformation_in_gensim.html">
+        <li class="chapter " data-level="4.4" data-path="vector_transformation_in_gensim.html">
             
-                <a href="../chapter-3/vector_transformation_in_gensim.html">
+                <a href="vector_transformation_in_gensim.html">
             
                     
                     Gensim에서 벡터 표현법
@@ -305,9 +303,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.5" data-path="../chapter-3/n_gram.html">
+        <li class="chapter active" data-level="4.5" data-path="n_gram.html">
             
-                <a href="../chapter-3/n_gram.html">
+                <a href="n_gram.html">
             
                     
                     N-gram과 전처리
@@ -390,7 +388,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >NER 태깅</a>
+        <a href=".." >N-gram과 전처리</a>
     </h1>
 </div>
 
@@ -405,32 +403,27 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="ner-&#xD0DC;&#xAE45;">NER &#xD0DC;&#xAE45;</h2>
+                                <h2 id="n-gram&#xACFC;-&#xC804;&#xCC98;&#xB9AC;">N-gram&#xACFC; &#xC804;&#xCC98;&#xB9AC;</h2>
 <hr>
-<h3 id="ner">NER</h3>
-<p>Default Pipeline&#xC758; &#xB9C8;&#xC9C0;&#xB9C9;&#xC740; NER(Named Entity Recognition)&#xC785;&#xB2C8;&#xB2E4;.<br>Named Entity&#xB294; &#xC774;&#xB984;&#xC774; &#xBD80;&#xC5EC;&#xB41C; &#xC2E4;&#xC81C; object&#xC785;&#xB2C8;&#xB2E4;.(&#xC608;&#xB97C; &#xB4E4;&#xBA74;, &#xC0AC;&#xB78C;, &#xB098;&#xB77C;, &#xC81C;&#xD488;, &#xD68C;&#xC0AC; &#xB4F1;)<br>spaCy&#xB294; &#xB2E4;&#xC591;&#xD55C; &#xC885;&#xB958;&#xC758; Named Entity&#xB97C; &#xBAA8;&#xB378;&#xC5D0; &#xC608;&#xCE21;&#xD558;&#xB294; &#xBC29;&#xC2DD;&#xC73C;&#xB85C; &#xC778;&#xC2DD;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC544;&#xB798;&#xC640; &#xAC19;&#xC774; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>doc = nlp(u&apos;Microsoft has offices all over Europe.&apos;)
+<h3 id="n-gram">N-gram</h3>
+<p>&#xD14D;&#xC2A4;&#xD2B8; &#xB370;&#xC774;&#xD130;&#xB97C; &#xCC98;&#xB9AC;&#xD558;&#xB2E4; &#xBCF4;&#xBA74;, context&#xAC00; &#xAD49;&#xC7A5;&#xD788; &#xC911;&#xC694;&#xD568;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>vector representation&#xC5D0;&#xC11C;&#xB294; word&#xC758; count&#xB9CC; &#xC54C;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; context&#xB97C; &#xC783;&#xC5B4;&#xBC84;&#xB9B4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br><strong>N-gram</strong>, &#xADF8; &#xC911;&#xC5D0;&#xC11C;&#xB3C4; <strong>bi-gram</strong>&#xC774; &#xC5B4;&#xB290; &#xC815;&#xB3C4;&#xB294; &#xC774; context&#xB97C; &#xD574;&#xACB0;&#xD574;&#xC904; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>N-gram&#xC740; text&#xC5D0;&#xC11C; &#xC5F0;&#xC18D;&#xB41C; n&#xAC1C;&#xC758; item&#xC744; &#xC758;&#xBBF8;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC5EC;&#xAE30;&#xC11C; item&#xC774;&#xB780; &#xBB38;&#xC790;, &#xC74C;&#xC808;, &#xC74C;&#xC18C; &#xB4F1;&#xC774; &#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>bi-gram&#xC774;&#xB780; <em>n=2</em>&#xC778; &#xACBD;&#xC6B0;&#xB97C; &#xB9D0;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<p>bi-gram&#xC774; text&#xC5D0;&#xC11C; &#xC774;&#xC804; token&#xC774; &#xC788;&#xC744; &#xB54C; &#xADF8; &#xB2E4;&#xC74C; token&#xC774; &#xB098;&#xC62C; &#xD655;&#xB960;&#xB85C; &#xACC4;&#xC0B0;&#xB420; &#xC218;&#xB3C4; &#xC788;&#xACE0;, bi-gram&#xC774; pair&#xB85C; &#xB098;&#xD0C0;&#xB0A0; &#xD655;&#xB960;&#xB85C; &#xACC4;&#xC0B0;&#xB420; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, <em>New York</em>&#xB098; <em>Machine Learning</em>&#xC774; bi-gram&#xC5D0; &#xC758;&#xD574; &#xC0DD;&#xAE34; &#xB2E8;&#xC5B4;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xB2E4;&#xC2DC; &#xB9D0;&#xD574;&#xC11C;, training data&#xC5D0; &#xB530;&#xB77C;, &#xC6B0;&#xB9AC;&#xB294; <em>New</em> &#xB2E4;&#xC74C;&#xC5D0;&#xB294; <em>York</em>&#xAC00; &#xC62C; &#xD655;&#xB960;&#xC774; &#xB192;&#xB2E4;&#xB294; &#xAC83;&#xC744; &#xC54C; &#xC218; &#xC788;&#xACE0;, <em>New York</em> &#xC790;&#xCCB4;&#xB97C; &#xD558;&#xB098;&#xC758; &#xAC1D;&#xCCB4;&#xB85C; &#xC778;&#xC2DD;&#xD558;&#xB294; &#xD3B8;&#xC774; &#xC88B;&#xACA0;&#xB2E4;&#xACE0; &#xC0DD;&#xAC01;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xB294; bi-gram &#xBAA8;&#xB378;&#xC744; &#xB3CC;&#xB9AC;&#xAE30; &#xC804;&#xC5D0; &#xD544;&#xC694;&#xC5C6;&#xB294; stop words&#xB97C; &#xC81C;&#xAC70;&#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>Gensim&#xC758; &#xACBD;&#xC6B0; bi-gram &#xBAA8;&#xB378;&#xC740; pair&#xAC00; &#xB098;&#xD0C0;&#xB0A0; &#xD655;&#xB960;&#xC744; &#xBC14;&#xD0D5;&#xC73C;&#xB85C; &#xD558;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>Gensim&#xC740; bigram&#xC744; &#xB450; &#xB2E8;&#xC5B4; &#xC0AC;&#xC774;&#xC5D0; &apos;_&apos;&#xB97C; &#xB193;&#xB294; &#xBC29;&#xC2DD;&#xC73C;&#xB85C; &#xD45C;&#xD604;&#xD569;&#xB2C8;&#xB2E4;.<br>bi-gram&#xC744; &#xC0DD;&#xC131;&#xD558;&#xB294; &#xCF54;&#xB4DC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>import gensim
+bigram = gensim.models.Phrases(texts)
+</code></pre><p>&#xC774;&#xC81C; &#xD559;&#xC2B5;&#xB41C; bi-gram&#xC744; &#xAC16;&#xAC8C; &#xB418;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xC774;&#xD6C4;&#xC5D0; transformation&#xC744; &#xD558;&#xB294; &#xAC83;&#xC740; TF-IDF&#xC640; &#xB3D9;&#xC77C;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>texts = [bigram[line] for line in texts]
 
-for ent in doc.ents:
-  print((ent.text, ent.start_char, ent.end_char, ent.label_))
-</code></pre><p>&#xADF8; &#xACB0;&#xACFC;&#xB294; &#xC544;&#xB798;&#xC640; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>(&apos;Microsoft&apos;, 0, 9, &apos;ORG&apos;)
-(&apos;Europe&apos;, 31, 37, &apos;LOC&apos;)
-</code></pre><p>spaCy&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; built-in entity type&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<ul>
-<li>PERSON: &#xC0AC;&#xB78C;</li>
-<li>NORP: &#xAD6D;&#xC801;&#xC774;&#xB098; &#xC815;&#xCE58;&#xC801; &#xADF8;&#xB8F9;</li>
-<li>FACILITY: &#xBE4C;&#xB529;, &#xACF5;&#xD56D;, &#xB3C4;&#xB85C;, &#xB2E4;&#xB9AC; &#xB4F1;</li>
-<li>ORG: &#xAE30;&#xAD00;</li>
-<li>GPE: &#xB098;&#xB77C;, &#xB3C4;&#xC2DC;, &#xC8FC; &#xB4F1;</li>
-<li>LOC: GPE&#xAC00; &#xC544;&#xB2CC; location, &#xC0B0;, &#xAC15; &#xB4F1;</li>
-<li>PRODUCT: &#xBB3C;&#xAC74;, &#xC74C;&#xC2DD;, &#xC6B4;&#xC1A1;&#xC218;&#xB2E8; &#xB4F1;</li>
-<li>EVENT: &#xD5C8;&#xB9AC;&#xCF00;&#xC778;, &#xC804;&#xD22C; &#xB4F1;&#xC758; &#xC0AC;&#xAC74;</li>
-<li>WORK_OF_ART: &#xCC45;, &#xC74C;&#xC545; &#xB4F1;</li>
-<li>LAW: &#xBC95;&#xC73C;&#xB85C; &#xB9CC;&#xB4E4;&#xC5B4;&#xC9C4; &#xBB38;&#xC11C;</li>
-<li>LANGUAGE: &#xC5B8;&#xC5B4;</li>
-</ul>
+dictionary = corpora.Dictionary(texts)
+
+corpus = [dictionary.doc2bow(text) for text in texts]
+</code></pre><p>bi-gram&#xC744; &#xB9CC;&#xB4E0; &#xD6C4;, tri-gram&#xACFC; &#xAC19;&#xC740; &#xB2E4;&#xB978; n-gram&#xC744; &#xC5BC;&#xB9C8;&#xB4E0;&#xC9C0; &#xB9CC;&#xB4E4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xB2E8;&#xC9C0; phrases &#xBAA8;&#xB378;&#xC744; &#xC5EC;&#xB7EC;&#xBC88; &#xB3CC;&#xB9AC;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="&#xC804;&#xCC98;&#xB9AC;">&#xC804;&#xCC98;&#xB9AC;</h3>
+<p>&#xBAA8;&#xB4E0; &#xACBD;&#xC6B0;&#xC5D0; &#xC801;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xB294; &#xC804;&#xCC98;&#xB9AC;&#xB294; &#xC5C6;&#xC2B5;&#xB2C8;&#xB2E4;.<br>data&#xC5D0; &#xB530;&#xB77C; &#xC801;&#xC6A9;&#xD574;&#xC57C; &#xD558;&#xB294; &#xC804;&#xCC98;&#xB9AC;&#xB294; &#xB2EC;&#xB77C;&#xC9D1;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB9CC;&#xC57D; &#xB108;&#xBB34; &#xB9CE;&#xC774; &#xB098;&#xC624;&#xB294; &#xB2E8;&#xC5B4;&#xC640; &#xB108;&#xBB34; &#xC801;&#xAC8C; &#xB098;&#xC624;&#xB294; &#xB2E8;&#xC5B4;&#xB97C; &#xC81C;&#xAC70;&#xD558;&#xB824; &#xD55C;&#xB2E4;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xAE30;&#xC220;&#xC744; &#xC801;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>dictionary.filter_extremes(no_below=20, no_above=0.5)
+</code></pre><p>20&#xAC1C;&#xC758; &#xBB38;&#xC11C;&#xBCF4;&#xB2E4; &#xC801;&#xAC8C; &#xB098;&#xC624;&#xAC70;&#xB098;, 50%&#xC758; &#xBB38;&#xC11C; &#xC774;&#xC0C1;&#xC5D0;&#xC11C; &#xB098;&#xC628; &#xB2E8;&#xC5B4;&#xB97C; &#xC704;&#xC640; &#xAC19;&#xC774; &#xC81C;&#xAC70;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
 
                                 
                                 </section>
@@ -458,14 +451,10 @@ for ent in doc.ents:
 
             
                 
-                <a href="pos_tagging.html" class="navigation navigation-prev " aria-label="Previous page: POS 태깅">
+                <a href="vector_transformation_in_gensim.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Gensim에서 벡터 표현법">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="preprocessing.html" class="navigation navigation-next " aria-label="Next page: 텍스트 전처리">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -474,7 +463,7 @@ for ent in doc.ents:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"NER 태깅","level":"3.5","depth":1,"next":{"title":"텍스트 전처리","level":"3.6","depth":1,"path":"chapter-2/preprocessing.md","ref":"chapter-2/preprocessing.md","articles":[]},"previous":{"title":"POS 태깅","level":"3.4","depth":1,"path":"chapter-2/pos_tagging.md","ref":"chapter-2/pos_tagging.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-2/ner_tagging.md","mtime":"2020-08-29T15:54:25.176Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-31T08:52:56.339Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"N-gram과 전처리","level":"4.5","depth":1,"previous":{"title":"Gensim에서 벡터 표현법","level":"4.4","depth":1,"path":"chapter-3/vector_transformation_in_gensim.md","ref":"chapter-3/vector_transformation_in_gensim.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-3/n_gram.md","mtime":"2020-08-31T08:52:47.127Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-31T08:52:56.339Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
