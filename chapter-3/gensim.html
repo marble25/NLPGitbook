@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>텍스트 토큰화 · GitBook</title>
+        <title>Gensim · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="pos_tagging.html" />
+    <link rel="next" href="bow.html" />
     
     
-    <link rel="prev" href="install_lm.html" />
+    <link rel="prev" href="../chapter-2/preprocessing.html" />
     
 
     </head>
@@ -181,9 +181,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="install_lm.html">
+        <li class="chapter " data-level="3.2" data-path="../chapter-2/install_lm.html">
             
-                <a href="install_lm.html">
+                <a href="../chapter-2/install_lm.html">
             
                     
                     Language Model 설치
@@ -194,9 +194,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="tokenize_text.html">
+        <li class="chapter " data-level="3.3" data-path="../chapter-2/tokenize_text.html">
             
-                <a href="tokenize_text.html">
+                <a href="../chapter-2/tokenize_text.html">
             
                     
                     텍스트 토큰화
@@ -207,9 +207,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.4" data-path="pos_tagging.html">
+        <li class="chapter " data-level="3.4" data-path="../chapter-2/pos_tagging.html">
             
-                <a href="pos_tagging.html">
+                <a href="../chapter-2/pos_tagging.html">
             
                     
                     POS 태깅
@@ -220,9 +220,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.5" data-path="ner_tagging.html">
+        <li class="chapter " data-level="3.5" data-path="../chapter-2/ner_tagging.html">
             
-                <a href="ner_tagging.html">
+                <a href="../chapter-2/ner_tagging.html">
             
                     
                     NER 태깅
@@ -233,9 +233,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.6" data-path="preprocessing.html">
+        <li class="chapter " data-level="3.6" data-path="../chapter-2/preprocessing.html">
             
-                <a href="preprocessing.html">
+                <a href="../chapter-2/preprocessing.html">
             
                     
                     텍스트 전처리
@@ -253,9 +253,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../chapter-3/gensim.html">
+        <li class="chapter active" data-level="4.1" data-path="gensim.html">
             
-                <a href="../chapter-3/gensim.html">
+                <a href="gensim.html">
             
                     
                     Gensim
@@ -266,9 +266,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../chapter-3/bow.html">
+        <li class="chapter " data-level="4.2" data-path="bow.html">
             
-                <a href="../chapter-3/bow.html">
+                <a href="bow.html">
             
                     
                     Bag-of-words
@@ -279,7 +279,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="../chapter-3/tf_idf.md">
+        <li class="chapter " data-level="4.3" data-path="tf_idf.md">
             
                 <span>
             
@@ -364,7 +364,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >텍스트 토큰화</a>
+        <a href=".." >Gensim</a>
     </h1>
 </div>
 
@@ -379,12 +379,11 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#xD14D;&#xC2A4;&#xD2B8;-&#xD1A0;&#xD070;&#xD654;">&#xD14D;&#xC2A4;&#xD2B8; &#xD1A0;&#xD070;&#xD654;</h2>
+                                <h2 id="gensim">Gensim</h2>
 <hr>
-<h3 id="&#xD1A0;&#xD070;&#xD654;&#xB780;">&#xD1A0;&#xD070;&#xD654;&#xB780;?</h3>
-<p>&#xD1A0;&#xD070;&#xD654;&#xB294; &#xD14D;&#xC2A4;&#xD2B8;&#xB97C; &#xC758;&#xBBF8;&#xC788;&#xB294; segment&#xC778; token&#xC73C;&#xB85C; &#xB098;&#xB204;&#xB294; &#xAC83;&#xC744; &#xB9D0;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB7F0; segment&#xB294; &#xACBD;&#xC6B0;&#xC5D0; &#xB530;&#xB77C; word, &#xAD6C;&#xB450;&#xC810;, &#xC22B;&#xC790;, &#xB610;&#xB294; &#xB2E4;&#xB978; &#xBB38;&#xC790;&#xB4E4;&#xC774; &#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>spaCy&#xC5D0;&#xC11C;&#xB294; input&#xC774; unicode text&#xAC00; &#xB418;&#xACE0;, output&#xC740; doc object&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xAC01;&#xAC01;&#xC758; &#xC5B8;&#xC5B4;&#xB294; &#xAC01;&#xAE30; &#xB2E4;&#xB978; tokenization rule&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xC2DC;&#xB85C;, <em>Let us go to the park.</em>&#xB97C; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xAC01;&#xAC01;&#xC758; token&#xC740; space &#xB2E8;&#xC704;&#xB85C; &#xBD84;&#xB9AC;&#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.<br>&#xB9CC;&#xC57D; &#xC774; &#xBB38;&#xC7A5;&#xC774; <em>Let&apos;s go to the park.</em>&#xC600;&#xB2E4;&#xBA74;, tokenizer&#xB294; Let&apos;s&#xB97C; Let&#xACFC; &apos;s&#xB85C; &#xBD84;&#xB9AC;&#xD560; &#xC218; &#xC788;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xB9D0;&#xC740;, tokenization&#xC5D0; &#xB744;&#xC5B4;&#xC4F0;&#xAE30; &#xC678;&#xC5D0;&#xB3C4; &#xD2B9;&#xBCC4;&#xD55C; &#xADDC;&#xCE59;&#xC774; &#xD544;&#xC694;&#xD558;&#xB2E4;&#xB294; &#xB9D0;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<p>Pipeline &#xB0B4;&#xC5D0; &#xB2E4;&#xB978; &#xBD80;&#xBD84;&#xACFC; &#xB2E4;&#xB974;&#xAC8C;, tokenization&#xC5D0;&#xB294; &#xD2B9;&#xBCC4;&#xD55C; statistical model&#xC774; &#xD544;&#xC694;&#xD558;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.<br>Tokenization&#xC740; prefix, suffix&#xC758; &#xC608;&#xC678;&#xB9CC; rule&#xC5D0; &#xB530;&#xB77C; &#xBD84;&#xD560;&#xD574;&#xC8FC;&#xB294; &#xBC29;&#xC2DD;&#xC785;&#xB2C8;&#xB2E4;.<br>Tokenization&#xC758; rule&#xC5D0; &#xD3EC;&#xD568;&#xB418;&#xC9C0; &#xC54A;&#xB294; exception&#xC740; &#xB098;&#xC911;&#xC5D0; NER Tagging &#xB4F1;&#xC5D0;&#xC11C; &#xCC98;&#xB9AC;&#xB97C; &#xD574;&#xC8FC;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="gensim&#xC774;&#xB780;">Gensim&#xC774;&#xB780;?</h3>
+<p>&#xD604;&#xC7AC;&#xAE4C;&#xC9C0; &#xC6B0;&#xB9AC;&#xB294; spaCy&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xBA74;&#xC11C; &#xC228;&#xACA8;&#xC9C4; &#xC815;&#xBCF4;&#xB97C; &#xC54C;&#xC544;&#xB0B4;&#xB294; &#xAC83;&#xBCF4;&#xB2E4;&#xB294; text&#xC758; shape&#xC744; &#xB9DE;&#xCD94;&#xB294;&#xB370; &#xC8FC;&#xB825;&#xD574; &#xC654;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xB9D0;&#xC740; &#xC6B0;&#xB9AC;&#xAC00; &#xC544;&#xC9C1; Preprocessing &#xB2E8;&#xACC4;&#xC5D0; &#xC788;&#xB2E4;&#xB294; &#xAC83;&#xC744; &#xB9D0;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xBC88; &#xB2E8;&#xC6D0;&#xC5D0;&#xC11C; string&#xB4E4;&#xC744; vector&#xB85C; &#xD45C;&#xD604;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xB4E4;&#xC5D0; &#xB300;&#xD574;&#xC11C; &#xBC30;&#xC6CC;&#xBCFC; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB7F0; &#xBC29;&#xBC95;&#xC5D0;&#xB294; BOW(Bag of Words), TF-IDF(Term Frequency-Inverse Document Frequency), LSI(Latent Semantic Indexing), Word2Vec &#xB4F1;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB7F0; Transformed Vector&#xB4E4;&#xC740; scikit-learn machine&#xC5D0; &#xC27D;&#xAC8C; &#xC0BD;&#xC785;&#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>Gensim&#xC740; python&#xC758; built-in generator&#xACFC; iterator&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; scalable&#xD560; &#xC218; &#xC788;&#xACE0;, dataset&#xC740; RAM&#xC5D0; &#xC804;&#xBD80; &#xB85C;&#xB4DC;&#xB418;&#xC9C0; &#xC54A;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.<br>Gensim&#xC740; memory&#xC640; &#xB3C5;&#xB9BD;&#xC801;&#xC774;&#xACE0;, &#xD504;&#xB85C;&#xC138;&#xC2A4; &#xCC98;&#xB9AC;&#xC5D0; multicore&#xB97C; &#xC0AC;&#xC6A9; &#xAC00;&#xB2A5;&#xD569;&#xB2C8;&#xB2E4;.   </p>
 
                                 
                                 </section>
@@ -412,12 +411,12 @@
 
             
                 
-                <a href="install_lm.html" class="navigation navigation-prev " aria-label="Previous page: Language Model 설치">
+                <a href="../chapter-2/preprocessing.html" class="navigation navigation-prev " aria-label="Previous page: 텍스트 전처리">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="pos_tagging.html" class="navigation navigation-next " aria-label="Next page: POS 태깅">
+                <a href="bow.html" class="navigation navigation-next " aria-label="Next page: Bag-of-words">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -428,7 +427,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"텍스트 토큰화","level":"3.3","depth":1,"next":{"title":"POS 태깅","level":"3.4","depth":1,"path":"chapter-2/pos_tagging.md","ref":"chapter-2/pos_tagging.md","articles":[]},"previous":{"title":"Language Model 설치","level":"3.2","depth":1,"path":"chapter-2/install_lm.md","ref":"chapter-2/install_lm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-2/tokenize_text.md","mtime":"2020-08-29T15:26:01.373Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-31T05:54:58.575Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Gensim","level":"4.1","depth":1,"next":{"title":"Bag-of-words","level":"4.2","depth":1,"path":"chapter-3/bow.md","ref":"chapter-3/bow.md","articles":[]},"previous":{"title":"텍스트 전처리","level":"3.6","depth":1,"path":"chapter-2/preprocessing.md","ref":"chapter-2/preprocessing.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-3/gensim.md","mtime":"2020-08-31T05:54:29.530Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-31T05:54:58.575Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

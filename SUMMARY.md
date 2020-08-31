@@ -20,6 +20,10 @@
 
 ### Chapter 3 - Text를 Vector로
 
+* [Gensim](chapter-3/gensim.md)
+* [Bag-of-words](chapter-3/bow.md)
+* [TF-IDF](chapter-3/tf_idf.md)
+
 ### Chpater 4 - POS Tagging
 
 ### Chapter 5 - NER Tagging
