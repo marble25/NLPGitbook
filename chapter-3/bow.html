@@ -379,7 +379,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="bag-of-words">Bag-of-Words</h2>
+<hr>
+<h3 id="&#xBCA1;&#xD130;&#xC758;-&#xD544;&#xC694;&#xC131;">&#xBCA1;&#xD130;&#xC758; &#xD544;&#xC694;&#xC131;</h3>
+<p>&#xC6B0;&#xB9AC;&#xB294; Text Analysis&#xC758; Machine Learning &#xD30C;&#xD2B8;&#xB85C; &#xB4E4;&#xC5B4;&#xC654;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xB9D0;&#xC740; &#xC774;&#xC81C; word&#xB97C; &#xAC00;&#xC9C0;&#xACE0; &#xD558;&#xAE30;&#xBCF4;&#xB2E4;&#xB294; &#xC22B;&#xC790;&#xB4E4;&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xD560; &#xB54C;&#xAC00; &#xC654;&#xB2E4;&#xB294; &#xB9D0;&#xC785;&#xB2C8;&#xB2E4;.<br>spaCy&#xB97C; &#xC0AC;&#xC6A9;&#xD560; &#xB54C;&#xC5D0;&#xB3C4;, POS tagging&#xACFC; NER tagging&#xC5D0;&#xC11C; &#xC6B0;&#xB9AC;&#xB294; &#xADF8;&#xC800; unicode text&#xB97C; &#xC785;&#xB825;&#xC73C;&#xB85C; &#xB123;&#xC5C8;&#xC744; &#xBFD0;&#xC774;&#xC9C0;&#xB9CC;, &#xB0B4;&#xBD80;&#xC801;&#xC73C;&#xB85C;&#xB294; &#xC22B;&#xC790;&#xB97C; &#xC0AC;&#xC6A9;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xBC18;&#xBA74;&#xC5D0;, Gensim&#xC5D0;&#xC11C;&#xB294; IR algorithm(LDA, LSI &#xB4F1;)&#xC758; input&#xC744; vector&#xB85C; &#xBC1B;&#xAE30; &#xB54C;&#xBB38;&#xC5D0;, string&#xC744; vector&#xB85C; &#xD45C;&#xD604;&#xD558;&#xB294; &#xAC83;&#xC740; &#xAF2D; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="bag-of-words">Bag-of-Words</h3>
+<p>BOW &#xBAA8;&#xB378;&#xC740; &#xBB38;&#xC7A5;&#xC744; &#xBCA1;&#xD130;&#xB85C; &#xD45C;&#xD604;&#xD558;&#xB294; &#xAC00;&#xC7A5; &#xC9C1;&#xAD00;&#xC801;&#xC778; &#xBC29;&#xBC95;&#xC785;&#xB2C8;&#xB2E4;.<br>Chapter2&#xC5D0;&#xC11C; &#xBC30;&#xC6B4; &#xBC29;&#xBC95;&#xC73C;&#xB85C; &#xAC04;&#xB2E8;&#xD788; &#xC2DC;&#xC791;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>import spacy
+
+nlp = spacy.load(&apos;en&apos;)
+
+doc1 = nlp(u&apos;The dog sat by the mat.&apos;)
+doc2 = nlp(u&apos;The cat loves the dog.&apos;)
+sentence1 = []
+sentence2 = []
+for w in doc1:
+    if w.text != &apos;n&apos; and not w.is_stop and not w.is_punct and not w.like_num:
+        sentence1.append(w.text)
+
+for w in doc2:
+    if w.text != &apos;n&apos; and not w.is_stop and not w.is_punct and not w.like_num:
+        sentence2.append(w.text)
+
+print(sentence1, sentence2)
+</code></pre><p>S1&#xC740; &quot;The dog sat by the mat.&quot;&#xC774;&#xACE0;, S2&#xB294; &quot;The cat loves the dog.&quot; &#xC77C; &#xB54C;, Stop words&#xC640; &#xAD6C;&#xB450;&#xC810;, &#xC22B;&#xC790;&#xB97C; &#xC81C;&#xAC70;&#xD55C; &#xC0C1;&#xD0DC;&#xB97C; &#xCD9C;&#xB825;&#xD558;&#xB294; &#xCF54;&#xB4DC;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[&apos;dog&apos;, &apos;sat&apos;, &apos;mat&apos;] [&apos;cat&apos;, &apos;loves&apos;, &apos;dog&apos;]
+</code></pre><p>&#xC774;&#xB97C; &#xBCA1;&#xD130;&#xB85C; &#xD45C;&#xD604;&#xD558;&#xACE0; &#xC2F6;&#xB2E4;&#xBA74;, &#xAC00;&#xC7A5; &#xBA3C;&#xC800; vocabulary&#xB97C; &#xAD6C;&#xCD95;&#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xC758; vocabulary vector&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>vocab = [&apos;dog&apos;, &apos;sat&apos;, &apos;mat&apos;, &apos;cat&apos;, &apos;loves&apos;]
+</code></pre><p>&#xC911;&#xBCF5;&#xB41C; &#xB2E8;&#xC5B4;&#xC778; &apos;dog&apos;&#xB294; &#xC81C;&#xAC70;&#xB418;&#xC5B4; &#xAE38;&#xC774; 5&#xC758; &#xBCA1;&#xD130;&#xB85C; &#xBCC0;&#xD658;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>bag-of-words &#xBAA8;&#xB378;&#xC740; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB2E8;&#xC5B4;&#xC758; &#xBE48;&#xB3C4;&#xB97C; &#xD3EC;&#xD568;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>S1:[1, 1, 1, 0, 0]
+S2:[1, 0, 0, 1, 1]
+</code></pre><p>&#xC774;&#xB294; &#xC27D;&#xAC8C; &#xC774;&#xD574;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>S1&#xC5D0;&#xB294; &apos;dog&apos;, &apos;sat&apos;, &apos;mat&apos;&#xC774;&#xB77C;&#xB294; &#xB2E8;&#xC5B4;&#xAC00; &#xC788;&#xACE0;, S2&#xC5D0;&#xB294; &apos;dog&apos;, &apos;cat&apos;, &apos;loves&apos;&#xB77C;&#xB294; &#xB2E8;&#xC5B4;&#xAC00; &#xC788;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xD574;&#xB2F9;&#xB418;&#xB294; &#xC704;&#xCE58;&#xB97C; 1&#xB85C; &#xD45C;&#xC2DC;&#xD558;&#xACE0;, &#xB098;&#xBA38;&#xC9C0;&#xB294; 0&#xC73C;&#xB85C; &#xD45C;&#xC2DC;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>BoW&#xC758; &#xC911;&#xC694;&#xD55C; &#xD2B9;&#xC9D5; &#xC911; &#xD558;&#xB098;&#xB294; &#xC21C;&#xC11C;&#xAC00; &#xC5C6;&#xACE0; count&#xB9CC; &#xC788;&#xB2E4;&#xB294; &#xC810;&#xC785;&#xB2C8;&#xB2E4;.<br>BoW &#xBCA1;&#xD130;&#xB9CC; &#xAC00;&#xC9C0;&#xACE0;&#xB294; &#xC5B4;&#xB5A4; &#xB2E8;&#xC5B4;&#xAC00; &#xBA3C;&#xC800; &#xC654;&#xB294;&#xC9C0; &#xC54C; &#xC218; &#xC5C6;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB294; &#xC704;&#xCE58; &#xC815;&#xBCF4;&#xC640; &#xC758;&#xBBF8; &#xC815;&#xBCF4;&#xB97C; &#xC783;&#xC5B4;&#xBC84;&#xB9B4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xD558;&#xC9C0;&#xB9CC;, &#xB9CE;&#xC740; Information Retrieval Algorithm&#xC5D0;&#xC11C; order&#xAC00; &#xC911;&#xC694;&#xD558;&#xC9C0; &#xC54A;&#xAE30; &#xB54C;&#xBB38;&#xC5D0;, &#xB2E8;&#xC5B4;&#xC758; occurence&#xB9CC; &#xAC00;&#xC9C0;&#xACE0;&#xB3C4; &#xC2DC;&#xC791;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, spam filtering&#xAC19;&#xC740; &#xACF3;&#xC5D0;&#xC11C; buy, money, stock&#xACFC; &#xAC19;&#xC740; &#xB2E8;&#xC5B4;&#xAC00; &#xC788;&#xB2E4;&#xBA74; text&#xB97C; BoW &#xBCA1;&#xD130;&#xB85C; &#xBCC0;&#xD658; &#xD6C4;, Bayesian Probability&#xB97C; &#xC801;&#xC6A9;&#xD574;&#xC11C; &#xC774;&#xBA54;&#xC77C;&#xC774; spam&#xC778;&#xC9C0; &#xD310;&#xB2E8;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -422,7 +455,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Bag-of-words","level":"4.2","depth":1,"next":{"title":"TF-IDF","level":"4.3","depth":1,"path":"chapter-3/tf_idf.md","ref":"chapter-3/tf_idf.md","articles":[]},"previous":{"title":"Gensim","level":"4.1","depth":1,"path":"chapter-3/gensim.md","ref":"chapter-3/gensim.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-3/bow.md","mtime":"2020-08-31T05:54:47.830Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-31T05:54:58.575Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Bag-of-words","level":"4.2","depth":1,"next":{"title":"TF-IDF","level":"4.3","depth":1,"path":"chapter-3/tf_idf.md","ref":"chapter-3/tf_idf.md","articles":[]},"previous":{"title":"Gensim","level":"4.1","depth":1,"path":"chapter-3/gensim.md","ref":"chapter-3/gensim.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-3/bow.md","mtime":"2020-08-31T06:20:18.278Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-08-31T06:20:24.445Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
