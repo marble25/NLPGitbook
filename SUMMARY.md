@@ -23,6 +23,7 @@
 * [Gensim](chapter-3/gensim.md)
 * [Bag-of-words](chapter-3/bow.md)
 * [TF-IDF](chapter-3/tf_idf.md)
+* [Gensim에서 벡터 표현법](chapter-3/vector_transformation_in_gensim.md)
 
 ### Chpater 4 - POS Tagging
 
