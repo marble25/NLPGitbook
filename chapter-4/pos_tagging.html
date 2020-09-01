@@ -1,0 +1,656 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>POS Tagging · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="python_pos_tagging.html" />
+    
+    
+    <link rel="prev" href="../chapter-3/n_gram.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    프로젝트 소개
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Chapter 1 - Text Analysis</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../chapter-1/what_is_text_analysis.html">
+            
+                <a href="../chapter-1/what_is_text_analysis.html">
+            
+                    
+                    Text Analysis란?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../chapter-1/importance_of_input.html">
+            
+                <a href="../chapter-1/importance_of_input.html">
+            
+                    
+                    Garbage in, Garbage out
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../chapter-1/importance_of_text_analysis.html">
+            
+                <a href="../chapter-1/importance_of_text_analysis.html">
+            
+                    
+                    Text Analysis를 시작하자!
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../chapter-1/why_python.html">
+            
+                <a href="../chapter-1/why_python.html">
+            
+                    
+                    Python?
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Chapter 2 - Language Model</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../chatper-2/spaCy.md">
+            
+                <span>
+            
+                    
+                    spaCy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../chapter-2/install_lm.html">
+            
+                <a href="../chapter-2/install_lm.html">
+            
+                    
+                    Language Model 설치
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../chapter-2/tokenize_text.html">
+            
+                <a href="../chapter-2/tokenize_text.html">
+            
+                    
+                    텍스트 토큰화
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../chapter-2/pos_tagging.html">
+            
+                <a href="../chapter-2/pos_tagging.html">
+            
+                    
+                    POS 태깅
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../chapter-2/ner_tagging.html">
+            
+                <a href="../chapter-2/ner_tagging.html">
+            
+                    
+                    NER 태깅
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../chapter-2/preprocessing.html">
+            
+                <a href="../chapter-2/preprocessing.html">
+            
+                    
+                    텍스트 전처리
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Chapter 3 - Text를 Vector로</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../chapter-3/gensim.html">
+            
+                <a href="../chapter-3/gensim.html">
+            
+                    
+                    Gensim
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../chapter-3/bow.html">
+            
+                <a href="../chapter-3/bow.html">
+            
+                    
+                    Bag-of-words
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../chapter-3/tf_idf.html">
+            
+                <a href="../chapter-3/tf_idf.html">
+            
+                    
+                    TF-IDF
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../chapter-3/vector_transformation_in_gensim.html">
+            
+                <a href="../chapter-3/vector_transformation_in_gensim.html">
+            
+                    
+                    Gensim에서 벡터 표현법
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.5" data-path="../chapter-3/n_gram.html">
+            
+                <a href="../chapter-3/n_gram.html">
+            
+                    
+                    N-gram과 전처리
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Chpater 4 - POS Tagging</li>
+        
+        
+    
+        <li class="chapter active" data-level="5.1" data-path="pos_tagging.html">
+            
+                <a href="pos_tagging.html">
+            
+                    
+                    POS Tagging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="python_pos_tagging.html">
+            
+                <a href="python_pos_tagging.html">
+            
+                    
+                    Python에서 POS Tagging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="training_pos_tagger.html">
+            
+                <a href="training_pos_tagger.html">
+            
+                    
+                    POS Tagger 학습시키기
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Chapter 5 - NER Tagging</li>
+        
+        
+    
+
+    
+        
+        <li class="header">Chapter 6 - Dependency Parsing</li>
+        
+        
+    
+
+    
+        
+        <li class="header">Chapter 7 - Topic Models</li>
+        
+        
+    
+
+    
+        
+        <li class="header">Chpater 8 - Advanced Topic Modeling</li>
+        
+        
+    
+
+    
+        
+        <li class="header">Chapter 9 - Cluster & Classify Text</li>
+        
+        
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >POS Tagging</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="pos-tagging">POS Tagging</h2>
+<hr>
+<h3 id="pos-tagging&#xC774;&#xB780;">POS Tagging&#xC774;&#xB780;?</h3>
+<p>POS&#xB294; Part-Of-Speech&#xC758; &#xC904;&#xC784;&#xB9D0;&#xB85C;, &#xD55C;&#xAD6D;&#xC5B4;&#xB85C; &#xD488;&#xC0AC;&#xB97C; &#xC758;&#xBBF8;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xB9D0;&#xC740;, POS Tagging&#xC774;&#xB780; &#xC785;&#xB825;&#xC73C;&#xB85C; &#xB4E4;&#xC5B4;&#xC628; &#xB2E8;&#xC5B4;&#xB4E4;&#xC758; &#xD488;&#xC0AC;&#xB97C; &#xC9C0;&#xC815;&#xD574;&#xC8FC;&#xB294; &#xC791;&#xC5C5;&#xC774;&#xB77C;&#xB294; &#xC758;&#xBBF8;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC804;&#xD1B5;&#xC801;&#xC73C;&#xB85C;, POS&#xB294; &#xBB38;&#xBC95;&#xC801;&#xC778; &#xD2B9;&#xC9D5; &#xBC0F; &#xC0AC;&#xC6A9;&#xACFC; &#xBC00;&#xC811;&#xD55C; &#xC5F0;&#xAD00;&#xC131;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC601;&#xC5B4;&#xC758; &#xD488;&#xC0AC;&#xB97C; &#xBD84;&#xB958;&#xD560; &#xB54C; &#xD754;&#xD788; &#xC0AC;&#xC6A9;&#xB418;&#xB294; &#xCE74;&#xD14C;&#xACE0;&#xB9AC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<ul>
+<li>Noun : &#xBA85;&#xC0AC; (&#xC0AC;&#xB78C;, &#xC0AC;&#xBB3C;, &#xC7A5;&#xC18C; &#xB4F1;)</li>
+<li>Verb : &#xB3D9;&#xC0AC; (&#xC6C0;&#xC9C1;&#xC784;&#xC774;&#xB098; &#xC0C1;&#xD0DC;)</li>
+<li>Adjective : &#xD615;&#xC6A9;&#xC0AC; (&#xBA85;&#xC0AC;&#xB098; &#xB300;&#xBA85;&#xC0AC;&#xB97C; &#xAFB8;&#xBA70;&#xC8FC;&#xAC70;&#xB098; &#xC124;&#xBA85;&#xD568;)</li>
+<li>Adverb : &#xBD80;&#xC0AC; (&#xB3D9;&#xC0AC;&#xB098; &#xD615;&#xC6A9;&#xC0AC;, &#xB2E4;&#xB978; &#xBD80;&#xC0AC;&#xB97C; &#xAFB8;&#xBA70;&#xC8FC;&#xAC70;&#xB098; &#xC124;&#xBA85;&#xD568;)</li>
+<li>Pronoun : &#xB300;&#xBA85;&#xC0AC; (&#xBA85;&#xC0AC; &#xB300;&#xC2E0;&#xC5D0; &#xC0AC;&#xC6A9;&#xB418;&#xBA70;, &#xBA85;&#xC0AC;&#xB97C; &#xC9C0;&#xCE6D;&#xD568;)</li>
+<li>Preposition : &#xC804;&#xCE58;&#xC0AC; (&#xBA85;&#xC0AC;&#xB098; &#xB300;&#xBA85;&#xC0AC; &#xC55E;&#xC5D0; &#xC704;&#xCE58;&#xD558;&#xC5EC; &#xC804;&#xCE58;&#xC0AC;&#xAD6C;(phrase)&#xB97C; &#xD615;&#xC131;&#xD558;&#xACE0;, &#xC804;&#xCE58;&#xC0AC;&#xAD6C;&#xB294; &#xBB38;&#xC7A5; &#xB0B4;&#xC5D0; &#xB2E4;&#xB978; &#xB2E8;&#xC5B4;&#xB4E4;&#xC744; &#xC218;&#xC2DD;&#xD558;&#xB294;&#xB370; &#xC0AC;&#xC6A9;&#xB428;)</li>
+<li>Conjunction : &#xC811;&#xC18D;&#xC0AC; (&#xB2E8;&#xC5B4;, &#xAD6C;, &#xC808; &#xB4F1;&#xC744; &#xC5F0;&#xACB0;&#xD574;&#xC90C;)</li>
+<li>Interjection : &#xAC10;&#xD0C4;&#xC0AC; (&#xAC10;&#xC815;&#xC744; &#xD45C;&#xD604;&#xD568;)</li>
+</ul>
+<p>&#xC774; &#xC678;&#xC5D0;&#xB3C4; &#xB2E4;&#xC591;&#xD55C; &#xCE74;&#xD14C;&#xACE0;&#xB9AC;&#xAC00; &#xC874;&#xC7AC;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB9CC;&#xC57D; &#xC601;&#xC5B4; &#xC774;&#xC678;&#xC5D0; &#xB2E4;&#xB978; &#xC5B8;&#xC5B4;&#xB97C; &#xCC98;&#xB9AC;&#xD560; &#xB54C;&#xC5D0;&#xB294; &#xB2E4;&#xB978; POS tagger&#xB97C; &#xC0AC;&#xC6A9;&#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xC601;&#xC5B4;&#xC640;&#xB294; &#xBD84;&#xB958;&#xD558;&#xB294; &#xAE30;&#xC900;&#xC774; &#xB2E4;&#xB97C; &#xC218; &#xC788;&#xACE0;, &#xCE74;&#xD14C;&#xACE0;&#xB9AC; &#xC790;&#xCCB4;&#xB3C4; &#xB2EC;&#xB77C;&#xC9C8; &#xC218; &#xC788;&#xAE30; &#xB54C;&#xBB38;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC2EC;&#xC9C0;&#xC5B4; &#xC601;&#xC5B4;&#xC5D0;&#xC11C;&#xB3C4;, POS tagging&#xC740; &#xD56D;&#xC0C1; &#xC9C1;&#xAD00;&#xC801;&#xC778; &#xAC83;&#xC740; &#xC544;&#xB2D9;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, &#xB2E8;&#xC5B4; <em>refuse</em>&#xC758; &#xACBD;&#xC6B0; &#xBA85;&#xC0AC;&#xB85C; &#xC0AC;&#xC6A9;&#xB418;&#xBA74; &apos;&#xC4F0;&#xB808;&#xAE30;&apos;&#xB97C; &#xC758;&#xBBF8;&#xD558;&#xC9C0;&#xB9CC;, &#xB3D9;&#xC0AC;&#xB85C; &#xC0AC;&#xC6A9;&#xB418;&#xBA74; &apos;&#xAC70;&#xC808;&#xD558;&#xB2E4;&apos;&#xB97C; &#xC758;&#xBBF8;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB807;&#xB4EF; &#xBB38;&#xC7A5;&#xC5D0;&#xC11C; &#xC5B4;&#xB5A4; &#xC758;&#xBBF8;&#xB85C; &#xC0AC;&#xC6A9;&#xB418;&#xB294;&#xC9C0;&#xB97C; &#xC544;&#xB294; &#xAC83;&#xC740; &#xAD49;&#xC7A5;&#xD788; &#xC911;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.<br>POS Tag&#xB97C; &#xC54C;&#xC544;&#xB0B4;&#xB824;&#xBA74; &#xBB38;&#xB9E5;&#xC774; &#xD544;&#xC218;&#xC801;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>spaCy&#xC5D0;&#xC11C;&#xB294; &#xC870;&#xAE08; &#xB354; &#xB514;&#xD14C;&#xC77C;&#xD55C; &#xBD84;&#xC11D;&#xC744; &#xC9C4;&#xD589;&#xD569;&#xB2C8;&#xB2E4;.<br>spaCy&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xCE74;&#xD14C;&#xACE0;&#xB9AC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#xD0DC;&#xADF8;</th>
+<th style="text-align:left">&#xC124;&#xBA85;</th>
+<th style="text-align:left">&#xC608;&#xC2DC;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ADJ</td>
+<td style="text-align:left">adjective(&#xD615;&#xC6A9;&#xC0AC;)</td>
+<td style="text-align:left">big, old, green, incomprehensible, first</td>
+</tr>
+<tr>
+<td style="text-align:left">ADP</td>
+<td style="text-align:left">adposition(&#xBD80;&#xCE58;&#xC0AC;)</td>
+<td style="text-align:left">in, to, during</td>
+</tr>
+<tr>
+<td style="text-align:left">ADV</td>
+<td style="text-align:left">adverb(&#xBD80;&#xC0AC;)</td>
+<td style="text-align:left">very, tomorrow, down, where, there</td>
+</tr>
+<tr>
+<td style="text-align:left">AUX</td>
+<td style="text-align:left">auxiliary(&#xBCF4;&#xC870;&#xC0AC;)</td>
+<td style="text-align:left">is, has, willl, should</td>
+</tr>
+<tr>
+<td style="text-align:left">CONJ</td>
+<td style="text-align:left">conjunction(&#xC811;&#xC18D;&#xC0AC;)</td>
+<td style="text-align:left">and, or, but</td>
+</tr>
+<tr>
+<td style="text-align:left">CCONJ</td>
+<td style="text-align:left">coordinating conjunction(&#xB4F1;&#xC704; &#xC811;&#xC18D;&#xC0AC;)</td>
+<td style="text-align:left">and, or, but</td>
+</tr>
+<tr>
+<td style="text-align:left">DET</td>
+<td style="text-align:left">determiner(&#xD55C;&#xC815;&#xC0AC;)</td>
+<td style="text-align:left">a, an, the</td>
+</tr>
+<tr>
+<td style="text-align:left">INTJ</td>
+<td style="text-align:left">interjection(&#xAC10;&#xD0C4;&#xC0AC;)</td>
+<td style="text-align:left">psst, ouch, bravo, hello</td>
+</tr>
+<tr>
+<td style="text-align:left">NOUN</td>
+<td style="text-align:left">noun(&#xBA85;&#xC0AC;)</td>
+<td style="text-align:left">girl, cat, tree, air, beauty</td>
+</tr>
+<tr>
+<td style="text-align:left">NUM</td>
+<td style="text-align:left">numeral(&#xC22B;&#xC790;)</td>
+<td style="text-align:left">1, 2017, one, IV, seventy-six</td>
+</tr>
+<tr>
+<td style="text-align:left">PART</td>
+<td style="text-align:left">particle(&#xC18C;&#xC0AC;)</td>
+<td style="text-align:left">&apos;s, not</td>
+</tr>
+<tr>
+<td style="text-align:left">PRON</td>
+<td style="text-align:left">pronoun(&#xB300;&#xBA85;&#xC0AC;)</td>
+<td style="text-align:left">I, you, myself, somebody</td>
+</tr>
+<tr>
+<td style="text-align:left">PROPN</td>
+<td style="text-align:left">proper noun(&#xACE0;&#xC720;&#xBA85;&#xC0AC;)</td>
+<td style="text-align:left">Mary, London, NATO, John</td>
+</tr>
+<tr>
+<td style="text-align:left">PUNCT</td>
+<td style="text-align:left">punctuation(&#xAD6C;&#xB450;&#xC810;)</td>
+<td style="text-align:left">., (, ), ?</td>
+</tr>
+<tr>
+<td style="text-align:left">SCONJ</td>
+<td style="text-align:left">subordinating conjunction(&#xC885;&#xC18D; &#xC811;&#xC18D;&#xC0AC;)</td>
+<td style="text-align:left">if, while, that</td>
+</tr>
+<tr>
+<td style="text-align:left">SYM</td>
+<td style="text-align:left">symbol(&#xC2EC;&#xBCFC;)</td>
+<td style="text-align:left">$, %, +, :)</td>
+</tr>
+<tr>
+<td style="text-align:left">VERB</td>
+<td style="text-align:left">verb(&#xB3D9;&#xC0AC;)</td>
+<td style="text-align:left">run, runs, running, eat, ate, eating</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">other(&#xAE30;&#xD0C0;)</td>
+<td style="text-align:left">asdfasdfasdfjj</td>
+</tr>
+<tr>
+<td style="text-align:left">SPACE</td>
+<td style="text-align:left">space</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pos-tagging&#xD558;&#xB294;-&#xBC29;&#xBC95;">POS Tagging&#xD558;&#xB294; &#xBC29;&#xBC95;</h3>
+<p>&#xAE30;&#xC874;&#xC5D0; POS Tagging&#xC740; &#xBAA8;&#xB450; &#xC190;&#xC73C;&#xB85C; &#xC9C1;&#xC811; &#xD588;&#xAE30; &#xB54C;&#xBB38;&#xC5D0;, &#xD1B5;&#xACC4;&#xC801; &#xBAA8;&#xB378;&#xC744; &#xAD6C;&#xCD95;&#xD560; &#xB9CC;&#xD55C; &#xBC29;&#xB300;&#xD55C; &#xB370;&#xC774;&#xD130;&#xAC00; &#xC874;&#xC7AC;&#xD569;&#xB2C8;&#xB2E4;.<br><em>Brown corpus</em>&#xB294; &#xAD49;&#xC7A5;&#xD788; &#xC798; &#xC815;&#xB9AC;&#xB41C; corpus &#xC911; &#xD558;&#xB098;&#xC785;&#xB2C8;&#xB2E4;.<br>POS Tagging&#xC5D0;&#xB294; <strong>Hidden Markov Model</strong>&#xC774; &#xC0AC;&#xC6A9;&#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>Hidden Markov Model&#xC740; sequence&#xAC00; &#xC8FC;&#xC5B4;&#xC84C;&#xC744; &#xB54C; &#xC0AC;&#xC6A9;&#xB418;&#xBA70; &#xAE30;&#xC874; &#xB2E8;&#xC5B4;&#xAC00; &#xC8FC;&#xC5B4;&#xC84C;&#xC744; &#xB54C; &#xB2E4;&#xC74C; &#xB2E8;&#xC5B4;&#xC758; POS Tag&#xB97C; &#xC608;&#xCE21;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, the &#xB4A4;&#xC5D0; &#xB098;&#xC624;&#xB294; &#xB2E8;&#xC5B4;&#xB294; 40%&#xC758; &#xD655;&#xB960;&#xB85C; &#xBA85;&#xC0AC;&#xC774;&#xACE0;, 35% &#xD655;&#xB960;&#xB85C; &#xD615;&#xC6A9;&#xC0AC;&#xC774;&#xACE0;, 25% &#xD655;&#xB960;&#xB85C; &#xC22B;&#xC790;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xD1B5;&#xACC4;&#xC801;&#xC778; &#xBAA8;&#xB378;&#xACFC;&#xB294; &#xB2E4;&#xB974;&#xAC8C;, rule-based POS tagger&#xB3C4; &#xC874;&#xC7AC;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xB2F9;&#xC5F0;&#xD558;&#xAC8C;&#xB3C4;, &#xC774; &#xBC29;&#xBC95;&#xC740; &#xD1B5;&#xACC4;&#xC801;&#xC778; &#xBC29;&#xBC95;&#xC744; &#xC804;&#xD600; &#xC4F0;&#xC9C0; &#xC54A;&#xB294; &#xAC83;&#xC740; &#xC544;&#xB2C8;&#xACE0;, &#xB354; &#xC801;&#xAC8C; &#xC758;&#xC874;&#xD560; &#xBFD0;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="pos-tagging&#xD558;&#xB294;-&#xC774;&#xC720;">POS Tagging&#xD558;&#xB294; &#xC774;&#xC720;</h3>
+<p>POS Tagging&#xD558;&#xB294; &#xAC83;&#xC774; &#xC720;&#xC6A9;&#xD574; &#xBCF4;&#xC774;&#xAE30;&#xB294; &#xD558;&#xC9C0;&#xB9CC;, &#xC774; &#xC815;&#xBCF4;&#xB85C; &#xBB34;&#xC5C7;&#xC744; &#xD560; &#xC218; &#xC788;&#xC744;&#xAE4C;&#xC694;?<br>POS tag&#xB294; &#xC5ED;&#xC0AC;&#xC801;&#xC73C;&#xB85C; &#xB2E4;&#xC591;&#xD55C; &#xC774;&#xC720;&#xC640; &#xC6A9;&#xB3C4;&#xB85C; &#xC0AC;&#xC6A9;&#xB418;&#xC5B4; &#xC654;&#xC2B5;&#xB2C8;&#xB2E4;.<br>Speech-to-Text &#xBCC0;&#xD658;&#xACFC; &#xC5B8;&#xC5B4;&#xAC04; &#xBCC0;&#xD658;&#xC5D0;&#xC11C; &#xB3D9;&#xC74C;&#xC774;&#xC758;&#xC5B4;&#xC758; &#xBAA8;&#xD638;&#xC131;&#xC744; &#xC81C;&#xAC70;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, <em>I am going to fish a fish</em>&#xB97C; &#xB2E4;&#xB978; &#xC5B8;&#xC5B4;&#xB85C; &#xBC88;&#xC5ED;&#xD560; &#xB54C;, &#xC55E;&#xC758; fish&#xB294; &#xB3D9;&#xC0AC;&#xC774;&#xACE0; &#xB4A4;&#xC758; fish&#xB294; &#xBA85;&#xC0AC;&#xC784;&#xC744; &#xC54C;&#xC544;&#xC57C; &#xC815;&#xD655;&#xD55C; &#xBC88;&#xC5ED;&#xC774; &#xAC00;&#xB2A5;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB610;&#xD55C;, POS Tagging&#xC740; <strong>Dependency Parsing</strong>&#xC5D0; &#xC0AC;&#xC6A9;&#xB429;&#xB2C8;&#xB2E4;.<br>Dependency Parsing&#xC740; &#xB2E8;&#xC5B4;&#xC640; &#xB2E8;&#xC5B4; &#xC0AC;&#xC774;&#xC758; &#xC758;&#xC874;&#xB3C4;, &#xB610;&#xB294; &#xAD00;&#xACC4;&#xB97C; &#xC778;&#xC2DD;&#xD558;&#xB294; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB294; &#xB098;&#xC911;&#xC5D0; &#xB354; &#xC790;&#xC138;&#xD788; &#xC124;&#xBA85;&#xD558;&#xB3C4;&#xB85D; &#xD558;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../chapter-3/n_gram.html" class="navigation navigation-prev " aria-label="Previous page: N-gram과 전처리">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="python_pos_tagging.html" class="navigation navigation-next " aria-label="Next page: Python에서 POS Tagging">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"POS Tagging","level":"5.1","depth":1,"next":{"title":"Python에서 POS Tagging","level":"5.2","depth":1,"path":"chapter-4/python_pos_tagging.md","ref":"chapter-4/python_pos_tagging.md","articles":[]},"previous":{"title":"N-gram과 전처리","level":"4.5","depth":1,"path":"chapter-3/n_gram.md","ref":"chapter-3/n_gram.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-4/pos_tagging.md","mtime":"2020-09-01T10:14:49.714Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-01T10:14:59.966Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

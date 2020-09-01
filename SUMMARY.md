@@ -28,6 +28,10 @@
 
 ### Chpater 4 - POS Tagging
 
+* [POS Tagging](chapter-4/pos_tagging.md)
+* [Python에서 POS Tagging](chapter-4/python_pos_tagging.md)
+* [POS Tagger 학습시키기](chapter-4/training_pos_tagger.md)
+
 ### Chapter 5 - NER Tagging
 
 ### Chapter 6 - Dependency Parsing
