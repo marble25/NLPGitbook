@@ -49,7 +49,7 @@ spaCy에서 사용하는 카테고리는 다음과 같습니다.
 |SYM| symbol(심볼) |$, %, +, :)|
 |VERB| verb(동사) | run, runs, running, eat, ate, eating|
 |x| other(기타) | asdfasdfasdfjj|
-|SPACE| space | |
+|SPACE| space |&nbsp;|
 
 ### POS Tagging하는 방법
 기존에 POS Tagging은 모두 손으로 직접 했기 때문에, 통계적 모델을 구축할 만한 방대한 데이터가 존재합니다.   
