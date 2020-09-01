@@ -31,7 +31,7 @@
 * [POS Tagging](chapter-4/pos_tagging.md)
 * [Python에서 POS Tagging](chapter-4/python_pos_tagging.md)
 * [POS Tagger 학습시키기](chapter-4/training_pos_tagger.md)
-* [POS Tagging Code](chpater-4/pos_tagging_code.md)
+* [POS Tagging Code](chapter-4/pos_tagging_code.md)
 
 ### Chapter 5 - NER Tagging
 

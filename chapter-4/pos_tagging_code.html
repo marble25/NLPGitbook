@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>텍스트 토큰화 · GitBook</title>
+        <title>POS Tagging Code · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="pos_tagging.html" />
     
-    
-    <link rel="prev" href="install_lm.html" />
+    <link rel="prev" href="training_pos_tagger.html" />
     
 
     </head>
@@ -181,9 +179,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="install_lm.html">
+        <li class="chapter " data-level="3.2" data-path="../chapter-2/install_lm.html">
             
-                <a href="install_lm.html">
+                <a href="../chapter-2/install_lm.html">
             
                     
                     Language Model 설치
@@ -194,9 +192,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="tokenize_text.html">
+        <li class="chapter " data-level="3.3" data-path="../chapter-2/tokenize_text.html">
             
-                <a href="tokenize_text.html">
+                <a href="../chapter-2/tokenize_text.html">
             
                     
                     텍스트 토큰화
@@ -207,9 +205,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.4" data-path="pos_tagging.html">
+        <li class="chapter " data-level="3.4" data-path="../chapter-2/pos_tagging.html">
             
-                <a href="pos_tagging.html">
+                <a href="../chapter-2/pos_tagging.html">
             
                     
                     POS 태깅
@@ -220,9 +218,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.5" data-path="ner_tagging.html">
+        <li class="chapter " data-level="3.5" data-path="../chapter-2/ner_tagging.html">
             
-                <a href="ner_tagging.html">
+                <a href="../chapter-2/ner_tagging.html">
             
                     
                     NER 태깅
@@ -233,9 +231,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.6" data-path="preprocessing.html">
+        <li class="chapter " data-level="3.6" data-path="../chapter-2/preprocessing.html">
             
-                <a href="preprocessing.html">
+                <a href="../chapter-2/preprocessing.html">
             
                     
                     텍스트 전처리
@@ -325,9 +323,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../chapter-4/pos_tagging.html">
+        <li class="chapter " data-level="5.1" data-path="pos_tagging.html">
             
-                <a href="../chapter-4/pos_tagging.html">
+                <a href="pos_tagging.html">
             
                     
                     POS Tagging
@@ -338,9 +336,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="../chapter-4/python_pos_tagging.html">
+        <li class="chapter " data-level="5.2" data-path="python_pos_tagging.html">
             
-                <a href="../chapter-4/python_pos_tagging.html">
+                <a href="python_pos_tagging.html">
             
                     
                     Python에서 POS Tagging
@@ -351,9 +349,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.3" data-path="../chapter-4/training_pos_tagger.html">
+        <li class="chapter " data-level="5.3" data-path="training_pos_tagger.html">
             
-                <a href="../chapter-4/training_pos_tagger.html">
+                <a href="training_pos_tagger.html">
             
                     
                     POS Tagger 학습시키기
@@ -364,9 +362,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.4" data-path="../chapter-4/pos_tagging_code.html">
+        <li class="chapter active" data-level="5.4" data-path="pos_tagging_code.html">
             
-                <a href="../chapter-4/pos_tagging_code.html">
+                <a href="pos_tagging_code.html">
             
                     
                     POS Tagging Code
@@ -442,7 +440,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >텍스트 토큰화</a>
+        <a href=".." >POS Tagging Code</a>
     </h1>
 </div>
 
@@ -457,13 +455,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#xD14D;&#xC2A4;&#xD2B8;-&#xD1A0;&#xD070;&#xD654;">&#xD14D;&#xC2A4;&#xD2B8; &#xD1A0;&#xD070;&#xD654;</h2>
+                                <h2 id="pos-tagging-code">POS Tagging Code</h2>
 <hr>
-<h3 id="&#xD1A0;&#xD070;&#xD654;&#xB780;">&#xD1A0;&#xD070;&#xD654;&#xB780;?</h3>
-<p>&#xD1A0;&#xD070;&#xD654;&#xB294; &#xD14D;&#xC2A4;&#xD2B8;&#xB97C; &#xC758;&#xBBF8;&#xC788;&#xB294; segment&#xC778; token&#xC73C;&#xB85C; &#xB098;&#xB204;&#xB294; &#xAC83;&#xC744; &#xB9D0;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB7F0; segment&#xB294; &#xACBD;&#xC6B0;&#xC5D0; &#xB530;&#xB77C; word, &#xAD6C;&#xB450;&#xC810;, &#xC22B;&#xC790;, &#xB610;&#xB294; &#xB2E4;&#xB978; &#xBB38;&#xC790;&#xB4E4;&#xC774; &#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>spaCy&#xC5D0;&#xC11C;&#xB294; input&#xC774; unicode text&#xAC00; &#xB418;&#xACE0;, output&#xC740; doc object&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xAC01;&#xAC01;&#xC758; &#xC5B8;&#xC5B4;&#xB294; &#xAC01;&#xAE30; &#xB2E4;&#xB978; tokenization rule&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xC2DC;&#xB85C;, <em>Let us go to the park.</em>&#xB97C; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xAC01;&#xAC01;&#xC758; token&#xC740; space &#xB2E8;&#xC704;&#xB85C; &#xBD84;&#xB9AC;&#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.<br>&#xB9CC;&#xC57D; &#xC774; &#xBB38;&#xC7A5;&#xC774; <em>Let&apos;s go to the park.</em>&#xC600;&#xB2E4;&#xBA74;, tokenizer&#xB294; Let&apos;s&#xB97C; Let&#xACFC; &apos;s&#xB85C; &#xBD84;&#xB9AC;&#xD560; &#xC218; &#xC788;&#xC5B4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xB9D0;&#xC740;, tokenization&#xC5D0; &#xB744;&#xC5B4;&#xC4F0;&#xAE30; &#xC678;&#xC5D0;&#xB3C4; &#xD2B9;&#xBCC4;&#xD55C; &#xADDC;&#xCE59;&#xC774; &#xD544;&#xC694;&#xD558;&#xB2E4;&#xB294; &#xB9D0;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<p>Pipeline &#xB0B4;&#xC5D0; &#xB2E4;&#xB978; &#xBD80;&#xBD84;&#xACFC; &#xB2E4;&#xB974;&#xAC8C;, tokenization&#xC5D0;&#xB294; &#xD2B9;&#xBCC4;&#xD55C; statistical model&#xC774; &#xD544;&#xC694;&#xD558;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.<br>Tokenization&#xC740; prefix, suffix&#xC758; &#xC608;&#xC678;&#xB9CC; rule&#xC5D0; &#xB530;&#xB77C; &#xBD84;&#xD560;&#xD574;&#xC8FC;&#xB294; &#xBC29;&#xC2DD;&#xC785;&#xB2C8;&#xB2E4;.<br>Tokenization&#xC758; rule&#xC5D0; &#xD3EC;&#xD568;&#xB418;&#xC9C0; &#xC54A;&#xB294; exception&#xC740; &#xB098;&#xC911;&#xC5D0; NER Tagging &#xB4F1;&#xC5D0;&#xC11C; &#xCC98;&#xB9AC;&#xB97C; &#xD574;&#xC8FC;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="&#xC2E4;&#xC81C;-&#xB370;&#xC774;&#xD130;&#xB85C;-pos-tagger-&#xC2E4;&#xD589;&#xD558;&#xAE30;">&#xC2E4;&#xC81C; &#xB370;&#xC774;&#xD130;&#xB85C; Pos Tagger &#xC2E4;&#xD589;&#xD558;&#xAE30;</h3>
+<p>Harry Porter txt&#xB97C; &#xB2E4;&#xC6B4;&#xBC1B;&#xC544;&#xC11C; &#xC2E4;&#xD589;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774; &#xC791;&#xC5C5;&#xC5D0;&#xB294; pandas&#xC640; matplotlib&#xAC00; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB4E4;&#xC744; &#xC124;&#xCE58;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>pip instasll pandas
+pip install matplotlib
+</code></pre><p>&#xADF8; &#xD6C4; &#xC544;&#xB798; &#xCF54;&#xB4DC;&#xB97C; &#xC785;&#xB825;&#xD574;&#xBCF4;&#xC138;&#xC694;.   </p>
+<pre><code>import spacy
+nlp = spacy.load(&apos;en&apos;)
 
+import pandas as pd
+import matplotlib.pyplot as plt
+
+harry_porter = open(&apos;HP1.txt&apos;).read()
+hp = nlp(harry_porter)
+hpSents = list(hp.sents)
+hpSentenceLengths = [len(sent) for sent in hpSents]
+
+tagDict = {w.pos: w.pos_ for w in hp}
+hpPOS = pd.Series(hp.count_by(spacy.attrs.POS))/len(hp)
+df = pd.DataFrame([hpPOS], index=[&apos;Harry Porter&apos;])
+df.columns = [tagDict[column] for column in df.columns]
+df.T.plot(kind=&apos;bar&apos;)
+plt.show()
+</code></pre><p><img src="image0001.png" alt="image0001"></p>
+<p>&#xC544;&#xB798;&#xC640; &#xAC19;&#xC740; &#xC774;&#xBBF8;&#xC9C0;&#xAC00; &#xB098;&#xC62C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xAC00;&#xC7A5; &#xB9CE;&#xC774; &#xB098;&#xC624;&#xB294; pronoun&#xC744; &#xCC3E;&#xAE30; &#xC704;&#xD574;&#xC11C;&#xB294; 3&#xC904;&#xB9CC; &#xCD94;&#xAC00;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from collections import Counter
+hpAdjs = [w for w in hp if w.pos_ == &apos;PRON&apos;]
+print(Counter([w.string.strip() for w in hpAdjs]).most_common(10))
+</code></pre><p>&#xACB0;&#xACFC;&#xAC00; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xD615;&#xD0DC;&#xB85C; &#xB098;&#xC62C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(&apos;he&apos;, 1208), (&apos;I&apos;, 919), (&apos;it&apos;, 898), (&apos;you&apos;, 838), (&apos;He&apos;, 548), (&apos;they&apos;, 506), (&apos;him&apos;, 495), (&apos;them&apos;, 324), (&apos;It&apos;, 286), (&apos;what&apos;, 260)]
+</code></pre>
                                 
                                 </section>
                             
@@ -490,14 +515,10 @@
 
             
                 
-                <a href="install_lm.html" class="navigation navigation-prev " aria-label="Previous page: Language Model 설치">
+                <a href="training_pos_tagger.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: POS Tagger 학습시키기">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="pos_tagging.html" class="navigation navigation-next " aria-label="Next page: POS 태깅">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -506,7 +527,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"텍스트 토큰화","level":"3.3","depth":1,"next":{"title":"POS 태깅","level":"3.4","depth":1,"path":"chapter-2/pos_tagging.md","ref":"chapter-2/pos_tagging.md","articles":[]},"previous":{"title":"Language Model 설치","level":"3.2","depth":1,"path":"chapter-2/install_lm.md","ref":"chapter-2/install_lm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-2/tokenize_text.md","mtime":"2020-08-29T15:26:01.373Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-01T16:00:18.562Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"POS Tagging Code","level":"5.4","depth":1,"previous":{"title":"POS Tagger 학습시키기","level":"5.3","depth":1,"path":"chapter-4/training_pos_tagger.md","ref":"chapter-4/training_pos_tagger.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-4/pos_tagging_code.md","mtime":"2020-09-01T15:58:12.309Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-01T16:00:18.562Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
