@@ -84,3 +84,98 @@ print(st.tag('Baptiste Capdeville is studying at Columbia University in NY'.spli
 ```
 
 NLTK는 간단하기는 하지만, 실제 production level에서 사용할 만한 수준은 아닙니다.   
+
+### spaCy에서 NER Tagging
+실제로 간단한 예시와 함께 NER Tagging을 진행해 봅시다.   
+
+```
+import spacy
+nlp = spacy.load('en')
+
+sent_0 = nlp(u'Donald Trump visited at the government headquarters in France today.')
+sent_1 = nlp(u'Emmanuel Jean-Michel Frédéric Macron is a French politician serving as President of France and ex officio Co-Prince of Andorra since 14 May 2017.')
+sent_2 = nlp(u"He studied philosophy at Paris Nanterre University, completed a Master's of Public Affairs at Sciences Po, and graduated from the École Nationale Administration (ÉNA) in 2004.")
+sent_3 = nlp(u'He worked at the Inspcectorate General of Finances, and later became an investment banker at Rothschild & Cie Banque.')
+
+for token in sent_0:
+    print((token.text, token.ent_type_))
+```
+
+위 코드의 결과는 다음과 같습니다.   
+
+```
+('Donald', 'PERSON')
+('Trump', 'PERSON')
+('visited', '')
+('at', '')
+('the', '')
+('government', '')
+('headquarters', '')
+('in', '')
+('France', 'GPE')
+('today', 'DATE')
+('.', '')
+```
+
+Named Entities로 인식되지 않은 것들은 empty stringdmfh skdhrp ehlqslek.   
+이 문장에는 Donald Trump, France, today라는 3개의 entity가 존재하는데, 각각 PERSON(사람), GPE(국가 그룹), DATE(날짜)로 잘 분류되었습니다.   
+goverment headquarters의 경우 어떤 특정한 것을 가리키지 않기 때문에 named entity로 분류되지 않았습니다.   
+
+spaCy가 `doc.ents`에 entities를 저장해놓는다는 것을 기억해 보세요.   
+
+```
+for ent in sent_0.ents:
+    print((ent.text, ent.label_))
+```
+
+위 코드의 결과는 다음과 같이 나올 것입니다.   
+
+```
+('Donald Trump', 'PERSON')
+('France', 'GPE')
+('today', 'DATE')
+```
+
+결과를 보면, Donald Trump가 하나의 entity로 취급된다는 것에 주목하십시오.   
+
+다음 문장을 보겠습니다.   
+
+```
+for ent in sent_1.ents:
+    print((ent.text, ent.label_))
+```
+
+결과는 다음과 같이 나옵니다.   
+
+```
+('Emmanuel Jean-Michel', 'PERSON')
+('Frédéric Macron', 'PERSON')
+('French', 'NORP')
+('France', 'GPE')
+('Andorra', 'PERSON')
+('14 May 2017', 'DATE')
+```
+
+여기에서 몇 가지 오류가 보입니다.   
+Emmanuel Jean-Michel Frédéric Macron 전체가 사람이고, Andorra는 국가로 취급되어야 합니다.   
+
+다음 문장을 보겠습니다.   
+
+```
+for ent in sent_2.ents:
+    print((ent.text, ent.label_))
+```
+
+결과는 다음과 같이 나옵니다.   
+
+```
+('Paris Nanterre University', 'ORG')
+('a Masters of Public Affairs at Sciences Po', 'WORK_OF_ART')
+('the École Nationale Administration', 'ORG')
+('ÉNA', 'ORG')
+('2004', 'DATE')
+```
+
+꽤 잘 나오는 것처럼 보입니다.   
+
+다음 장에서는 spaCy의 NER model 학습을 배워보겠습니다.   
