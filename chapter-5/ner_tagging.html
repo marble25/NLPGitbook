@@ -509,7 +509,106 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="ner-tagging">NER Tagging</h2>
+<hr>
+<h3 id="ner-tagging&#xC774;&#xB780;">NER Tagging&#xC774;&#xB780;?</h3>
+<p>NER&#xC740; Named Entity Recognition&#xC758; &#xC904;&#xC784;&#xB9D0;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC5EC;&#xAE30;&#xC11C; named entity&#xAC00; &#xBB34;&#xC5C7;&#xC778;&#xC9C0; &#xC54C;&#xC544;&#xBD05;&#xC2DC;&#xB2E4;.<br>named entity&#xB294; &#xD2B9;&#xC815;&#xD55C; &#xC774;&#xB984;&#xC744; &#xAC00;&#xC9C4; &#xC2E4;&#xC81C; &#xC138;&#xACC4;&#xC758; &#xAC1D;&#xCCB4;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xBA74;, France, Donald Trump, &#xADF8;&#xB9AC;&#xACE0; Twitter&#xAC19;&#xC740; &#xAC83;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>France&#xB294; GPE(Geopolitical Entity)&#xB85C; &#xBD84;&#xB958;&#xB418;&#xACE0;, Donald Trump&#xB294; PER(person), Twitter&#xB294; ORG(organization)&#xC73C;&#xB85C; &#xBD84;&#xB958;&#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xADF8;&#xB807;&#xB2E4;&#xBA74; &#xC5BC;&#xB9C8;&#xB098; &#xB9CE;&#xC740; &#xC885;&#xB958;&#xC758; named entities&#xAC00; &#xC874;&#xC7AC;&#xD560;&#xAE4C;&#xC694;?
+&#xC774;&#xAC83; &#xC5ED;&#xC2DC; &#xC6B0;&#xB9AC;&#xAC00; &#xC5B4;&#xB5BB;&#xAC8C; &#xC815;&#xC758;&#xD558;&#xB294;&#xAC00;&#xC5D0; &#xB530;&#xB77C; &#xB2E4;&#xB985;&#xB2C8;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xAC00; &#xAE30;&#xC5B5;&#xD574;&#xC57C; &#xD558;&#xB294; &#xAC83;&#xC740; &#xD604;&#xB300;&#xC758; NER-tagger&#xB294; &#xBCF4;&#xD1B5; &#xD1B5;&#xACC4;&#xC801;&#xC73C;&#xB85C; &#xD559;&#xC2B5;&#xB41C; &#xBAA8;&#xB378;&#xC774;&#xACE0;, &#xBB38;&#xC81C;&#xC5D0; &#xB530;&#xB77C; &#xBCC0;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="spacy&#xC5D0;&#xC11C;-entities&#xC758;-&#xC885;&#xB958;">spaCy&#xC5D0;&#xC11C; Entities&#xC758; &#xC885;&#xB958;</h3>
+<p>spaCy&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xD558;&#xB294; named entities&#xC758; &#xCE74;&#xD14C;&#xACE0;&#xB9AC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#xD0C0;&#xC785;</th>
+<th style="text-align:left">&#xC124;&#xBA85;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">PERSON</td>
+<td style="text-align:left">&#xC0AC;&#xB78C;&#xB4E4;</td>
+</tr>
+<tr>
+<td style="text-align:left">NORP</td>
+<td style="text-align:left">&#xAD6D;&#xC801;&#xC774;&#xB098; &#xC885;&#xAD50;&#xC801;, &#xC815;&#xCE58;&#xC801; &#xADF8;&#xB8F9;</td>
+</tr>
+<tr>
+<td style="text-align:left">FACILITY</td>
+<td style="text-align:left">&#xAC74;&#xBB3C;, &#xACF5;&#xD56D;, &#xACE0;&#xC18D;&#xB3C4;&#xB85C;, &#xB2E4;&#xB9AC; &#xB4F1;</td>
+</tr>
+<tr>
+<td style="text-align:left">ORG</td>
+<td style="text-align:left">&#xD68C;&#xC0AC;, &#xBC95;&#xC778; &#xB4F1;</td>
+</tr>
+<tr>
+<td style="text-align:left">GPE</td>
+<td style="text-align:left">&#xAD6D;&#xAC00;, &#xB3C4;&#xC2DC;, &#xC8FC; &#xB4F1;</td>
+</tr>
+<tr>
+<td style="text-align:left">LOC</td>
+<td style="text-align:left">GPE&#xAC00; &#xC544;&#xB2CC; locations, &#xC0B0;, &#xAC15; &#xB4F1;</td>
+</tr>
+<tr>
+<td style="text-align:left">PRODUCT</td>
+<td style="text-align:left">&#xC0AC;&#xBB3C;, &#xC6B4;&#xC1A1;&#xC218;&#xB2E8;, &#xC74C;&#xC2DD; &#xB4F1;</td>
+</tr>
+<tr>
+<td style="text-align:left">EVENT</td>
+<td style="text-align:left">&#xD5C8;&#xB9AC;&#xCF00;&#xC778;, &#xC804;&#xC7C1; &#xB4F1;&#xC758; &#xC0AC;&#xAC74;</td>
+</tr>
+<tr>
+<td style="text-align:left">WORK_OF_ART</td>
+<td style="text-align:left">&#xCC45; &#xC81C;&#xBAA9;, &#xB178;&#xB798; &#xB4F1;</td>
+</tr>
+<tr>
+<td style="text-align:left">LAW</td>
+<td style="text-align:left">&#xBC95;</td>
+</tr>
+<tr>
+<td style="text-align:left">LANGUAGE</td>
+<td style="text-align:left">&#xC5B8;&#xC5B4;</td>
+</tr>
+<tr>
+<td style="text-align:left">DATE</td>
+<td style="text-align:left">&#xC808;&#xB300;&#xC801;, &#xC0C1;&#xB300;&#xC801; &#xB0A0;&#xC9DC;&#xB098; &#xAE30;&#xAC04;</td>
+</tr>
+<tr>
+<td style="text-align:left">TIME</td>
+<td style="text-align:left">&#xD558;&#xB8E8;&#xBCF4;&#xB2E4; &#xC791;&#xC740; &#xB2E8;&#xC704;&#xC758; &#xC2DC;&#xAC04;</td>
+</tr>
+<tr>
+<td style="text-align:left">PERCENT</td>
+<td style="text-align:left">&apos;%&apos;&#xAC00; &#xD3EC;&#xD568;&#xB41C; &#xD37C;&#xC13C;&#xD2B8;</td>
+</tr>
+<tr>
+<td style="text-align:left">MONEY</td>
+<td style="text-align:left">&#xD654;&#xD3D0;</td>
+</tr>
+<tr>
+<td style="text-align:left">QUANTITY</td>
+<td style="text-align:left">&#xBB34;&#xAC8C;&#xB098; &#xAC70;&#xB9AC; &#xB4F1;&#xC758; &#xD06C;&#xAE30;</td>
+</tr>
+<tr>
+<td style="text-align:left">ORDINAL</td>
+<td style="text-align:left">&#xC11C;&#xC218;</td>
+</tr>
+<tr>
+<td style="text-align:left">CARDINAL</td>
+<td style="text-align:left">&#xB2E4;&#xB978; &#xAC83;&#xACFC; &#xC911;&#xBCF5;&#xB418;&#xC9C0; &#xC54A;&#xB294; &#xC22B;&#xC790; &#xD0C0;&#xC785;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ner-tagging&#xC744;-&#xC0AC;&#xC6A9;&#xD558;&#xB294;-&#xC774;&#xC720;">NER Tagging&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xC774;&#xC720;</h3>
+<p>&#xADF8;&#xB807;&#xB2E4;&#xBA74; &#xC65C; NER Tagging&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xACE0;, &#xC65C; &#xC6B0;&#xB9AC;&#xAC00; &#xAD00;&#xC2EC;&#xC744; &#xAC00;&#xC838;&#xC57C; &#xD560;&#xAE4C;&#xC694;?<br>&#xC0AC;&#xC2E4; &#xB2E8;&#xC21C;&#xD788; named entities&#xB97C; &#xC778;&#xC9C0;&#xD558;&#xB294; &#xAC83;&#xC740; &#xC6B0;&#xB9AC;&#xC758; &#xCD5C;&#xC885; &#xBAA9;&#xD45C;&#xB294; &#xC544;&#xB2D9;&#xB2C8;&#xB2E4;.<br>&#xD558;&#xC9C0;&#xB9CC; NER Tagging&#xC740; &#xC6B0;&#xB9AC;&#xAC00; &#xCD5C;&#xC885; &#xACB0;&#xACFC;&#xB97C; &#xB9CC;&#xB4E4;&#xC5B4;&#xB0B4;&#xB294;&#xB370; &#xD558;&#xB098;&#xC758; &#xC911;&#xC694;&#xD55C; &#xC8FC;&#xCDA7;&#xB3CC;&#xC785;&#xB2C8;&#xB2E4;.<br>Entity linking&#xC740; &#xC5B4;&#xB514;&#xC5D0; entity recognition&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xACE0; &#xADF8;&#xB4E4; &#xAC04;&#xC758; &#xAD00;&#xACC4;&#xB97C; &#xC54C;&#xC544;&#xB0B4;&#xB294; &#xC791;&#xC5C5;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p><em>Rome is the capital of Italy.</em></p>
+<p>NER tagger&#xB294; Rome&#xC744; place(GPE)&#xB85C; &#xC778;&#xC2DD;&#xD558;&#xACE0;, Italy &#xC5ED;&#xC2DC; &#xB9C8;&#xCC2C;&#xAC00;&#xC9C0;&#xB85C; GPE&#xB85C; &#xC778;&#xC2DD;&#xD560; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>Rome&#xC744; &#xB3C4;&#xC2DC;&#xB85C; &#xC778;&#xC2DD;&#xD558;&#xACE0; &#xBBF8;&#xAD6D;&#xC758; R&amp;B artist&#xB85C; &#xC778;&#xC2DD;&#xD558;&#xC9C0; &#xC54A;&#xB294; &#xAC83;&#xC744; <strong>Named Entity Disambiguation(NED)</strong> &#xB77C;&#xACE0; &#xBD80;&#xB985;&#xB2C8;&#xB2E4;.   </p>
+<p>NER tagger&#xB294; &#xB3C4;&#xBA54;&#xC778;&#xC5D0; &#xB530;&#xB77C; &#xB9E4;&#xC6B0; &#xB2E4;&#xB974;&#xAC8C; &#xC778;&#xC2DD;&#xB418;&#xB294; &#xACBD;&#xD5A5;&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>POS tagger&#xB294; &#xBB38;&#xC11C;&#xC5D0; &#xB530;&#xB77C; &#xC57D;&#xAC04;&#xC758; &#xCC28;&#xC774;&#xB97C; &#xBCF4;&#xC774;&#xC9C0;&#xB9CC;, NER tagger&#xB294; &#xBB38;&#xB9E5;&#xC5D0; &#xB530;&#xB77C; &#xC644;&#xC804;&#xD788; &#xB2E4;&#xB978; &#xACB0;&#xACFC;&#xB97C; &#xBCF4;&#xC5EC;&#xC8FC;&#xAE30;&#xB3C4; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB7F0; &#xD604;&#xC0C1;&#xC740; &#xB9E4;&#xC6B0; &#xC798; &#xD6C8;&#xB828;&#xB41C; &#xBAA8;&#xB378;&#xC5D0;&#xC11C;&#xB3C4; &#xBC1C;&#xC0DD;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB294; &#xC5B4;&#xB5A4; &#xB3C4;&#xBA54;&#xC778;&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xD558;&#xB294;&#xC9C0;&#xAC00; NER tagger&#xC5D0;&#xC11C;&#xB294; &#xB9E4;&#xC6B0; &#xC911;&#xC694;&#xD568;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="ner-tagging&#xC744;-&#xC0AC;&#xC6A9;&#xD558;&#xB294;-&#xBC29;&#xBC95;">NER Tagging&#xC744; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xBC29;&#xBC95;</h3>
+<p>POS tagger&#xC5D0;&#xC11C; dataset&#xC744; &#xC81C;&#xACF5;&#xD588;&#xB358; &#xAC83;&#xCC98;&#xB7FC;, NER tagger&#xC5D0;&#xC11C;&#xB3C4; &#xD559;&#xC2B5;&#xC744; &#xC704;&#xD574;&#xC11C; &#xBB38;&#xC7A5;&#xACFC; NER tag&#xB97C; &#xC81C;&#xACF5;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xB610;&#xD55C; NER tagging&#xC744; &#xD560; &#xB54C;, &#xB2E8;&#xC5B4;&#xC758; POS tag &#xC5ED;&#xC2DC; context&#xB85C; &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB294; POS tagging&#xC744; NER tagging &#xC804;&#xC5D0; &#xD558;&#xB294; &#xC774;&#xC720; &#xC911; &#xD558;&#xB098;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xC678;&#xC5D0;&#xB3C4; word&#xC758; prefix&#xB098; suffix&#xAC00; &#xC5B4;&#xB5A4; &#xD2B9;&#xC815;&#xD55C; symbol&#xC744; &#xD3EC;&#xD568;&#xD558;&#xB294;&#xC9C0;, &#xC774; &#xAC83;&#xC774; &#xB300;&#xBB38;&#xC790;&#xC778;&#xC9C0; &#xB4F1;&#xC774; NER tagging&#xC758; context&#xB85C; &#xC0AC;&#xC6A9;&#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774;&#xB807;&#xAC8C; features&#xB97C; &#xC54C;&#xAC8C; &#xB418;&#xBA74;, &#xC6B0;&#xB9AC; &#xBAA8;&#xB378;&#xC744; &#xD559;&#xC2B5;&#xD558;&#xB294;&#xB370; &#xB2E4;&#xC218;&#xC758; &#xC54C;&#xACE0;&#xB9AC;&#xC998;&#xC774; &#xC0AC;&#xC6A9;&#xB429;&#xB2C8;&#xB2E4;.<br><strong>CRF(Conditional Random Fields)</strong> &#xAC00; NER tagging&#xC5D0; &#xB300;&#xBD80;&#xBD84; &#xC0AC;&#xC6A9;&#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xBB3C;&#xB860;, NLP&#xC5D0;&#xC11C; &#xB2E4;&#xB978; &#xC791;&#xC5C5;&#xB4E4;&#xC774; &#xADF8;&#xB807;&#xB4EF;, NER&#xC5D0;&#xC11C;&#xB3C4; rule-based approch&#xAC00; &#xAC00;&#xB2A5;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xBC29;&#xBC95;&#xC740; &#xAF64; &#xD06C;&#xACE0; &#xBC29;&#xB300;&#xD55C; &#xC6A9;&#xB7C9;&#xC758; dictionary&#xB97C; &#xD544;&#xC694;&#xB85C; &#xD558;&#xACE0;, &#xC9C0;&#xC18D;&#xC801;&#xC73C;&#xB85C; &#xC5C5;&#xB370;&#xC774;&#xD2B8;&#xB418;&#xC5B4;&#xC57C; &#xD558;&#xBA70;, domain-specific&#xD558;&#xAC8C; &#xB9CC;&#xB4E4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -552,7 +651,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"NER Tagging","level":"6.1","depth":1,"next":{"title":"Python에서 NER Tagging","level":"6.2","depth":1,"path":"chapter-5/python_ner_tagging.md","ref":"chapter-5/python_ner_tagging.md","articles":[]},"previous":{"title":"POS Tagging Code","level":"5.4","depth":1,"path":"chapter-4/pos_tagging_code.md","ref":"chapter-4/pos_tagging_code.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-5/ner_tagging.md","mtime":"2020-09-02T08:49:10.942Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-02T08:49:33.534Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"NER Tagging","level":"6.1","depth":1,"next":{"title":"Python에서 NER Tagging","level":"6.2","depth":1,"path":"chapter-5/python_ner_tagging.md","ref":"chapter-5/python_ner_tagging.md","articles":[]},"previous":{"title":"POS Tagging Code","level":"5.4","depth":1,"path":"chapter-4/pos_tagging_code.md","ref":"chapter-4/pos_tagging_code.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-5/ner_tagging.md","mtime":"2020-09-02T09:21:52.685Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-02T09:21:57.028Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
