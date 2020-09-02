@@ -35,6 +35,11 @@
 
 ### Chapter 5 - NER Tagging
 
+* [NER Tagging](chapter-5/ner_tagging.md)
+* [Python에서 NER Tagging](chapter-5/python_ner_tagging.md)
+* [NER Tagger 학습시키기](chapter-5/training_ner_tagger.md)
+* [NER Tagging Code](chapter-5/ner_tagging_code.md)
+
 ### Chapter 6 - Dependency Parsing
 
 ### Chapter 7 - Topic Models
