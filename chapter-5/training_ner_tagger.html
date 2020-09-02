@@ -509,7 +509,259 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="ner-tagger-&#xD559;&#xC2B5;&#xC2DC;&#xD0A4;&#xAE30;">NER Tagger &#xD559;&#xC2B5;&#xC2DC;&#xD0A4;&#xAE30;</h2>
+<hr>
+<h3 id="ner-tagger-training-&#xC2E4;&#xC2B5;">NER Tagger Training &#xC2E4;&#xC2B5;</h3>
+<p>&#xB2E4;&#xC74C; &#xC608;&#xC81C;&#xB294; spaCy&#xC758; <a href="https://github.com/explosion/spaCy/blob/master/examples/training/train_ner.py" target="_blank">train_ner.py</a>&#xC5D0; &#xB098;&#xC640;&#xC788;&#xB294; &#xC608;&#xC81C;&#xC785;&#xB2C8;&#xB2E4;.    </p>
+<pre><code>from __future__ import unicode_literals, print_function
+
+import plac
+import random
+import warnings
+from pathlib import Path
+import spacy
+from spacy.util import minibatch, compounding
+
+
+# training data
+TRAIN_DATA = [
+    (&quot;Who is Shaka Khan?&quot;, {&quot;entities&quot;: [(7, 17, &quot;PERSON&quot;)]}),
+    (&quot;I like London and Berlin.&quot;, {&quot;entities&quot;: [(7, 13, &quot;LOC&quot;), (18, 24, &quot;LOC&quot;)]}),
+]
+</code></pre><p>&#xC704;&#xC640; &#xAC19;&#xC774; train_data&#xB97C; &#xC900;&#xBE44;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>POS Tagger&#xC640; &#xB9C8;&#xCC2C;&#xAC00;&#xC9C0;&#xB85C;, &#xBB38;&#xC7A5;&#xC744; &#xD558;&#xB098; &#xC8FC;&#xC5B4;&#xC8FC;&#xACE0;, &#xAC70;&#xAE30;&#xC5D0; &#xC874;&#xC7AC;&#xD558;&#xB294; entity&#xB97C; &#xB4A4;&#xC5D0; &#xB2F4;&#xC544;&#xB450;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>@plac.annotations(
+    model=(&quot;Model name. Defaults to blank &apos;en&apos; model.&quot;, &quot;option&quot;, &quot;m&quot;, str),
+    output_dir=(&quot;Optional output directory&quot;, &quot;option&quot;, &quot;o&quot;, Path),
+    n_iter=(&quot;Number of training iterations&quot;, &quot;option&quot;, &quot;n&quot;, int),
+)
+def main(model=None, output_dir=None, n_iter=100):
+    &quot;&quot;&quot;Load the model, set up the pipeline and train the entity recognizer.&quot;&quot;&quot;
+    if model is not None:
+        nlp = spacy.load(model)  # load existing spaCy model
+        print(&quot;Loaded model &apos;%s&apos;&quot; % model)
+    else:
+        nlp = spacy.blank(&quot;en&quot;)  # create blank Language class
+        print(&quot;Created blank &apos;en&apos; model&quot;)
+
+    # create the built-in pipeline components and add them to the pipeline
+    # nlp.create_pipe works for built-ins that are registered with spaCy
+    if &quot;ner&quot; not in nlp.pipe_names:
+        ner = nlp.create_pipe(&quot;ner&quot;)
+        nlp.add_pipe(ner, last=True)
+    # otherwise, get it so we can add labels
+    else:
+        ner = nlp.get_pipe(&quot;ner&quot;)
+
+    # add labels
+    for _, annotations in TRAIN_DATA:
+        for ent in annotations.get(&quot;entities&quot;):
+            ner.add_label(ent[2])
+
+    # get names of other pipes to disable them during training
+    pipe_exceptions = [&quot;ner&quot;, &quot;trf_wordpiecer&quot;, &quot;trf_tok2vec&quot;]
+    other_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptions]
+    # only train NER
+    with nlp.disable_pipes(*other_pipes), warnings.catch_warnings():
+        # show warnings for misaligned entity spans once
+        warnings.filterwarnings(&quot;once&quot;, category=UserWarning, module=&apos;spacy&apos;)
+
+        # reset and initialize the weights randomly &#x2013; but only if we&apos;re
+        # training a new model
+        if model is None:
+            nlp.begin_training()
+        for itn in range(n_iter):
+            random.shuffle(TRAIN_DATA)
+            losses = {}
+            # batch up the examples using spaCy&apos;s minibatch
+            batches = minibatch(TRAIN_DATA, size=compounding(4.0, 32.0, 1.001))
+            for batch in batches:
+                texts, annotations = zip(*batch)
+                nlp.update(
+                    texts,  # batch of texts
+                    annotations,  # batch of annotations
+                    drop=0.5,  # dropout - make it harder to memorise data
+                    losses=losses,
+                )
+            print(&quot;Losses&quot;, losses)
+
+    # test the trained model
+    for text, _ in TRAIN_DATA:
+        doc = nlp(text)
+        print(&quot;Entities&quot;, [(ent.text, ent.label_) for ent in doc.ents])
+        print(&quot;Tokens&quot;, [(t.text, t.ent_type_, t.ent_iob) for t in doc])
+
+    # save model to output directory
+    if output_dir is not None:
+        output_dir = Path(output_dir)
+        if not output_dir.exists():
+            output_dir.mkdir()
+        nlp.to_disk(output_dir)
+        print(&quot;Saved model to&quot;, output_dir)
+
+        # test the saved model
+        print(&quot;Loading from&quot;, output_dir)
+        nlp2 = spacy.load(output_dir)
+        for text, _ in TRAIN_DATA:
+            doc = nlp2(text)
+            print(&quot;Entities&quot;, [(ent.text, ent.label_) for ent in doc.ents])
+            print(&quot;Tokens&quot;, [(t.text, t.ent_type_, t.ent_iob) for t in doc])
+
+
+if __name__ == &quot;__main__&quot;:
+    plac.call(main)
+
+    # Expected output:
+    # Entities [(&apos;Shaka Khan&apos;, &apos;PERSON&apos;)]
+    # Tokens [(&apos;Who&apos;, &apos;&apos;, 2), (&apos;is&apos;, &apos;&apos;, 2), (&apos;Shaka&apos;, &apos;PERSON&apos;, 3),
+    # (&apos;Khan&apos;, &apos;PERSON&apos;, 1), (&apos;?&apos;, &apos;&apos;, 2)]
+    # Entities [(&apos;London&apos;, &apos;LOC&apos;), (&apos;Berlin&apos;, &apos;LOC&apos;)]
+    # Tokens [(&apos;I&apos;, &apos;&apos;, 2), (&apos;like&apos;, &apos;&apos;, 2), (&apos;London&apos;, &apos;LOC&apos;, 3),
+    # (&apos;and&apos;, &apos;&apos;, 2), (&apos;Berlin&apos;, &apos;LOC&apos;, 3), (&apos;.&apos;, &apos;&apos;, 2)]
+</code></pre><p>&#xC704; &#xCF54;&#xB4DC;&#xC5D0;&#xC11C; ner pipeline &#xC678;&#xC5D0; &#xB2E4;&#xB978; pipeline&#xC740; &#xBAA8;&#xB450; disable&#xD574;&#xC11C; &#xC624;&#xC9C1; NER-tagger&#xB9CC; &#xC5C5;&#xB370;&#xC774;&#xD2B8;&#xD560; &#xC218; &#xC788;&#xB3C4;&#xB85D; &#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>training &#xC790;&#xCCB4;&#xB294; nlp.update() &#xBA54;&#xC18C;&#xB4DC; &#xC548;&#xC5D0;&#xC11C;&#xB9CC; &#xC77C;&#xC5B4;&#xB098;&#xC11C; &#xC628;&#xAC16; &#xC5B4;&#xB824;&#xC6B4; &#xC791;&#xC5C5;&#xB4E4;&#xC744; &#xC6B0;&#xB9AC;&#xAC00; &#xC54C; &#xD544;&#xC694; &#xC5C6;&#xB3C4;&#xB85D; &#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC704; &#xCF54;&#xB4DC;&#xC758; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>Entities [(&apos;London&apos;, &apos;LOC&apos;), (&apos;Berlin&apos;, &apos;LOC&apos;)]
+Tokens [(&apos;I&apos;, &apos;&apos;, 2), (&apos;like&apos;, &apos;&apos;, 2), (&apos;London&apos;, &apos;LOC&apos;, 3), (&apos;and&apos;, &apos;&apos;, 2), (&apos;Berlin&apos;, &apos;LOC&apos;, 3), (&apos;.&apos;, &apos;&apos;, 2)]
+Entities [(&apos;Shaka Khan&apos;, &apos;PERSON&apos;)]
+Tokens [(&apos;Who&apos;, &apos;&apos;, 2), (&apos;is&apos;, &apos;&apos;, 2), (&apos;Shaka&apos;, &apos;PERSON&apos;, 3), (&apos;Khan&apos;, &apos;PERSON&apos;, 1), (&apos;?&apos;, &apos;&apos;, 2)]
+</code></pre><p>&#xC608;&#xC0C1;&#xD55C; &#xACB0;&#xACFC;&#xC640; &#xB611;&#xAC19;&#xC774; &#xB098;&#xC654;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC0C8;&#xB85C;&#xC6B4; label&#xC744; &#xC815;&#xC758;&#xD55C; &#xBAA8;&#xB378;&#xC744; &#xB9CC;&#xB4E4;&#xC5B4; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>#!/usr/bin/env python
+# coding: utf8
+&quot;&quot;&quot;Example of training spaCy&apos;s named entity recognizer, starting off with an
+existing model or a blank model.
+
+For more details, see the documentation:
+* Training: https://spacy.io/usage/training
+* NER: https://spacy.io/usage/linguistic-features#named-entities
+
+Compatible with: spaCy v2.0.0+
+Last tested with: v2.2.4
+&quot;&quot;&quot;
+from __future__ import unicode_literals, print_function
+
+import plac
+import random
+import warnings
+from pathlib import Path
+import spacy
+from spacy.util import minibatch, compounding
+
+LABEL = &apos;ANIMAL&apos;
+
+# training data
+TRAIN_DATA = [
+    (&quot;Horses are too tall and they pretend to care about your feelings&quot;, {
+        &apos;entities&apos;: [(0, 6, &apos;ANIMAL&apos;)]
+    }),
+    (&quot;Do they bite?&quot;, {
+        &apos;entities&apos;: []
+    }),
+    (&quot;horses are too tall and they pretend to care about your feelings&quot;, {
+        &apos;entities&apos;: [(0, 6, &apos;ANIMAL&apos;)]
+    }),
+    (&quot;horses pretend to care about your feelings&quot;, {
+        &apos;entities&apos;: [(0, 6, &apos;ANIMAL&apos;)]
+    }),
+    (&quot;they pretend to care about your feelings, those horses&quot;, {
+        &apos;entities&apos;: [(48, 54, &apos;ANIMAL&apos;)]
+    }),
+    (&quot;hosres?&quot;, {
+        &apos;entities&apos;: [(0, 6, &apos;ANIMAL&apos;)]
+    })
+]
+</code></pre><p>&apos;ANIMAL&apos;&#xC774;&#xB77C;&#xB294; label&#xC744; &#xC815;&#xC758;&#xD574;&#xC11C; &#xC774; label&#xC758; &#xD2B9;&#xC131;&#xC744; &#xD559;&#xC2B5;&#xD558;&#xACE0;&#xC790; &#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>@plac.annotations(
+    model=(&quot;Model name. Defaults to blank &apos;en&apos; model.&quot;, &quot;option&quot;, &quot;m&quot;, str),
+    output_dir=(&quot;Optional output directory&quot;, &quot;option&quot;, &quot;o&quot;, Path),
+    n_iter=(&quot;Number of training iterations&quot;, &quot;option&quot;, &quot;n&quot;, int),
+)
+def main(model=None, output_dir=None, n_iter=100):
+    &quot;&quot;&quot;Load the model, set up the pipeline and train the entity recognizer.&quot;&quot;&quot;
+    if model is not None:
+        nlp = spacy.load(model)  # load existing spaCy model
+        print(&quot;Loaded model &apos;%s&apos;&quot; % model)
+    else:
+        nlp = spacy.blank(&quot;en&quot;)  # create blank Language class
+        print(&quot;Created blank &apos;en&apos; model&quot;)
+
+    # create the built-in pipeline components and add them to the pipeline
+    # nlp.create_pipe works for built-ins that are registered with spaCy
+    if &quot;ner&quot; not in nlp.pipe_names:
+        ner = nlp.create_pipe(&quot;ner&quot;)
+        nlp.add_pipe(ner, last=True)
+    # otherwise, get it so we can add labels
+    else:
+        ner = nlp.get_pipe(&quot;ner&quot;)
+
+    # add labels
+    ner.add_label(LABEL)
+
+    # get names of other pipes to disable them during training
+    pipe_exceptions = [&quot;ner&quot;, &quot;trf_wordpiecer&quot;, &quot;trf_tok2vec&quot;]
+    other_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptions]
+    # only train NER
+    with nlp.disable_pipes(*other_pipes), warnings.catch_warnings():
+        # show warnings for misaligned entity spans once
+        warnings.filterwarnings(&quot;once&quot;, category=UserWarning, module=&apos;spacy&apos;)
+
+        # reset and initialize the weights randomly &#x2013; but only if we&apos;re
+        # training a new model
+        if model is None:
+            nlp.begin_training()
+        for itn in range(n_iter):
+            random.shuffle(TRAIN_DATA)
+            losses = {}
+            # batch up the examples using spaCy&apos;s minibatch
+            batches = minibatch(TRAIN_DATA, size=compounding(4.0, 32.0, 1.001))
+            for batch in batches:
+                texts, annotations = zip(*batch)
+                nlp.update(
+                    texts,  # batch of texts
+                    annotations,  # batch of annotations
+                    drop=0.35,  # dropout - make it harder to memorise data
+                    losses=losses,
+                )
+            print(&quot;Losses&quot;, losses)
+
+    # test the trained model
+    doc = nlp(&apos;Do you like horses?&apos;)
+    print(&quot;Entities&quot;, [(ent.text, ent.label_) for ent in doc.ents])
+    print(&quot;Tokens&quot;, [(t.text, t.ent_type_, t.ent_iob) for t in doc])
+
+    # save model to output directory
+    if output_dir is not None:
+        output_dir = Path(output_dir)
+        if not output_dir.exists():
+            output_dir.mkdir()
+        nlp.to_disk(output_dir)
+        print(&quot;Saved model to&quot;, output_dir)
+
+        # test the saved model
+        print(&quot;Loading from&quot;, output_dir)
+        nlp2 = spacy.load(output_dir)
+        for text, _ in TRAIN_DATA:
+            doc = nlp2(text)
+            print(&quot;Entities&quot;, [(ent.text, ent.label_) for ent in doc.ents])
+            print(&quot;Tokens&quot;, [(t.text, t.ent_type_, t.ent_iob) for t in doc])
+
+
+if __name__ == &quot;__main__&quot;:
+    plac.call(main)
+
+    # Expected output:
+    # Entities [(&apos;Shaka Khan&apos;, &apos;PERSON&apos;)]
+    # Tokens [(&apos;Who&apos;, &apos;&apos;, 2), (&apos;is&apos;, &apos;&apos;, 2), (&apos;Shaka&apos;, &apos;PERSON&apos;, 3),
+    # (&apos;Khan&apos;, &apos;PERSON&apos;, 1), (&apos;?&apos;, &apos;&apos;, 2)]
+    # Entities [(&apos;London&apos;, &apos;LOC&apos;), (&apos;Berlin&apos;, &apos;LOC&apos;)]
+    # Tokens [(&apos;I&apos;, &apos;&apos;, 2), (&apos;like&apos;, &apos;&apos;, 2), (&apos;London&apos;, &apos;LOC&apos;, 3),
+    # (&apos;and&apos;, &apos;&apos;, 2), (&apos;Berlin&apos;, &apos;LOC&apos;, 3), (&apos;.&apos;, &apos;&apos;, 2)]
+</code></pre><p>&#xAE30;&#xBCF8;&#xC801;&#xC778; step&#xC740; &#xB3D9;&#xC77C;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xB2E4;&#xB9CC; &#xC911;&#xAC04;&#xC5D0; ner.add_label(LABEL)&#xC5D0;&#xC11C; &#xC624;&#xC9C1; &#xD558;&#xB098;&#xC758; &#xB77C;&#xBCA8;&#xB9CC; &#xCD94;&#xAC00;&#xD55C;&#xB2E4;&#xB294; &#xC810;&#xACFC;
+nlp.update&#xC5D0;&#xC11C; drop&#xC744; 0.5&#xC5D0;&#xC11C; 0.35&#xB85C; &#xC904;&#xC600;&#xB2E4;&#xB294; &#xC810;&#xB9CC; &#xB2E4;&#xB985;&#xB2C8;&#xB2E4;.   </p>
+<p>test &#xBB38;&#xC7A5;&#xC744; &apos;Do you like horses?&apos;&#xB85C; &#xBC14;&#xAFE8;&#xC744; &#xB54C;, &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC654;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>Entities [(&apos;horses&apos;, &apos;ANIMAL&apos;)]
+Tokens [(&apos;Do&apos;, &apos;&apos;, 2), (&apos;you&apos;, &apos;&apos;, 2), (&apos;like&apos;, &apos;&apos;, 2), (&apos;horses&apos;, &apos;ANIMAL&apos;, 3), (&apos;?&apos;, &apos;&apos;, 2)]
+</code></pre><p>&#xC0C8;&#xB85C;&#xC6B4; label&#xC778; ANIMAL&#xC744; &#xC798; &#xAC10;&#xC9C0;&#xD588;&#xC74C;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>spaCy&#xB294; &#xAE30;&#xC874; &#xBAA8;&#xB378;&#xC758; &#xC131;&#xB2A5;&#xC774; &#xB6F0;&#xC5B4;&#xB0A0; &#xBFD0;&#xB9CC; &#xC544;&#xB2C8;&#xB77C; &#xC0C8;&#xB85C;&#xC6B4; &#xBAA8;&#xB378; &#xD559;&#xC2B5;&#xC744; &#xC704;&#xD55C; &#xC26C;&#xC6B4; &#xBC29;&#xBC95;&#xC744; &#xC81C;&#xACF5;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -552,7 +804,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"NER Tagger 학습시키기","level":"6.3","depth":1,"next":{"title":"NER Tagging Code","level":"6.4","depth":1,"path":"chapter-5/ner_tagging_code.md","ref":"chapter-5/ner_tagging_code.md","articles":[]},"previous":{"title":"Python에서 NER Tagging","level":"6.2","depth":1,"path":"chapter-5/python_ner_tagging.md","ref":"chapter-5/python_ner_tagging.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-5/training_ner_tagger.md","mtime":"2020-09-02T08:49:21.418Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-02T11:38:25.587Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"NER Tagger 학습시키기","level":"6.3","depth":1,"next":{"title":"NER Tagging Code","level":"6.4","depth":1,"path":"chapter-5/ner_tagging_code.md","ref":"chapter-5/ner_tagging_code.md","articles":[]},"previous":{"title":"Python에서 NER Tagging","level":"6.2","depth":1,"path":"chapter-5/python_ner_tagging.md","ref":"chapter-5/python_ner_tagging.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-5/training_ner_tagger.md","mtime":"2020-09-02T11:59:56.324Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-02T12:00:00.500Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
