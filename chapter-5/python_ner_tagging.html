@@ -509,7 +509,78 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="python&#xC5D0;&#xC11C;-ner-tagging">Python&#xC5D0;&#xC11C; NER Tagging</h2>
+<hr>
+<h3 id="chunking">chunking</h3>
+<p>&#xBA3C;&#xC800; chunking&#xC774;&#xB77C;&#xB294; &#xB2E8;&#xC5B4;&#xC5D0; &#xB300;&#xD574; &#xC54C;&#xC544;&#xBCFC; &#xD544;&#xC694;&#xAC00; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB294; POS Tagging&#xC774; &#xB05D;&#xB09C; &#xD6C4;&#xC5D0; &#xC5F0;&#xC18D;&#xC801;&#xC778; &#xBD80;&#xBD84;&#xC73C;&#xB85C; &#xBB38;&#xC7A5;&#xC744; &#xBD84;&#xD560;&#xD558;&#xB294; &#xAC83;&#xC744; &#xC758;&#xBBF8;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<p><em>The little brown dog barked at the black cat.</em></p>
+<p>&#xC774; &#xACBD;&#xC6B0;&#xC5D0;, &#xB450; &#xAC1C;&#xC758; &#xBA85;&#xC0AC;&#xAD6C;&#xB97C; &#xC27D;&#xAC8C; &#xCC3E;&#xC544;&#xB0BC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&apos;The little brown dog&apos;&#xC640; &apos;the black cat&apos;
+&#xC774;&#xB294; chapter 6&#xC5D0;&#xC11C; &#xB354; &#xC790;&#xC138;&#xD788; &#xBC30;&#xC6B8; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC65C; &#xC774; &#xAC83;&#xC774; NER Tagging&#xACFC; &#xAD00;&#xB828;&#xC774; &#xC788;&#xC744;&#xAE4C;&#xC694;?
+&#xC774;&#xC804;&#xC5D0; &#xB4E0; &#xC608;&#xC2DC;&#xC5D0;&#xC11C;, &#xB2E8;&#xC9C0; Donald&#xB098; Trump&#xAC00; &#xC544;&#xB2CC;, Donald Trump&#xB77C;&#xB294; &#xC804;&#xCCB4; &#xBA85;&#xC0AC;&#xAD6C;&#xAC00; &#xC0AC;&#xB78C;&#xC73C;&#xB85C; &#xD0DC;&#xADF8;&#xB418;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xBA85;&#xC0AC;&#xAD6C;&#xC5D0; &#xB300;&#xD55C; &#xC774;&#xD574;&#xB294; tagging&#xC5D0;&#xC11C; &#xC6B0;&#xB9AC;&#xC758; &#xACB0;&#xC815;&#xC744; &#xB3C4;&#xC640;&#xC904; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC628;&#xB77C;&#xC778;&#xC5D0;&#xC11C; tagging &#xC2DC;&#xC2A4;&#xD15C;&#xC5D0; &#xB300;&#xD574; &#xCC3E;&#xC544;&#xBCF4;&#xBA74;, IOB &#xC2DC;&#xC2A4;&#xD15C; &#xAC19;&#xC740; &#xAC83;&#xC774; &#xB098;&#xC62C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>spaCy&#xC5D0;&#xC11C;&#xB294; &#xC774;&#xB97C; &#xB354; &#xC138;&#xBD84;&#xD654;&#xD574;&#xC11C; BILOU &#xC2DC;&#xC2A4;&#xD15C;&#xC744; &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#xD0DC;&#xADF8;</th>
+<th style="text-align:left">&#xC124;&#xBA85;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>B</code>EGIN</td>
+<td style="text-align:left">&#xBA40;&#xD2F0; &#xD1A0;&#xD070; &#xAC1D;&#xCCB4;&#xC758; &#xCCAB; &#xD1A0;&#xD070;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>I</code>N</td>
+<td style="text-align:left">&#xBA40;&#xD2F0; &#xD1A0;&#xD070; &#xAC1D;&#xCCB4;&#xC758; &#xB0B4;&#xBD80; &#xD1A0;&#xD070;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>L</code>AST</td>
+<td style="text-align:left">&#xBA40;&#xD2F0; &#xD1A0;&#xD070; &#xAC1D;&#xCCB4;&#xC758; &#xB9C8;&#xC9C0;&#xB9C9; &#xD1A0;&#xD070;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>U</code>NIT</td>
+<td style="text-align:left">&#xB2E8;&#xC77C; &#xD1A0;&#xD070; &#xAC1D;&#xCCB4;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>O</code>UT</td>
+<td style="text-align:left">Entity&#xAC00; &#xC544;&#xB2CC; &#xD1A0;&#xD070;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nltk&#xC5D0;&#xC11C;-ner-tagging">NLTK&#xC5D0;&#xC11C; NER Tagging</h3>
+<p>POS tagger&#xC5D0;&#xC11C; &#xC0B4;&#xD3B4;&#xBCF4;&#xC558;&#xB4EF;&#xC774;, NER Tagging&#xC5D0;&#xC11C;&#xB3C4; spaCy&#xC758; &#xCD5C;&#xB300; &#xB77C;&#xC774;&#xBC8C;&#xC778; NLTK&#xC758; &#xAE30;&#xB2A5;&#xC744; &#xAD6C;&#xD604;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.<br>&#xBA3C;&#xC800; &#xBA87; &#xAC00;&#xC9C0; &#xC124;&#xCE58;&#xD574;&#xC57C; &#xD558;&#xB294; &#xAC83;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>import nltk
+
+nltk.download(&apos;maxent_ne_chunker&apos;)
+nltk.download(&apos;words&apos;)
+</code></pre><p>&#xADF8; &#xD6C4; &#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xD574;&#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>from nltk.chunk import conlltags2tree, tree2conlltags
+from nltk import pos_tag
+from nltk import word_tokenize
+from nltk.chunk import ne_chunk
+
+
+sentence = &quot;Clement and Mathieu are working at Apple.&quot;
+ne_tree = ne_chunk(pos_tag(word_tokenize(sentence)))
+
+iob_tagged = tree2conlltags(ne_tree)
+print(iob_tagged)
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC654;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(&apos;Clement&apos;, &apos;NN&apos;, &apos;B-GPE&apos;), (&apos;and&apos;, &apos;CC&apos;, &apos;O&apos;), (&apos;Mathieu&apos;, &apos;NNP&apos;, &apos;B-PERSON&apos;), (&apos;are&apos;, &apos;VBP&apos;, &apos;O&apos;), (&apos;working&apos;, &apos;VBG&apos;, &apos;O&apos;), (&apos;at&apos;, &apos;IN&apos;, &apos;O&apos;), (&apos;Apple&apos;, &apos;NNP&apos;, &apos;B-ORGANIZATION&apos;), (&apos;.&apos;, &apos;.&apos;, &apos;O&apos;)]
+</code></pre><p>&#xCF54;&#xB4DC;&#xB97C; &#xBCF4;&#xBA74;, &#xBA3C;&#xC800; &#xBB38;&#xC7A5;&#xC744; tokenize&#xD588;&#xACE0;, POS-tag &#xD588;&#xACE0;, &#xADF8; &#xD6C4; chunk&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xACB0;&#xACFC;&#xB97C; &#xBCF4;&#xBA74;, Clement&#xAC00; &#xC0AC;&#xB78C;&#xC778;&#xB370;&#xB3C4; GPE&#xB85C; &#xC798;&#xBABB; &#xB098;&#xC640; &#xC788;&#xACE0;, &#xADF8; &#xC678;&#xC5D0;&#xB294; &#xB2E4; &#xC798; &#xB098;&#xC640; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB2E4;&#xB978; &#xC720;&#xBA85;&#xD55C; tagger&#xB294; Stanford NER tagger&#xC785;&#xB2C8;&#xB2E4;.<br>Stanford NER tagger&#xB294; &#xC55E;&#xC11C; &#xC0B4;&#xD3B4;&#xBD24;&#xB358; CRF &#xC54C;&#xACE0;&#xB9AC;&#xC998;&#xC744; &#xC0AC;&#xC6A9;&#xD574;&#xC11C; tagging&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774; tagger&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xAE30; &#xC704;&#xD574;&#xC11C;&#xB294; Jar File&#xC744; &#xB2E4;&#xC6B4;&#xB85C;&#xB4DC;&#xBC1B;&#xC544;&#xC57C; &#xD558;&#xB294;&#xB370;, &#xB2E4;&#xC74C; &#xC0AC;&#xC774;&#xD2B8;&#xC5D0;&#xC11C; &#xB2E4;&#xC6B4;&#xB85C;&#xB4DC;&#xBC1B;&#xC744; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br><a href="https://nlp.stanford.edu/software/CRF-NER.html" target="_blank">https://nlp.stanford.edu/software/CRF-NER.html</a></p>
+<p>&#xADF8; &#xD6C4; &#xC544;&#xB798;&#xC640; &#xAC19;&#xC774; &#xC798; &#xC2E4;&#xD589;&#xB418;&#xB294;&#xC9C0; &#xD655;&#xC778;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>from nltk.tag import StanfordNERTagger
+st = StanfordNERTagger(&apos;stanford-ner-4.0.0/classifiers/english.all.3class.distsim.crf.ser.gz&apos;,
+                       &apos;stanford-ner-4.0.0/stanford-ner.jar&apos;, encoding=&apos;utf-8&apos;)
+
+print(st.tag(&apos;Baptiste Capdeville is studying at Columbia University in NY&apos;.split()))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(&apos;Baptiste&apos;, &apos;PERSON&apos;), (&apos;Capdeville&apos;, &apos;PERSON&apos;), (&apos;is&apos;, &apos;O&apos;), (&apos;studying&apos;, &apos;O&apos;), (&apos;at&apos;, &apos;O&apos;), (&apos;Columbia&apos;, &apos;ORGANIZATION&apos;), (&apos;University&apos;, &apos;ORGANIZATION&apos;), (&apos;in&apos;, &apos;O&apos;), (&apos;NY&apos;, &apos;O&apos;)]
+</code></pre><p>NLTK&#xB294; &#xAC04;&#xB2E8;&#xD558;&#xAE30;&#xB294; &#xD558;&#xC9C0;&#xB9CC;, &#xC2E4;&#xC81C; production level&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xD560; &#xB9CC;&#xD55C; &#xC218;&#xC900;&#xC740; &#xC544;&#xB2D9;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -552,7 +623,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Python에서 NER Tagging","level":"6.2","depth":1,"next":{"title":"NER Tagger 학습시키기","level":"6.3","depth":1,"path":"chapter-5/training_ner_tagger.md","ref":"chapter-5/training_ner_tagger.md","articles":[]},"previous":{"title":"NER Tagging","level":"6.1","depth":1,"path":"chapter-5/ner_tagging.md","ref":"chapter-5/ner_tagging.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-5/python_ner_tagging.md","mtime":"2020-09-02T08:49:15.802Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-02T09:21:57.028Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Python에서 NER Tagging","level":"6.2","depth":1,"next":{"title":"NER Tagger 학습시키기","level":"6.3","depth":1,"path":"chapter-5/training_ner_tagger.md","ref":"chapter-5/training_ner_tagger.md","articles":[]},"previous":{"title":"NER Tagging","level":"6.1","depth":1,"path":"chapter-5/ner_tagging.md","ref":"chapter-5/ner_tagging.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-5/python_ner_tagging.md","mtime":"2020-09-02T09:47:36.258Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-02T09:47:44.628Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
