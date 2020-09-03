@@ -42,7 +42,7 @@
 
 ### Chapter 6 - Dependency Parsing
 
-* [Dependency Parsing](chatper-6/dependency_parsing.md)
+* [Dependency Parsing](chapter-6/dependency_parsing.md)
 * [Python에서 Dependency Parsing](chapter-6/python_dependency_parsing.md)
 * [Dependency Parsing 학습시키기](chapter-6/training_dependency_parsing.md)
 
