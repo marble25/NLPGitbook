@@ -551,8 +551,104 @@
                                 <h2 id="python&#xC5D0;&#xC11C;-dependency-parsing">Python&#xC5D0;&#xC11C; Dependency Parsing</h2>
 <hr>
 <h3 id="nltk&#xC5D0;&#xC11C;-dependency-parsing">NLTK&#xC5D0;&#xC11C; Dependency Parsing</h3>
-<p>&#xC774;&#xC804;&#xC5D0; &#xADF8;&#xB798;&#xC654;&#xB4EF;&#xC774;, NLTK&#xC5D0;&#xC11C; &#xBA3C;&#xC800; &#xC2DC;&#xC791;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xAC00; &#xD560; &#xC791;&#xC5C5;&#xC740; Stanford Dependency Parser&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xC744; &#xC54C;&#xC544;&#xBCF4;&#xB294; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774;&#xC804;&#xC5D0; &#xADF8;&#xB798;&#xC654;&#xB4EF;&#xC774;, NLTK&#xC5D0;&#xC11C; &#xBA3C;&#xC800; &#xC2DC;&#xC791;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xAC00; &#xD560; &#xC791;&#xC5C5;&#xC740; Stanford Dependency Parser&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xC744; &#xC54C;&#xC544;&#xBCF4;&#xB294; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774; Parser&#xB294; Deprecated&#xB418;&#xC5C8;&#xC9C0;&#xB9CC;, &#xC544;&#xC9C1; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xD30C;&#xC77C;&#xC740; <a href="https://nlp.stanford.edu/software/stanford-parser-4.0.0.zip" target="_blank">https://nlp.stanford.edu/software/stanford-parser-4.0.0.zip</a>&#xC5D0;&#xC11C; &#xB2E4;&#xC6B4;&#xB85C;&#xB4DC; &#xBC1B;&#xC744; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from nltk.parse.stanford import StanfordDependencyParser
+path_to_jar = &apos;stanford-parser-4.0.0/stanford-parser.jar&apos;
+path_to_models_jar = &apos;stanford-parser-4.0.0/stanford-parser-4.0.0-models.jar&apos;
+dependency_parser = StanfordDependencyParser(path_to_jar=path_to_jar, path_to_models_jar=path_to_models_jar)
 
+result = dependency_parser.raw_parse(&apos;I shot an elephant in my sleep&apos;)
+dep = result.__next__()
+print(list(dep.triples()))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[((&apos;shot&apos;, &apos;VBD&apos;), &apos;nsubj&apos;, (&apos;I&apos;, &apos;PRP&apos;)), ((&apos;shot&apos;, &apos;VBD&apos;), &apos;obj&apos;, (&apos;elephant&apos;, &apos;NN&apos;)), ((&apos;elephant&apos;, &apos;NN&apos;), &apos;det&apos;, (&apos;an&apos;, &apos;DT&apos;)), ((&apos;shot&apos;, &apos;VBD&apos;), &apos;obl&apos;, (&apos;sleep&apos;, &apos;NN&apos;)), ((&apos;sleep&apos;, &apos;NN&apos;), &apos;case&apos;, (&apos;in&apos;, &apos;IN&apos;)), ((&apos;sleep&apos;, &apos;NN&apos;), &apos;nmod:poss&apos;, (&apos;my&apos;, &apos;PRP$&apos;))]
+</code></pre><p>shot&#xC774;&#xB77C;&#xB294; verb&#xAC00; tree&#xC758; root&#xB97C; &#xCC28;&#xC9C0;&#xD558;&#xB294; &#xAC83;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>NLTK&#xC5D0;&#xC11C; &#xAC04;&#xB2E8;&#xD558;&#xAC8C; &#xC5B4;&#xB5BB;&#xAC8C; &#xC774;&#xB8E8;&#xC5B4;&#xC9C0;&#xB294;&#xC9C0; &#xC54C;&#xC544;&#xBCF4;&#xC558;&#xACE0;, &#xC774;&#xC81C;&#xB294; spaCy&#xB85C; &#xB118;&#xC5B4;&#xAC00;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="spacy&#xC5D0;&#xC11C;-dependency-parsing">spaCy&#xC5D0;&#xC11C; Dependency Parsing</h3>
+<p>&#xB9CC;&#xC57D; &#xBAA8;&#xB4E0; &#xB2E8;&#xC6D0;&#xC744; &#xB530;&#xB77C;&#xC654;&#xB2E4;&#xBA74;, &#xB2F9;&#xC2E0;&#xC740; &#xC0AC;&#xC2E4; dependency parsing&#xC744; &#xC5EC;&#xB7EC; &#xBC88; &#xD574;&#xBD24;&#xC744; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>Text&#xB97C; nlp &#xB3CC;&#xB9AC;&#xB294; &#xC791;&#xC5C5;&#xC5D0; dependency parsing&#xC774; &#xD3EC;&#xD568;&#xB418;&#xC5B4; &#xC788;&#xAE30; &#xB54C;&#xBB38;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>import spacy
+nlp = spacy.load(&apos;en&apos;)
+
+sent_0 = nlp(&apos;Myriam saw Clement with a telescope.&apos;)
+sent_1 = nlp(&apos;Self-driving cars shift insurance liability toward manufacturers.&apos;)
+sent_2 = nlp(&apos;I shot the elephant in my pyjamas.&apos;)
+
+for chunk in sent_0.noun_chunks:
+    print((chunk.text, chunk.root.text, chunk.root.dep_, chunk.root.head.text))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC62C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>(&apos;Myriam&apos;, &apos;Myriam&apos;, &apos;nsubj&apos;, &apos;saw&apos;)
+(&apos;Clement&apos;, &apos;Clement&apos;, &apos;dobj&apos;, &apos;saw&apos;)
+(&apos;a telescope&apos;, &apos;telescope&apos;, &apos;pobj&apos;, &apos;with&apos;)
+</code></pre><p>&#xC774;&#xC81C; &#xC6B0;&#xB9AC;&#xB294; chunk&#xC640; root text, dependency type, head&#xB97C; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xC0C1;&#xD588;&#xB4EF;, &#xB3D9;&#xC0AC; saw&#xB294; Myriam&#xACFC; Clement&#xC758; head&#xC774;&#xACE0;, Myriam&#xC740; &#xC8FC;&#xC5B4;, Clement&#xB294; &#xBAA9;&#xC801;&#xC5B4;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB2E4;&#xC74C; &#xBB38;&#xC7A5;&#xC744; &#xC2E4;&#xD589;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>for chunk in sent_1.noun_chunks:
+    print((chunk.text, chunk.root.text, chunk.root.dep_, chunk.root.head.text))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>(&apos;Self-driving cars&apos;, &apos;cars&apos;, &apos;nsubj&apos;, &apos;shift&apos;)
+(&apos;insurance liability&apos;, &apos;liability&apos;, &apos;dobj&apos;, &apos;shift&apos;)
+(&apos;manufacturers&apos;, &apos;manufacturers&apos;, &apos;pobj&apos;, &apos;toward&apos;)
+</code></pre><p>3&#xAC1C;&#xC758; &#xBA85;&#xC0AC;&#xAD6C;&#xAC00; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.<br>Self-driving cars&#xC640; insuarce liability&#xB294; &#xAC01;&#xAC01; root noun&#xC778; cars&#xC640; liability&#xB97C; &#xAFB8;&#xBBF8;&#xB294; self-driving&#xACFC; insurance&#xB85C; &#xC774;&#xB8E8;&#xC5B4;&#xC838; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>manufacturers&#xB294; toward&#xC758; &#xBAA9;&#xC801;&#xC5B4;&#xC778; &#xBA85;&#xC0AC;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB9C8;&#xC9C0;&#xB9C9; &#xBB38;&#xC7A5;&#xC744; &#xC2E4;&#xD589;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>for chunk in sent_2.noun_chunks:
+    print((chunk.text, chunk.root.text, chunk.root.dep_, chunk.root.head.text))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>(&apos;I&apos;, &apos;I&apos;, &apos;nsubj&apos;, &apos;shot&apos;)
+(&apos;the elephant&apos;, &apos;elephant&apos;, &apos;dobj&apos;, &apos;shot&apos;)
+(&apos;my pyjamas&apos;, &apos;pyjamas&apos;, &apos;pobj&apos;, &apos;in&apos;)
+</code></pre><p>the&#xC640; my&#xB294; elephant&#xC640; pyjamas&#xB97C; &#xAFB8;&#xBA70;&#xC8FC;&#xACE0;, &#xBA85;&#xC0AC;&#xAD6C; &#xC548;&#xC5D0; &#xD3EC;&#xD568;&#xB418;&#xC5B4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774;&#xBC88;&#xC5D0;&#xB294; phrases&#xBCF4;&#xB2E4;&#xB294; individual words&#xB97C; &#xC911;&#xC2EC;&#xC73C;&#xB85C; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>for token in sent_0:
+    print((token.text, token.dep_, token.head.text, token.head.pos_, [child for child in token.children]))
+</code></pre><p>&#xC704; &#xCF54;&#xB4DC;&#xC758; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;. </p>
+<pre><code>(&apos;Myriam&apos;, &apos;nsubj&apos;, &apos;saw&apos;, &apos;VERB&apos;, [])
+(&apos;saw&apos;, &apos;ROOT&apos;, &apos;saw&apos;, &apos;VERB&apos;, [Myriam, Clement, with, .])
+(&apos;Clement&apos;, &apos;dobj&apos;, &apos;saw&apos;, &apos;VERB&apos;, [])
+(&apos;with&apos;, &apos;prep&apos;, &apos;saw&apos;, &apos;VERB&apos;, [telescope])
+(&apos;a&apos;, &apos;det&apos;, &apos;telescope&apos;, &apos;NOUN&apos;, [])
+(&apos;telescope&apos;, &apos;pobj&apos;, &apos;with&apos;, &apos;ADP&apos;, [a])
+(&apos;.&apos;, &apos;punct&apos;, &apos;saw&apos;, &apos;VERB&apos;, [])
+</code></pre><p>&#xB2E4;&#xC74C; &#xBB38;&#xC7A5;&#xC5D0;&#xC11C;&#xB3C4; &#xC27D;&#xAC8C; &#xACB0;&#xACFC;&#xB97C; &#xD655;&#xC778;&#xD574; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>for token in sent_1:
+    print((token.text, token.dep_, token.head.text, token.head.pos_, [child for child in token.children]))
+</code></pre><p>&#xADF8; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>(&apos;Self&apos;, &apos;npadvmod&apos;, &apos;driving&apos;, &apos;VERB&apos;, [])
+(&apos;-&apos;, &apos;punct&apos;, &apos;driving&apos;, &apos;VERB&apos;, [])
+(&apos;driving&apos;, &apos;amod&apos;, &apos;cars&apos;, &apos;NOUN&apos;, [Self, -])
+(&apos;cars&apos;, &apos;nsubj&apos;, &apos;shift&apos;, &apos;VERB&apos;, [driving])
+(&apos;shift&apos;, &apos;ROOT&apos;, &apos;shift&apos;, &apos;VERB&apos;, [cars, liability, toward, .])
+(&apos;insurance&apos;, &apos;compound&apos;, &apos;liability&apos;, &apos;NOUN&apos;, [])
+(&apos;liability&apos;, &apos;dobj&apos;, &apos;shift&apos;, &apos;VERB&apos;, [insurance])
+(&apos;toward&apos;, &apos;prep&apos;, &apos;shift&apos;, &apos;VERB&apos;, [manufacturers])
+(&apos;manufacturers&apos;, &apos;pobj&apos;, &apos;toward&apos;, &apos;ADP&apos;, [])
+(&apos;.&apos;, &apos;punct&apos;, &apos;shift&apos;, &apos;VERB&apos;, [])
+</code></pre><p>&#xC774; &#xACB0;&#xACFC;&#xC5D0;&#xC11C;&#xB3C4; root verb&#xC778; shift&#xAC00; &#xB2E4;&#xC591;&#xD55C; &#xB2E8;&#xC5B4;&#xB4E4;&#xACFC; &#xC5F0;&#xACB0;&#xB418;&#xC5B4; &#xC788;&#xC74C;&#xC744; &#xD655;&#xC778;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB97C; displaCy&#xB85C; &#xD655;&#xC778;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;. </p>
+<pre><code>spacy.displacy.serve(sent_1, style=&apos;dep&apos;)
+</code></pre><p><img src="image0003.png" alt="image0003"></p>
+<p>&#xD55C;&#xACB0; &#xC774;&#xD574;&#xAC00; &#xC26C;&#xC6B8; &#xAC81;&#xB2C8;&#xB2E4;.   </p>
+<p>Tree&#xB97C; iterate&#xD574;&#xC11C; sentence&#xC758; head&#xAC00; &#xD558;&#xB098;&#xB9CC; &#xC874;&#xC7AC;&#xD55C;&#xB2E4;&#xB294; &#xAC83;&#xC744; &#xBCF4;&#xC77C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xBAA8;&#xB4E0; &#xAC00;&#xB2A5;&#xD55C; &#xC8FC;&#xC5B4;&#xB4E4;&#xC744; iterate&#xD574;&#xC11C; verb&#xC778; head&#xB97C; &#xCD94;&#xAC00;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from spacy.symbols import nsubj, VERB
+
+verbs = set()
+for possible_subject in sent_1:
+    if possible_subject.dep == nsubj and possible_subject.head.pos == VERB:
+        verbs.add(possible_subject.head)
+
+print(verbs)
+</code></pre><p>&#xC6B0;&#xB9AC;&#xAC00; &#xC608;&#xC0C1;&#xD588;&#xB358; &#xB300;&#xB85C; &#xACB0;&#xACFC;&#xAC00; &#xB098;&#xC624;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>{shift}
+</code></pre><p>&#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xD574; &#xBCF4;&#xC2ED;&#xC2DC;&#xC624;.   </p>
+<pre><code>root = [token for token in sent_1 if token.head == token][0]
+subject = list(root.lefts)[0]
+for descendant in subject.subtree:
+    print((descendant.text, descendant.dep_, descendant.n_lefts,
+          descendant.n_rights, [ancestor.text for ancestor in descendant.ancestors]))
+</code></pre><p>root&#xB97C; token&#xC758; head&#xAC00; &#xC790;&#xAE30; &#xC790;&#xC2E0;&#xC778;&#xC9C0; &#xCCB4;&#xD06C;&#xD574;&#xC11C; &#xCC3E;&#xC744; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>subject&#xB294; tree&#xC758; &#xC67C;&#xCABD;&#xC5D0; &#xC788;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.<br>n_lefts&#xB294; &#xC67C;&#xCABD;&#xC5D0; &#xC788;&#xB294; &#xC790;&#xC2DD;&#xB4E4;&#xC758; &#xAC1C;&#xC218;&#xC774;&#xACE0;, n_rights&#xB294; &#xC624;&#xB978;&#xCABD;&#xC5D0; &#xC788;&#xB294; &#xC790;&#xC2DD;&#xB4E4; &#xAC1C;&#xC218;&#xC785;&#xB2C8;&#xB2E4;.<br>ancestors&#xB294; &#xBAA8;&#xB4E0; &#xC870;&#xC0C1; &#xB178;&#xB4DC;&#xB4E4;&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xCF54;&#xB4DC; &#xC2E4;&#xD589; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>(&apos;Self&apos;, &apos;npadvmod&apos;, 0, 0, [&apos;driving&apos;, &apos;cars&apos;, &apos;shift&apos;])
+(&apos;-&apos;, &apos;punct&apos;, 0, 0, [&apos;driving&apos;, &apos;cars&apos;, &apos;shift&apos;])
+(&apos;driving&apos;, &apos;amod&apos;, 2, 0, [&apos;cars&apos;, &apos;shift&apos;])
+(&apos;cars&apos;, &apos;nsubj&apos;, 1, 0, [&apos;shift&apos;])
+</code></pre>
                                 
                                 </section>
                             
@@ -595,7 +691,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Python에서 Dependency Parsing","level":"7.2","depth":1,"next":{"title":"Dependency Parsing 학습시키기","level":"7.3","depth":1,"path":"chapter-6/training_dependency_parsing.md","ref":"chapter-6/training_dependency_parsing.md","articles":[]},"previous":{"title":"Dependency Parsing","level":"7.1","depth":1,"path":"chapter-6/dependency_parsing.md","ref":"chapter-6/dependency_parsing.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-6/python_dependency_parsing.md","mtime":"2020-09-03T07:26:53.508Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-03T09:19:39.922Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Python에서 Dependency Parsing","level":"7.2","depth":1,"next":{"title":"Dependency Parsing 학습시키기","level":"7.3","depth":1,"path":"chapter-6/training_dependency_parsing.md","ref":"chapter-6/training_dependency_parsing.md","articles":[]},"previous":{"title":"Dependency Parsing","level":"7.1","depth":1,"path":"chapter-6/dependency_parsing.md","ref":"chapter-6/dependency_parsing.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-6/python_dependency_parsing.md","mtime":"2020-09-03T09:20:14.138Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-03T09:20:18.210Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
