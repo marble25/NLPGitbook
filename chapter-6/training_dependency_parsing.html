@@ -546,7 +546,476 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="dependency-parsing-&#xD559;&#xC2B5;&#xC2DC;&#xD0A4;&#xAE30;">Dependency Parsing &#xD559;&#xC2B5;&#xC2DC;&#xD0A4;&#xAE30;</h2>
+<hr>
+<h3 id="dependency-parser-&#xD559;&#xC2B5;&#xAE30;&#xCD08;">Dependency Parser &#xD559;&#xC2B5;(&#xAE30;&#xCD08;)</h3>
+<p>&#xC774;&#xC804; &#xC608;&#xC81C;&#xC640; &#xB3D9;&#xC77C;&#xD558;&#xAC8C;, <a href="https://github.com/explosion/spaCy/blob/master/examples/training/train_parser.py" target="_blank">train_parser.py</a>&#xB97C; &#xC2E4;&#xC2B5;&#xD574; &#xBCF4;&#xBA74;&#xC11C; Dependency Parser&#xB97C; &#xD559;&#xC2B5;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from __future__ import unicode_literals, print_function
+
+import plac
+import random
+from pathlib import Path
+import spacy
+from spacy.util import minibatch, compounding
+
+
+# training data
+TRAIN_DATA = [
+    (
+        &quot;They trade mortgage-backed securities.&quot;,
+        {
+            &quot;heads&quot;: [1, 1, 4, 4, 5, 1, 1],
+            &quot;deps&quot;: [&quot;nsubj&quot;, &quot;ROOT&quot;, &quot;compound&quot;, &quot;punct&quot;, &quot;nmod&quot;, &quot;dobj&quot;, &quot;punct&quot;],
+        },
+    ),
+    (
+        &quot;I like London and Berlin.&quot;,
+        {
+            &quot;heads&quot;: [1, 1, 1, 2, 2, 1],
+            &quot;deps&quot;: [&quot;nsubj&quot;, &quot;ROOT&quot;, &quot;dobj&quot;, &quot;cc&quot;, &quot;conj&quot;, &quot;punct&quot;],
+        },
+    ),
+]
+</code></pre><p>&#xC774;&#xC804; &#xC608;&#xC81C;&#xB4E4;&#xACFC; &#xB3D9;&#xC77C;&#xD558;&#xAC8C;, Train data&#xC5D0;&#xB294; &#xD574;&#xB2F9; &#xBB38;&#xC7A5;&#xC744; &#xB123;&#xACE0;, &#xADF8;&#xC5D0; &#xD574;&#xB2F9;&#xD558;&#xB294; head&#xC640; dependency label&#xC744; &#xD568;&#xAED8; &#xB123;&#xC5B4;&#xC8FC;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>heads&#xC758; &#xACBD;&#xC6B0;&#xC5D0;&#xB294; word&#xB85C; &#xAD6C;&#xBD84;&#xD588;&#xC744; &#xB54C; head&#xAC00; &#xB418;&#xB294; index&#xB97C; &#xC758;&#xBBF8;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97B; &#xB4E4;&#xC5B4; They&#xC758; &#xACBD;&#xC6B0; heads&#xAC00; 1&#xC774;&#xBBC0;&#xB85C; 1&#xBC88;&#xC9F8; &#xC788;&#xB294; trade&#xAC00; head&#xAC00; &#xB418;&#xACE0;, mortgage&#xC758; &#xACBD;&#xC6B0; heads&#xAC00; 4&#xC774;&#xBBC0;&#xB85C; 4&#xBC88;&#xC9F8; &#xC788;&#xB294; backed&#xAC00; head&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.<br>deps&#xC758; &#xACBD;&#xC6B0;&#xC5D0;&#xB294; &#xAC01;&#xC790;&#xC5D0; &#xD574;&#xB2F9;&#xD558;&#xB294; dependency label&#xC744; &#xB123;&#xC5B4;&#xC8FC;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>@plac.annotations(
+    model=(&quot;Model name. Defaults to blank &apos;en&apos; model.&quot;, &quot;option&quot;, &quot;m&quot;, str),
+    output_dir=(&quot;Optional output directory&quot;, &quot;option&quot;, &quot;o&quot;, Path),
+    n_iter=(&quot;Number of training iterations&quot;, &quot;option&quot;, &quot;n&quot;, int),
+)
+def main(model=None, output_dir=None, n_iter=15):
+    &quot;&quot;&quot;Load the model, set up the pipeline and train the parser.&quot;&quot;&quot;
+    if model is not None:
+        nlp = spacy.load(model)  # load existing spaCy model
+        print(&quot;Loaded model &apos;%s&apos;&quot; % model)
+    else:
+        nlp = spacy.blank(&quot;en&quot;)  # create blank Language class
+        print(&quot;Created blank &apos;en&apos; model&quot;)
+
+    # add the parser to the pipeline if it doesn&apos;t exist
+    # nlp.create_pipe works for built-ins that are registered with spaCy
+    if &quot;parser&quot; not in nlp.pipe_names:
+        parser = nlp.create_pipe(&quot;parser&quot;)
+        nlp.add_pipe(parser, first=True)
+    # otherwise, get it, so we can add labels to it
+    else:
+        parser = nlp.get_pipe(&quot;parser&quot;)
+</code></pre><p>&#xC774; &#xB2E8;&#xACC4;&#xB294; &#xC774;&#xC804; &#xC608;&#xC81C;&#xC640; &#xC720;&#xC0AC;&#xD558;&#xAC8C; blank model&#xC744; &#xBD88;&#xB7EC;&#xC640;&#xC11C; &#xD559;&#xC2B5;&#xC744; &#xD558;&#xB294; &#xACFC;&#xC815;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>    # add labels to the parser
+    for _, annotations in TRAIN_DATA:
+        for dep in annotations.get(&quot;deps&quot;, []):
+            parser.add_label(dep)
+
+    # get names of other pipes to disable them during training
+    pipe_exceptions = [&quot;parser&quot;, &quot;trf_wordpiecer&quot;, &quot;trf_tok2vec&quot;]
+    other_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptions]
+    with nlp.disable_pipes(*other_pipes):  # only train parser
+        optimizer = nlp.begin_training()
+        for itn in range(n_iter):
+            random.shuffle(TRAIN_DATA)
+            losses = {}
+            # batch up the examples using spaCy&apos;s minibatch
+            batches = minibatch(TRAIN_DATA, size=compounding(4.0, 32.0, 1.001))
+            for batch in batches:
+                texts, annotations = zip(*batch)
+                nlp.update(texts, annotations, sgd=optimizer, losses=losses)
+            print(&quot;Losses&quot;, losses)
+</code></pre><p>minibatch&#xB97C; &#xC774;&#xC6A9;&#xD574;&#xC11C; 4.0&#xC5D0;&#xC11C; &#xC2DC;&#xC791;&#xD574; 32.0&#xC774; &#xB420; &#xB54C;&#xAE4C;&#xC9C0; 1.001&#xB9CC;&#xD07C; &#xACF1;&#xD574;&#xC8FC;&#xBA74;&#xC11C; &#xD559;&#xC2B5;&#xD55C;&#xB2E4;&#xB294; &#xC758;&#xBBF8;&#xC785;&#xB2C8;&#xB2E4;.<br>nlp process&#xB294; &#xAC04;&#xB2E8;&#xD558;&#xAC8C; update&#xB97C; &#xC774;&#xC6A9;&#xD574;&#xC11C; &#xC9C4;&#xD589;&#xB429;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>    # test the trained model
+    test_text = &quot;I like securities.&quot;
+    doc = nlp(test_text)
+    print(&quot;Dependencies&quot;, [(t.text, t.dep_, t.head.text) for t in doc])
+
+    # save model to output directory
+    if output_dir is not None:
+        output_dir = Path(output_dir)
+        if not output_dir.exists():
+            output_dir.mkdir()
+        nlp.to_disk(output_dir)
+        print(&quot;Saved model to&quot;, output_dir)
+
+        # test the saved model
+        print(&quot;Loading from&quot;, output_dir)
+        nlp2 = spacy.load(output_dir)
+        doc = nlp2(test_text)
+        print(&quot;Dependencies&quot;, [(t.text, t.dep_, t.head.text) for t in doc])
+
+
+if __name__ == &quot;__main__&quot;:
+    plac.call(main)
+
+    # expected result:
+    # [
+    #   (&apos;I&apos;, &apos;nsubj&apos;, &apos;like&apos;),
+    #   (&apos;like&apos;, &apos;ROOT&apos;, &apos;like&apos;),
+    #   (&apos;securities&apos;, &apos;dobj&apos;, &apos;like&apos;),
+    #   (&apos;.&apos;, &apos;punct&apos;, &apos;like&apos;)
+    # ]
+</code></pre><p>&#xC774;&#xC640; &#xAC19;&#xC774; &#xC2E4;&#xD589;&#xC744; &#xB9C8;&#xCE58;&#xBA74; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>Dependencies [(&apos;I&apos;, &apos;nsubj&apos;, &apos;like&apos;), (&apos;like&apos;, &apos;ROOT&apos;, &apos;like&apos;), (&apos;securities&apos;, &apos;dobj&apos;, &apos;like&apos;), (&apos;.&apos;, &apos;conj&apos;, &apos;securities&apos;)]
+</code></pre><p>&#xC704;&#xC758; &#xC608;&#xC2DC;&#xB294; &#xAD49;&#xC7A5;&#xD788; &#xAE30;&#xCD08;&#xC801;&#xC778; parsing&#xC744; &#xC9C4;&#xD589;&#xD55C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="dependency-parser-&#xD559;&#xC2B5;custom">Dependency Parser &#xD559;&#xC2B5;(custom)</h3>
+<p>&#xC6B0;&#xB9AC;&#xAC00; &#xC815;&#xC758;&#xD55C; label&#xC5D0; &#xB530;&#xB978; Dependency Parser&#xB97C; &#xD559;&#xC2B5;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xD30C;&#xC77C;&#xC740; <a href="https://github.com/explosion/spaCy/blob/master/examples/training/train_intent_parser.py" target="_blank">train_intent_parser.py</a>&#xB97C; &#xCC38;&#xC870;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from __future__ import unicode_literals, print_function
+
+import plac
+import random
+from pathlib import Path
+import spacy
+from spacy.util import minibatch, compounding
+
+
+# training data: texts, heads and dependency labels
+# for no relation, we simply chose an arbitrary dependency label, e.g. &apos;-&apos;
+TRAIN_DATA = [
+    (
+        &quot;find a cafe with great wifi&quot;,
+        {
+            &quot;heads&quot;: [0, 2, 0, 5, 5, 2],  # index of token head
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;ATTRIBUTE&quot;],
+        },
+    ),
+    (
+        &quot;find a hotel near the beach&quot;,
+        {
+            &quot;heads&quot;: [0, 2, 0, 5, 5, 2],
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;PLACE&quot;, &quot;QUALITY&quot;, &quot;-&quot;, &quot;ATTRIBUTE&quot;],
+        },
+    ),
+    (
+        &quot;find me the closest gym that&apos;s open late&quot;,
+        {
+            &quot;heads&quot;: [0, 0, 4, 4, 0, 6, 4, 6, 6],
+            &quot;deps&quot;: [
+                &quot;ROOT&quot;,
+                &quot;-&quot;,
+                &quot;-&quot;,
+                &quot;QUALITY&quot;,
+                &quot;PLACE&quot;,
+                &quot;-&quot;,
+                &quot;-&quot;,
+                &quot;ATTRIBUTE&quot;,
+                &quot;TIME&quot;,
+            ],
+        },
+    ),
+    (
+        &quot;show me the cheapest store that sells flowers&quot;,
+        {
+            &quot;heads&quot;: [0, 0, 4, 4, 0, 4, 4, 4],  # attach &quot;flowers&quot; to store!
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;-&quot;, &quot;PRODUCT&quot;],
+        },
+    ),
+    (
+        &quot;find a nice restaurant in london&quot;,
+        {
+            &quot;heads&quot;: [0, 3, 3, 0, 3, 3],
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;LOCATION&quot;],
+        },
+    ),
+    (
+        &quot;show me the coolest hostel in berlin&quot;,
+        {
+            &quot;heads&quot;: [0, 0, 4, 4, 0, 4, 4],
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;LOCATION&quot;],
+        },
+    ),
+    (
+        &quot;find a good italian restaurant near work&quot;,
+        {
+            &quot;heads&quot;: [0, 4, 4, 4, 0, 4, 5],
+            &quot;deps&quot;: [
+                &quot;ROOT&quot;,
+                &quot;-&quot;,
+                &quot;QUALITY&quot;,
+                &quot;ATTRIBUTE&quot;,
+                &quot;PLACE&quot;,from __future__ import unicode_literals, print_function
+
+import plac
+import random
+from pathlib import Path
+import spacy
+from spacy.util import minibatch, compounding
+
+
+# training data: texts, heads and dependency labels
+# for no relation, we simply chose an arbitrary dependency label, e.g. &apos;-&apos;
+TRAIN_DATA = [
+    (
+        &quot;find a cafe with great wifi&quot;,
+        {
+            &quot;heads&quot;: [0, 2, 0, 5, 5, 2],  # index of token head
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;ATTRIBUTE&quot;],
+        },
+    ),
+    (
+        &quot;find a hotel near the beach&quot;,
+        {
+            &quot;heads&quot;: [0, 2, 0, 5, 5, 2],
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;PLACE&quot;, &quot;QUALITY&quot;, &quot;-&quot;, &quot;ATTRIBUTE&quot;],
+        },
+    ),
+    (
+        &quot;find me the closest gym that&apos;s open late&quot;,
+        {
+            &quot;heads&quot;: [0, 0, 4, 4, 0, 6, 4, 6, 6],
+            &quot;deps&quot;: [
+                &quot;ROOT&quot;,
+                &quot;-&quot;,
+                &quot;-&quot;,
+                &quot;QUALITY&quot;,
+                &quot;PLACE&quot;,
+                &quot;-&quot;,
+                &quot;-&quot;,
+                &quot;ATTRIBUTE&quot;,
+                &quot;TIME&quot;,
+            ],
+        },
+    ),
+    (
+        &quot;show me the cheapest store that sells flowers&quot;,
+        {
+            &quot;heads&quot;: [0, 0, 4, 4, 0, 4, 4, 4],  # attach &quot;flowers&quot; to store!
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;-&quot;, &quot;PRODUCT&quot;],
+        },
+    ),
+    (
+        &quot;find a nice restaurant in london&quot;,
+        {
+            &quot;heads&quot;: [0, 3, 3, 0, 3, 3],
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;LOCATION&quot;],
+        },
+    ),
+    (
+        &quot;show me the coolest hostel in berlin&quot;,
+        {
+            &quot;heads&quot;: [0, 0, 4, 4, 0, 4, 4],
+            &quot;deps&quot;: [&quot;ROOT&quot;, &quot;-&quot;, &quot;-&quot;, &quot;QUALITY&quot;, &quot;PLACE&quot;, &quot;-&quot;, &quot;LOCATION&quot;],
+        },
+    ),
+    (
+        &quot;find a good italian restaurant near work&quot;,
+        {
+            &quot;heads&quot;: [0, 4, 4, 4, 0, 4, 5],
+            &quot;deps&quot;: [
+                &quot;ROOT&quot;,
+                &quot;-&quot;,
+                &quot;QUALITY&quot;,
+                &quot;ATTRIBUTE&quot;,
+                &quot;PLACE&quot;,
+                &quot;ATTRIBUTE&quot;,
+                &quot;LOCATION&quot;,
+            ],
+        },
+    ),
+]
+
+
+@plac.annotations(
+    model=(&quot;Model name. Defaults to blank &apos;en&apos; model.&quot;, &quot;option&quot;, &quot;m&quot;, str),
+    output_dir=(&quot;Optional output directory&quot;, &quot;option&quot;, &quot;o&quot;, Path),
+    n_iter=(&quot;Number of training iterations&quot;, &quot;option&quot;, &quot;n&quot;, int),
+)
+def main(model=None, output_dir=None, n_iter=15):
+    &quot;&quot;&quot;Load the model, set up the pipeline and train the parser.&quot;&quot;&quot;
+    if model is not None:
+        nlp = spacy.load(model)  # load existing spaCy model
+        print(&quot;Loaded model &apos;%s&apos;&quot; % model)
+    else:
+        nlp = spacy.blank(&quot;en&quot;)  # create blank Language class
+        print(&quot;Created blank &apos;en&apos; model&quot;)
+
+    # We&apos;ll use the built-in dependency parser class, but we want to create a
+    # fresh instance &#x2013; just in case.
+    if &quot;parser&quot; in nlp.pipe_names:
+        nlp.remove_pipe(&quot;parser&quot;)
+    parser = nlp.create_pipe(&quot;parser&quot;)
+    nlp.add_pipe(parser, first=True)
+
+    for text, annotations in TRAIN_DATA:
+        for dep in annotations.get(&quot;deps&quot;, []):
+            parser.add_label(dep)
+
+    pipe_exceptions = [&quot;parser&quot;, &quot;trf_wordpiecer&quot;, &quot;trf_tok2vec&quot;]
+    other_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptions]
+    with nlp.disable_pipes(*other_pipes):  # only train parser
+        optimizer = nlp.begin_training()
+        for itn in range(n_iter):
+            random.shuffle(TRAIN_DATA)
+            losses = {}
+            # batch up the examples using spaCy&apos;s minibatch
+            batches = minibatch(TRAIN_DATA, size=compounding(4.0, 32.0, 1.001))
+            for batch in batches:
+                texts, annotations = zip(*batch)
+                nlp.update(texts, annotations, sgd=optimizer, losses=losses)
+            print(&quot;Losses&quot;, losses)
+
+    # test the trained model
+    test_model(nlp)
+
+    # save model to output directory
+    if output_dir is not None:
+        output_dir = Path(output_dir)
+        if not output_dir.exists():
+            output_dir.mkdir()
+        nlp.to_disk(output_dir)
+        print(&quot;Saved model to&quot;, output_dir)
+
+        # test the saved model
+        print(&quot;Loading from&quot;, output_dir)
+        nlp2 = spacy.load(output_dir)
+        test_model(nlp2)
+
+
+def test_model(nlp):
+    texts = [
+        &quot;find a hotel with good wifi&quot;,
+        &quot;find me the cheapest gym near work&quot;,
+        &quot;show me the best hotel in berlin&quot;,
+    ]
+    docs = nlp.pipe(texts)
+    for doc in docs:
+        print(doc.text)
+        print([(t.text, t.dep_, t.head.text) for t in doc if t.dep_ != &quot;-&quot;])
+
+
+if __name__ == &quot;__main__&quot;:
+    plac.call(main)
+
+    # Expected output:
+    # find a hotel with good wifi
+    # [
+    #   (&apos;find&apos;, &apos;ROOT&apos;, &apos;find&apos;),
+    #   (&apos;hotel&apos;, &apos;PLACE&apos;, &apos;find&apos;),
+    #   (&apos;good&apos;, &apos;QUALITY&apos;, &apos;wifi&apos;),
+    #   (&apos;wifi&apos;, &apos;ATTRIBUTE&apos;, &apos;hotel&apos;)
+    # ]
+    # find me the cheapest gym near work
+    # [
+    #   (&apos;find&apos;, &apos;ROOT&apos;, &apos;find&apos;),
+    #   (&apos;cheapest&apos;, &apos;QUALITY&apos;, &apos;gym&apos;),
+    #   (&apos;gym&apos;, &apos;PLACE&apos;, &apos;find&apos;),
+    #   (&apos;near&apos;, &apos;ATTRIBUTE&apos;, &apos;gym&apos;),
+    #   (&apos;work&apos;, &apos;LOCATION&apos;, &apos;near&apos;)
+    # ]
+    # show me the best hotel in berlin
+    # [
+    #   (&apos;show&apos;, &apos;ROOT&apos;, &apos;show&apos;),
+    #   (&apos;best&apos;, &apos;QUALITY&apos;, &apos;hotel&apos;),
+    #   (&apos;hotel&apos;, &apos;PLACE&apos;, &apos;show&apos;),
+    #   (&apos;berlin&apos;, &apos;LOCATION&apos;, &apos;hotel&apos;)
+    # ]
+
+                &quot;ATTRIBUTE&quot;,
+                &quot;LOCATION&quot;,
+            ],
+        },
+    ),
+]
+</code></pre><p>&#xC774; &#xC608;&#xC81C;&#xC5D0;&#xC11C;&#xB294; ROOT, PLACE, QUALITY, ATTRIBUTE, LOCATION &#xB4F1;&#xC758; dependency label&#xC744; &#xC124;&#xC815;&#xD588;&#xACE0;, &#xADF8; &#xC678;&#xC758; &#xAC83;&#xC5D0; &#xB300;&#xD574;&#xC11C;&#xB294; - label&#xC744; &#xBD99;&#xC600;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; dependency label&#xC5D0; &#xB530;&#xB77C; &#xC5EC;&#xB7EC; &#xAC1C;&#xC758; TRAIN_DATA&#xB97C; &#xC900;&#xBE44;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>@plac.annotations(
+    model=(&quot;Model name. Defaults to blank &apos;en&apos; model.&quot;, &quot;option&quot;, &quot;m&quot;, str),
+    output_dir=(&quot;Optional output directory&quot;, &quot;option&quot;, &quot;o&quot;, Path),
+    n_iter=(&quot;Number of training iterations&quot;, &quot;option&quot;, &quot;n&quot;, int),
+)
+def main(model=None, output_dir=None, n_iter=15):
+    &quot;&quot;&quot;Load the model, set up the pipeline and train the parser.&quot;&quot;&quot;
+    if model is not None:
+        nlp = spacy.load(model)  # load existing spaCy model
+        print(&quot;Loaded model &apos;%s&apos;&quot; % model)
+    else:
+        nlp = spacy.blank(&quot;en&quot;)  # create blank Language class
+        print(&quot;Created blank &apos;en&apos; model&quot;)
+
+    # We&apos;ll use the built-in dependency parser class, but we want to create a
+    # fresh instance &#x2013; just in case.
+    if &quot;parser&quot; in nlp.pipe_names:
+        nlp.remove_pipe(&quot;parser&quot;)
+    parser = nlp.create_pipe(&quot;parser&quot;)
+    nlp.add_pipe(parser, first=True)
+
+    for text, annotations in TRAIN_DATA:
+        for dep in annotations.get(&quot;deps&quot;, []):
+            parser.add_label(dep)
+
+    pipe_exceptions = [&quot;parser&quot;, &quot;trf_wordpiecer&quot;, &quot;trf_tok2vec&quot;]
+    other_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptions]
+    with nlp.disable_pipes(*other_pipes):  # only train parser
+        optimizer = nlp.begin_training()
+        for itn in range(n_iter):
+            random.shuffle(TRAIN_DATA)
+            losses = {}
+            # batch up the examples using spaCy&apos;s minibatch
+            batches = minibatch(TRAIN_DATA, size=compounding(4.0, 32.0, 1.001))
+            for batch in batches:
+                texts, annotations = zip(*batch)
+                nlp.update(texts, annotations, sgd=optimizer, losses=losses)
+            print(&quot;Losses&quot;, losses)
+</code></pre><p>&#xC55E;&#xC11C; &#xC81C;&#xC2DC;&#xD588;&#xB358; &#xAE30;&#xCD08;&#xC801;&#xC778; parser&#xACFC; &#xAC70;&#xC758; &#xC720;&#xC0AC;&#xD558;&#xAC8C; training&#xC744; &#xC9C4;&#xD589;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>    # test the trained model
+    test_model(nlp)
+
+    # save model to output directory
+    if output_dir is not None:
+        output_dir = Path(output_dir)
+        if not output_dir.exists():
+            output_dir.mkdir()
+        nlp.to_disk(output_dir)
+        print(&quot;Saved model to&quot;, output_dir)
+
+        # test the saved model
+        print(&quot;Loading from&quot;, output_dir)
+        nlp2 = spacy.load(output_dir)
+        test_model(nlp2)
+
+
+def test_model(nlp):
+    texts = [
+        &quot;find a hotel with good wifi&quot;,
+        &quot;find me the cheapest gym near work&quot;,
+        &quot;show me the best hotel in berlin&quot;,
+    ]
+    docs = nlp.pipe(texts)
+    for doc in docs:
+        print(doc.text)
+        print([(t.text, t.dep_, t.head.text) for t in doc if t.dep_ != &quot;-&quot;])
+
+
+if __name__ == &quot;__main__&quot;:
+    plac.call(main)
+
+    # Expected output:
+    # find a hotel with good wifi
+    # [
+    #   (&apos;find&apos;, &apos;ROOT&apos;, &apos;find&apos;),
+    #   (&apos;hotel&apos;, &apos;PLACE&apos;, &apos;find&apos;),
+    #   (&apos;good&apos;, &apos;QUALITY&apos;, &apos;wifi&apos;),
+    #   (&apos;wifi&apos;, &apos;ATTRIBUTE&apos;, &apos;hotel&apos;)
+    # ]
+    # find me the cheapest gym near work
+    # [
+    #   (&apos;find&apos;, &apos;ROOT&apos;, &apos;find&apos;),
+    #   (&apos;cheapest&apos;, &apos;QUALITY&apos;, &apos;gym&apos;),
+    #   (&apos;gym&apos;, &apos;PLACE&apos;, &apos;find&apos;),
+    #   (&apos;near&apos;, &apos;ATTRIBUTE&apos;, &apos;gym&apos;),
+    #   (&apos;work&apos;, &apos;LOCATION&apos;, &apos;near&apos;)
+    # ]
+    # show me the best hotel in berlin
+    # [
+    #   (&apos;show&apos;, &apos;ROOT&apos;, &apos;show&apos;),
+    #   (&apos;best&apos;, &apos;QUALITY&apos;, &apos;hotel&apos;),
+    #   (&apos;hotel&apos;, &apos;PLACE&apos;, &apos;show&apos;),
+    #   (&apos;berlin&apos;, &apos;LOCATION&apos;, &apos;hotel&apos;)
+    # ]
+</code></pre><p>Training&#xC744; &#xC131;&#xACF5;&#xC801;&#xC73C;&#xB85C; &#xB9C8;&#xCE58;&#xACE0; test&#xB97C; &#xC9C4;&#xD589;&#xD558;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; output&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>find a hotel with good wifi
+[(&apos;find&apos;, &apos;ROOT&apos;, &apos;find&apos;), (&apos;hotel&apos;, &apos;PLACE&apos;, &apos;find&apos;), (&apos;good&apos;, &apos;QUALITY&apos;, &apos;wifi&apos;), (&apos;wifi&apos;, &apos;ATTRIBUTE&apos;, &apos;hotel&apos;)]
+find me the cheapest gym near work
+[(&apos;find&apos;, &apos;ROOT&apos;, &apos;find&apos;), (&apos;cheapest&apos;, &apos;QUALITY&apos;, &apos;gym&apos;), (&apos;gym&apos;, &apos;PLACE&apos;, &apos;find&apos;), (&apos;work&apos;, &apos;LOCATION&apos;, &apos;near&apos;)]
+show me the best hotel in berlin
+[(&apos;show&apos;, &apos;ROOT&apos;, &apos;show&apos;), (&apos;best&apos;, &apos;QUALITY&apos;, &apos;hotel&apos;), (&apos;hotel&apos;, &apos;PLACE&apos;, &apos;show&apos;), (&apos;berlin&apos;, &apos;LOCATION&apos;, &apos;hotel&apos;)]
+</code></pre><p>&#xC608;&#xC0C1;&#xD55C; &#xAC83;&#xACFC; &#xAC19;&#xC774; &#xC798; &#xB098;&#xC628; &#xAC83;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774; &#xC608;&#xC81C;&#xB97C; &#xD1B5;&#xD574; spaCy&#xAC00; custom model&#xC744; &#xB9CC;&#xB4E4; &#xB54C; &#xADF8; &#xC9C4;&#xAC00;&#xB97C; &#xBC1C;&#xD718;&#xD568;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -585,7 +1054,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Dependency Parsing 학습시키기","level":"7.3","depth":1,"previous":{"title":"Python에서 Dependency Parsing","level":"7.2","depth":1,"path":"chapter-6/python_dependency_parsing.md","ref":"chapter-6/python_dependency_parsing.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-6/training_dependency_parsing.md","mtime":"2020-09-03T06:36:15.896Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-03T09:20:18.210Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Dependency Parsing 학습시키기","level":"7.3","depth":1,"previous":{"title":"Python에서 Dependency Parsing","level":"7.2","depth":1,"path":"chapter-6/python_dependency_parsing.md","ref":"chapter-6/python_dependency_parsing.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-6/training_dependency_parsing.md","mtime":"2020-09-03T09:38:35.081Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-03T09:38:38.905Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
