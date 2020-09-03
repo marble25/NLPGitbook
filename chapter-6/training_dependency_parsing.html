@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>NER Tagging Code · GitBook</title>
+        <title>Dependency Parsing 학습시키기 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../chatper-6/dependency_parsing.md" />
     
-    
-    <link rel="prev" href="training_ner_tagger.html" />
+    <link rel="prev" href="python_dependency_parsing.html" />
     
 
     </head>
@@ -384,9 +382,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="ner_tagging.html">
+        <li class="chapter " data-level="6.1" data-path="../chapter-5/ner_tagging.html">
             
-                <a href="ner_tagging.html">
+                <a href="../chapter-5/ner_tagging.html">
             
                     
                     NER Tagging
@@ -397,9 +395,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="python_ner_tagging.html">
+        <li class="chapter " data-level="6.2" data-path="../chapter-5/python_ner_tagging.html">
             
-                <a href="python_ner_tagging.html">
+                <a href="../chapter-5/python_ner_tagging.html">
             
                     
                     Python에서 NER Tagging
@@ -410,9 +408,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="training_ner_tagger.html">
+        <li class="chapter " data-level="6.3" data-path="../chapter-5/training_ner_tagger.html">
             
-                <a href="training_ner_tagger.html">
+                <a href="../chapter-5/training_ner_tagger.html">
             
                     
                     NER Tagger 학습시키기
@@ -423,9 +421,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.4" data-path="ner_tagging_code.html">
+        <li class="chapter " data-level="6.4" data-path="../chapter-5/ner_tagging_code.html">
             
-                <a href="ner_tagging_code.html">
+                <a href="../chapter-5/ner_tagging_code.html">
             
                     
                     NER Tagging Code
@@ -456,9 +454,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.2" data-path="../chapter-6/python_dependency_parsing.html">
+        <li class="chapter " data-level="7.2" data-path="python_dependency_parsing.html">
             
-                <a href="../chapter-6/python_dependency_parsing.html">
+                <a href="python_dependency_parsing.html">
             
                     
                     Python에서 Dependency Parsing
@@ -469,9 +467,9 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="../chapter-6/training_dependency_parsing.html">
+        <li class="chapter active" data-level="7.3" data-path="training_dependency_parsing.html">
             
-                <a href="../chapter-6/training_dependency_parsing.html">
+                <a href="training_dependency_parsing.html">
             
                     
                     Dependency Parsing 학습시키기
@@ -533,7 +531,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >NER Tagging Code</a>
+        <a href=".." >Dependency Parsing 학습시키기</a>
     </h1>
 </div>
 
@@ -548,31 +546,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="ner-tagging-code">NER Tagging Code</h2>
-<hr>
-<h3 id="displacy">displaCy</h3>
-<p>spaCy&#xC758; &#xC778;&#xC0C1;&#xC801;&#xC778; &#xBD80;&#xBD84; &#xC911; &#xD558;&#xB098;&#xB294; visualization&#xC774;&#xACE0;, &#xC774;&#xB294; <a href="https://explosion.ai/demos/displacy-ent" target="_blank">displaCy</a>&#xC5D0;&#xC11C; &#xC81C;&#xACF5;&#xD569;&#xB2C8;&#xB2E4;.   </p>
-<p><img src="image0001.png" alt="image0001"></p>
-<h3 id="&#xAC04;&#xB2E8;&#xD55C;-&#xC791;&#xC5C5;">&#xAC04;&#xB2E8;&#xD55C; &#xC791;&#xC5C5;</h3>
-<p>spaCy&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xAC04;&#xB2E8;&#xD55C; &#xC791;&#xC5C5;&#xC744; &#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>import spacy
-
-nlp = spacy.load(&apos;en&apos;)
-
-words, indices = [], []
-for i, w in enumerate(nlp(&apos;Tom went to London before going to Paris &apos;)):
-    if w.ent_type_ == &apos;GPE&apos;:
-        words.append(w.text_with_ws)
-        indices.append(i)
-    else:
-        words.append(w.text_with_ws)
-
-words[indices[0]], words[indices[1]] = words[indices[1]], words[indices[0]]
-print(&apos;&apos;.join(words))
-</code></pre><p>&apos;Tom went to London before going to Paris &apos;&#xB77C;&#xB294; &#xBB38;&#xC7A5;&#xC774; &#xC8FC;&#xC5B4;&#xC84C;&#xC744; &#xB54C; &#xCC98;&#xC74C; &#xB098;&#xC628; &#xAD6D;&#xAC00;&#xC640; &#xB450; &#xBC88;&#xC9F8; &#xB098;&#xC628; &#xAD6D;&#xAC00;&#xB97C; &#xC11C;&#xB85C; &#xBC14;&#xAFB8;&#xB294; &#xC791;&#xC5C5;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>Tom went to Paris before going to London
-</code></pre><p>spaCy&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xBA74; &#xC774;&#xB7F0; &#xC791;&#xC5C5;&#xC740; &#xAC04;&#xB2E8;&#xD558;&#xAC8C; &#xCC98;&#xB9AC;&#xD560; &#xC218; &#xC788;&#xC74C;&#xC744; &#xBCF4;&#xC5EC;&#xC90D;&#xB2C8;&#xB2E4;.   </p>
-
+                                
                                 
                                 </section>
                             
@@ -599,14 +573,10 @@ print(&apos;&apos;.join(words))
 
             
                 
-                <a href="training_ner_tagger.html" class="navigation navigation-prev " aria-label="Previous page: NER Tagger 학습시키기">
+                <a href="python_dependency_parsing.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Python에서 Dependency Parsing">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../chatper-6/dependency_parsing.md" class="navigation navigation-next " aria-label="Next page: Dependency Parsing">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -615,7 +585,7 @@ print(&apos;&apos;.join(words))
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"NER Tagging Code","level":"6.4","depth":1,"next":{"title":"Dependency Parsing","level":"7.1","depth":1,"path":"chatper-6/dependency_parsing.md","ref":"chatper-6/dependency_parsing.md","articles":[]},"previous":{"title":"NER Tagger 학습시키기","level":"6.3","depth":1,"path":"chapter-5/training_ner_tagger.md","ref":"chapter-5/training_ner_tagger.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-5/ner_tagging_code.md","mtime":"2020-09-02T12:12:18.780Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-03T06:36:25.538Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Dependency Parsing 학습시키기","level":"7.3","depth":1,"previous":{"title":"Python에서 Dependency Parsing","level":"7.2","depth":1,"path":"chapter-6/python_dependency_parsing.md","ref":"chapter-6/python_dependency_parsing.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-6/training_dependency_parsing.md","mtime":"2020-09-03T06:36:15.896Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-03T06:36:25.538Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
