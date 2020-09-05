@@ -50,7 +50,7 @@
 
 * [Topic Models](chapter-7/topic_models.md)
 * [Latent Dirichlet Allocation](chapter-7/lda.md)
-* [Latent Semantic Indexing](chapter-7/lsi.md)
+* [Latent Semantic Analysis](chapter-7/lsa.md)
 * [Hierarchical Dirichlet Process](chapter-7/hdp.md)
 * [Dynamic Topic Models](chapter-7/dtm.md)
 * [scikit-learn에서 topic models](chapter-7/scikit_topic_models.md)
