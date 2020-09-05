@@ -3,6 +3,7 @@
 
 ### Latent Dirichlet Allocation란?
 가장 유명한 LDA(Latent Dirichlet Allocation)으로 시작하겠습니다.   
+LDA는 단어가 특정 토픽에 존재할 확률과 문서에 특정 토픽이 존재할 확률을 결합확률로 추정하여 토픽을 추출합니다.   
 
 gensim에서는 LDA 모델을 간단하게 생성할 수 있습니다.   
 
