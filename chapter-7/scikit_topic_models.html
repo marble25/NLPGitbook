@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>POS 태깅 · GitBook</title>
+        <title>scikit-learn에서 topic models · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="ner_tagging.html" />
     
-    
-    <link rel="prev" href="tokenize_text.html" />
+    <link rel="prev" href="dtm.html" />
     
 
     </head>
@@ -181,9 +179,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="install_lm.html">
+        <li class="chapter " data-level="3.2" data-path="../chapter-2/install_lm.html">
             
-                <a href="install_lm.html">
+                <a href="../chapter-2/install_lm.html">
             
                     
                     Language Model 설치
@@ -194,9 +192,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="tokenize_text.html">
+        <li class="chapter " data-level="3.3" data-path="../chapter-2/tokenize_text.html">
             
-                <a href="tokenize_text.html">
+                <a href="../chapter-2/tokenize_text.html">
             
                     
                     텍스트 토큰화
@@ -207,9 +205,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.4" data-path="pos_tagging.html">
+        <li class="chapter " data-level="3.4" data-path="../chapter-2/pos_tagging.html">
             
-                <a href="pos_tagging.html">
+                <a href="../chapter-2/pos_tagging.html">
             
                     
                     POS 태깅
@@ -220,9 +218,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.5" data-path="ner_tagging.html">
+        <li class="chapter " data-level="3.5" data-path="../chapter-2/ner_tagging.html">
             
-                <a href="ner_tagging.html">
+                <a href="../chapter-2/ner_tagging.html">
             
                     
                     NER 태깅
@@ -233,9 +231,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.6" data-path="preprocessing.html">
+        <li class="chapter " data-level="3.6" data-path="../chapter-2/preprocessing.html">
             
-                <a href="preprocessing.html">
+                <a href="../chapter-2/preprocessing.html">
             
                     
                     텍스트 전처리
@@ -489,9 +487,9 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../chapter-7/topic_models.html">
+        <li class="chapter " data-level="8.1" data-path="topic_models.html">
             
-                <a href="../chapter-7/topic_models.html">
+                <a href="topic_models.html">
             
                     
                     Topic Models
@@ -502,9 +500,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="../chapter-7/lda.html">
+        <li class="chapter " data-level="8.2" data-path="lda.html">
             
-                <a href="../chapter-7/lda.html">
+                <a href="lda.html">
             
                     
                     Latent Dirichlet Allocation
@@ -515,9 +513,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.3" data-path="../chapter-7/lsi.html">
+        <li class="chapter " data-level="8.3" data-path="lsi.html">
             
-                <a href="../chapter-7/lsi.html">
+                <a href="lsi.html">
             
                     
                     Latent Semantic Indexing
@@ -528,9 +526,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="../chapter-7/hdp.html">
+        <li class="chapter " data-level="8.4" data-path="hdp.html">
             
-                <a href="../chapter-7/hdp.html">
+                <a href="hdp.html">
             
                     
                     Hierarchical Dirichlet Process
@@ -541,9 +539,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.5" data-path="../chapter-7/dtm.html">
+        <li class="chapter " data-level="8.5" data-path="dtm.html">
             
-                <a href="../chapter-7/dtm.html">
+                <a href="dtm.html">
             
                     
                     Dynamic Topic Models
@@ -554,9 +552,9 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6" data-path="../chapter-7/scikit_topic_models.html">
+        <li class="chapter active" data-level="8.6" data-path="scikit_topic_models.html">
             
-                <a href="../chapter-7/scikit_topic_models.html">
+                <a href="scikit_topic_models.html">
             
                     
                     scikit-learn에서 topic models
@@ -611,7 +609,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >POS 태깅</a>
+        <a href=".." >scikit-learn에서 topic models</a>
     </h1>
 </div>
 
@@ -626,29 +624,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="pos-&#xD0DC;&#xAE45;">POS &#xD0DC;&#xAE45;</h2>
-<hr>
-<h3 id="tensorizer">Tensorizer</h3>
-<p>Default Pipeline&#xC5D0;&#xC11C; &#xB450; &#xBC88;&#xC9F8; &#xC694;&#xC18C;&#xB294; tensorizer(&#xD14D;&#xC2A4;&#xD2B8; &#xBCA1;&#xD130;&#xD654;)&#xC785;&#xB2C8;&#xB2E4;.<br>&#xD14D;&#xC2A4;&#xD2B8; &#xBCA1;&#xD130;&#xD654;&#xB294; doc&#xC744; &#xB0B4;&#xBD80;&#xC801;&#xC73C;&#xB85C; float &#xBC30;&#xC5F4; &#xD615;&#xD0DC;&#xB85C; &#xBC14;&#xAFC9;&#xB2C8;&#xB2E4;.<br>&#xD558;&#xC9C0;&#xB9CC; spaCy&#xAC00; &#xB0B4;&#xBD80;&#xC801;&#xC73C;&#xB85C; &#xC54C;&#xC544;&#xC11C; &#xCC98;&#xB9AC;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC5D0;, &#xC6B0;&#xB9AC;&#xB294; &#xC774;&#xC5D0; &#xB300;&#xD574; &#xAC71;&#xC815;&#xD560; &#xD544;&#xC694;&#xAC00; &#xC5C6;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<h3 id="pos-tagging">POS-tagging</h3>
-<p>&#xC774; &#xC608;&#xC2DC;&#xB97C; &#xBCF4;&#xC2ED;&#xC2DC;&#xC624;.   </p>
-<pre><code>doc = nlp(u&apos;John and I  went to the park&apos;)
-
-for token in doc:
-  print((token.text, token.pos_))
-</code></pre><p>&#xC774; &#xC608;&#xC2DC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xACB0;&#xACFC;&#xB97C; &#xAC00;&#xC838;&#xC635;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>(&apos;John&apos;, &apos;PROPN&apos;)
-(&apos;and&apos;, &apos;CCONJ&apos;)
-(&apos;I&apos;, &apos;PRON&apos;)
-(&apos;went&apos;, &apos;VERB&apos;)
-(&apos;to&apos;, &apos;ADP&apos;)
-(&apos;the&apos;, &apos;DET&apos;)
-(&apos;park&apos;, &apos;NOUN&apos;)
-(&apos;.&apos;, &apos;PUNCT&apos;)
-</code></pre><p>POS Tagging&#xC774;&#xB780; &#xC774;&#xC640; &#xAC19;&#xC774; &#xBB38;&#xBC95; &#xC694;&#xC18C;&#xB97C; token&#xB4E4;&#xC5D0; &#xD560;&#xB2F9;&#xD558;&#xB294; &#xAC83;&#xC744; &#xB9D0;&#xD569;&#xB2C8;&#xB2E4;.   </p>
-<h3 id="parsing">Parsing</h3>
-<p>Default Pipeline&#xC5D0;&#xC11C; &#xB2E4;&#xC74C;&#xC5D0; &#xC62C; &#xAC83;&#xC740; parser&#xB85C;, dependency parsing&#xC744; &#xC218;&#xD589;&#xD569;&#xB2C8;&#xB2E4;.<br>Dependency Parsing&#xC740; symbol&#xB4E4; &#xC0AC;&#xC774;&#xC758; &#xC758;&#xC874;&#xC131;&#xC5D0; &#xB300;&#xD55C; &#xC774;&#xD574;&#xC640; &#xAD00;&#xB828;&#xB418;&#xC5B4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, &#xC601;&#xC5B4;&#xC5D0;&#xC11C;&#xB294;, &#xB3D9;&#xC0AC;&#xC640; &#xC8FC;&#xC5B4;, &#xBAA9;&#xC801;&#xC5B4; &#xC0AC;&#xC774;&#xC758; &#xAD00;&#xACC4;&#xB97C; &#xB098;&#xD0C0;&#xB0B4;&#xB294;&#xB370; &#xC0AC;&#xC6A9;&#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-
+                                
                                 
                                 </section>
                             
@@ -675,14 +651,10 @@ for token in doc:
 
             
                 
-                <a href="tokenize_text.html" class="navigation navigation-prev " aria-label="Previous page: 텍스트 토큰화">
+                <a href="dtm.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Dynamic Topic Models">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="ner_tagging.html" class="navigation navigation-next " aria-label="Next page: NER 태깅">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -691,7 +663,7 @@ for token in doc:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"POS 태깅","level":"3.4","depth":1,"next":{"title":"NER 태깅","level":"3.5","depth":1,"path":"chapter-2/ner_tagging.md","ref":"chapter-2/ner_tagging.md","articles":[]},"previous":{"title":"텍스트 토큰화","level":"3.3","depth":1,"path":"chapter-2/tokenize_text.md","ref":"chapter-2/tokenize_text.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-2/pos_tagging.md","mtime":"2020-08-29T15:43:53.982Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-05T06:05:09.471Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"scikit-learn에서 topic models","level":"8.6","depth":1,"previous":{"title":"Dynamic Topic Models","level":"8.5","depth":1,"path":"chapter-7/dtm.md","ref":"chapter-7/dtm.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-7/scikit_topic_models.md","mtime":"2020-09-05T06:04:59.361Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-05T06:05:09.471Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

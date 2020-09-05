@@ -48,6 +48,13 @@
 
 ### Chapter 7 - Topic Models
 
+* [Topic Models](chapter-7/topic_models.md)
+* [Latent Dirichlet Allocation](chapter-7/lda.md)
+* [Latent Semantic Indexing](chapter-7/lsi.md)
+* [Hierarchical Dirichlet Process](chapter-7/hdp.md)
+* [Dynamic Topic Models](chapter-7/dtm.md)
+* [scikit-learn에서 topic models](chapter-7/scikit_topic_models.md)
+
 ### Chpater 8 - Advanced Topic Modeling
 
 ### Chapter 9 - Cluster & Classify Text
