@@ -57,4 +57,9 @@
 
 ### Chpater 8 - Advanced Topic Modeling
 
+* [Training Tips](chapter-8/training_tips.md)
+* [Document 살펴보기](chapter-8/exploring_document.md)
+* [Topic Model 평가](chapter-8/evaluate_topic_models.md)
+* [Topic Model 시각화](chapter-8/visualize.md)
+
 ### Chapter 9 - Cluster & Classify Text
