@@ -678,7 +678,55 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="training-tips">Training Tips</h2>
+<hr>
+<h3 id="&#xC804;&#xCC98;&#xB9AC;">&#xC804;&#xCC98;&#xB9AC;</h3>
+<p>&#xC774;&#xC804; &#xCC55;&#xD130;&#xC5D0;&#xC11C;, &#xD1A0;&#xD53D; &#xBAA8;&#xB378;&#xC774; &#xBB34;&#xC5C7;&#xC778;&#xC9C0;&#xC5D0; &#xB300;&#xD574; &#xC54C;&#xC544;&#xBCF4;&#xC558;&#xACE0;, Gensim&#xACFC; scikit-learn&#xC744; &#xC774;&#xC6A9;&#xD574;&#xC11C; &#xC5B4;&#xB5BB;&#xAC8C; &#xC138;&#xD305;&#xD558;&#xB294;&#xC9C0; &#xC54C;&#xC544;&#xBCF4;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xADF8;&#xB7EC;&#xB098;, &#xADF8;&#xB0E5; &#xC138;&#xD305;&#xB9CC; &#xD558;&#xB294; &#xAC83;&#xC740; &#xCDA9;&#xBD84;&#xD558;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xD559;&#xC2B5;&#xC774; &#xC798; &#xB418;&#xC9C0; &#xC54A;&#xB294;&#xB2E4;&#xBA74;, topic model&#xC740; &#xC6B0;&#xB9AC;&#xC5D0;&#xAC8C; &#xC720;&#xC6A9;&#xD55C; &#xC815;&#xBCF4;&#xB97C; &#xC81C;&#xACF5;&#xD558;&#xC9C0; &#xC54A;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB97C; &#xC704;&#xD574;, &#xC55E;&#xC5D0;&#xC11C;&#xB3C4; &#xC5B8;&#xAE09;&#xD588;&#xB358; preprocessing, &#xC804;&#xCC98;&#xB9AC;&#xAC00; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC6B0;&#xB9AC;&#xAC00; &#xB9CC;&#xB4E0; topic &#xBAA8;&#xB378;&#xC744; &#xC774;&#xC6A9;&#xD574;&#xC11C; &#xCC98;&#xC74C; &#xC2DC;&#xB3C4;&#xD588;&#xC744; &#xB54C;&#xC5D0;&#xB294; &#xC88B;&#xC740; &#xACB0;&#xACFC;&#xAC00; &#xB098;&#xC62C; &#xD655;&#xB960;&#xC774; &#xAD49;&#xC7A5;&#xD788; &#xC801;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC88B;&#xC740; topic modeling&#xC744; &#xC704;&#xD574;&#xC11C;&#xB294; &#xB370;&#xC774;&#xD130;&#xB97C; &#xC815;&#xC81C;&#xD558;&#xACE0;, &#xACB0;&#xACFC;&#xB97C; &#xC77D;&#xC740; &#xD6C4;, &#xC804;&#xCC98;&#xB9AC; &#xACFC;&#xC815;&#xC744; &#xC218;&#xC815;&#xD558;&#xB294; &#xC218;&#xB9CE;&#xC740; &#xC791;&#xC5C5;&#xB4E4;&#xC774; &#xD544;&#xC694;&#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC5B4;, &#xCCAB; topic model&#xC744; &#xBCF4;&#xACE0; stop word&#xB97C; &#xCD94;&#xAC00;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>spacy&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xBA74;, &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; stop word&#xB97C; &#xCD94;&#xAC00;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>import spacy
+nlp = spacy.load(&apos;en&apos;)
+
+my_stop_words = [&apos;say&apos;, &apos;Mr&apos;, &apos;be&apos;, &apos;said&apos;, &apos;says&apos;, &apos;saying&apos;]
+for stopword in my_stop_words:
+    lexeme = nlp.vocab[stopword]
+    lexeme.is_stop = True
+</code></pre><p>&#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xC5D0;&#xC11C; <code>lexeme</code>&#xC758; <code>is_stop</code> &#xC18D;&#xC131;&#xC744; true&#xB85C; &#xBCC0;&#xACBD;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>lexeme&#xC740; case sensitive&#xD558;&#xC9C0; &#xC54A;&#xC73C;&#xBBC0;&#xB85C;, case&#xB294; &#xBB34;&#xC2DC;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>NLTK&#xC5D0;&#xC11C;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xCD94;&#xAC00;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from nltk.corpus import stopwords
+stopword_list = stopwords.words(&apos;english&apos;)
+</code></pre><p><code>stopword_list</code>&#xAC00; list &#xD0C0;&#xC785;&#xC774;&#xAE30; &#xB54C;&#xBB38;&#xC5D0;, &#xB2E8;&#xC9C0; &#xC5EC;&#xAE30;&#xC5D0; &#xC0C8; &#xB2E8;&#xC5B4;&#xB97C; &#xCD94;&#xAC00;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.<br>&#xD639;&#xC2DC; stopwords&#xAC00; &#xC5C6;&#xB2E4;&#xBA74;, &#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xBA3C;&#xC800; &#xC2E4;&#xD589;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>import nltk
+nltk.download(&apos;stopwords&apos;)
+</code></pre><p>Stop word&#xB97C; &#xCD94;&#xAC00;&#xD558;&#xB294; &#xAC83; &#xC678;&#xC5D0;&#xB3C4; Gensim&#xC758; Dictionary class&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.corpora import Dictionary
+corpus = [[&apos;mama&apos;, &apos;male&apos;, &apos;maso&apos;], [&apos;ema&apos;, &apos;ma&apos;, &apos;mama&apos;]]
+dct = Dictionary(corpus)
+print(dct)
+
+dct.filter_n_most_frequent(2)
+print(dct)
+</code></pre><p>&#xC704; &#xCF54;&#xB4DC;&#xC758; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>Dictionary(5 unique tokens: [&apos;male&apos;, &apos;mama&apos;, &apos;maso&apos;, &apos;ema&apos;, &apos;ma&apos;])
+Dictionary(3 unique tokens: [&apos;maso&apos;, &apos;ema&apos;, &apos;ma&apos;])
+</code></pre><p>&#xCC98;&#xC74C; dictionary&#xC5D0;&#xC11C; <code>filter_n_most_frequent(2)</code> &#xD568;&#xC218;&#xB97C; &#xD638;&#xCD9C;&#xD558;&#xB2C8;, &#xAC00;&#xC7A5; &#xBE48;&#xBC88;&#xD788; &#xB098;&#xC624;&#xB294; &#xB2E8;&#xC5B4; 2&#xAC1C;&#xAC00; &#xC0AC;&#xB77C;&#xC84C;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xBC29;&#xC2DD;&#xC73C;&#xB85C; &#xC790;&#xC8FC; &#xB098;&#xC624;&#xC9C0;&#xB9CC;, &#xBCC4;&#xB85C; &#xC911;&#xC694;&#xD55C; &#xC758;&#xBBF8;&#xAC00; &#xC5C6;&#xB294; &#xB2E8;&#xC5B4;&#xB97C; &#xC81C;&#xAC70;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774;&#xB7EC;&#xD55C; &#xC791;&#xC5C5;&#xB4E4;&#xC740; &#xC5B8;&#xC81C;&#xAE4C;&#xC9C0; &#xD574;&#xC57C;&#xD560;&#xAE4C;&#xC694;?
+&#xC6B0;&#xB9AC;&#xAC00; &#xACB0;&#xACFC;&#xB97C; &#xBCF4;&#xC558;&#xC744; &#xB54C; &#xB0A9;&#xB4DD;&#xD560; &#xB9CC;&#xD55C; &#xC815;&#xB3C4;&#xAC00; &#xB420; &#xB54C;&#xAE4C;&#xC9C0; &#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xAC83;&#xC774; &apos;&#xB0A9;&#xB4DD;&#xD560; &#xB9CC;&#xD55C; &#xC815;&#xB3C4;&apos;&#xC778;&#xC9C0; &#xD310;&#xB2E8;&#xD558;&#xB294; &#xAC83;&#xC740; <em>Topic Model &#xD3C9;&#xAC00;</em>&#xC5D0;&#xC11C; &#xBC30;&#xC6B8; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="model-tuning">Model Tuning</h3>
+<p>&#xC9C0;&#xAE08;&#xAE4C;&#xC9C0;&#xB294; &#xD1A0;&#xD53D; &#xBAA8;&#xB378;&#xB9C1; &#xC804;&#xC5D0; &#xD574;&#xC57C;&#xD560; &#xAC83;&#xB4E4;&#xC744; &#xC54C;&#xC544;&#xBCF4;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xC81C; training&#xC5D0; &#xB123;&#xC744; options&#xB4E4;&#xC744; &#xC218;&#xC815;&#xD558;&#xB294; tuning &#xC791;&#xC5C5;&#xC744; &#xD560; &#xCC28;&#xB840;&#xC785;&#xB2C8;&#xB2E4;.<br>option&#xB4E4;&#xC774; &#xB77C;&#xC774;&#xBE0C;&#xB7EC;&#xB9AC;&#xC5D0; &#xB530;&#xB77C; &#xB2E4;&#xB974;&#xAE30;&#xB294; &#xD558;&#xC9C0;&#xB9CC;, &#xACF5;&#xD1B5;&#xC801;&#xC73C;&#xB85C; &#xD1A0;&#xD53D;&#xC758; &#xAC1C;&#xC218;&#xB294; &#xAF2D; &#xB4E4;&#xC5B4;&#xAC00; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC5EC;&#xAE30;&#xC5D0;&#xB294; &#xC9C4;&#xC9DC; &#xC815;&#xB2F5;&#xC774;&#xB780; &#xAC83;&#xC740; &#xC5C6;&#xACE0;, &#xC774;&#xB294; &#xC5B4;&#xB5A4; &#xC885;&#xB958;&#xC758; corpus&#xC778;&#xC9C0;, corpus&#xC758; &#xD06C;&#xAE30; &#xB4F1; &#xB2E4;&#xC591;&#xD55C; &#xAC83;&#xB4E4;&#xACFC; &#xAD00;&#xB828;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xB9CC;&#xC57D; &#xC774;&#xC5D0; &#xB300;&#xD55C; &#xC9C0;&#xC2DD;&#xC774; &#xC5C6;&#xB2E4;&#xBA74;, 5&#xC5D0;&#xC11C; &#xC2DC;&#xC791;&#xD574;&#xC11C; 5&#xC529; &#xB298;&#xB824;&#xAC00;&#xB294; &#xBC29;&#xBC95;&#xB3C4; &#xC88B;&#xC740; &#xBC29;&#xBC95;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>Gensim&#xC744; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74;, &#xC911;&#xC694;&#xD55C; tuning parameter&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<ol>
+<li>chunksize : &#xC5BC;&#xB9C8;&#xB098; &#xB9CE;&#xC740; document&#xAC00; &#xD55C; &#xBC88;&#xC5D0; &#xCC98;&#xB9AC;&#xB418;&#xB294;&#xC9C0;. chunksize&#xB97C; &#xC62C;&#xB9AC;&#xBA74; &#xD559;&#xC2B5;&#xC774; &#xBE68;&#xB77C;&#xC9D1;&#xB2C8;&#xB2E4;.   </li>
+<li>passes : &#xC804;&#xCCB4; corpus&#xB97C; &#xBA87; &#xBC88; &#xD559;&#xC2B5;&#xC2DC;&#xD0AC; &#xAC83;&#xC778;&#xC9C0;. &#xB2E4;&#xB978; &#xB9D0;&#xB85C;&#xB294; <strong>epochs</strong>&#xB77C;&#xACE0;&#xB3C4; &#xD569;&#xB2C8;&#xB2E4;.   </li>
+<li>iterations: &#xD55C; document&#xB97C; &#xBA87; &#xBC88;&#xC529; &#xBC18;&#xBCF5;&#xD560; &#xAC83;&#xC778;&#xC9C0;. passes&#xC640; iterations&#xB97C; &#xC801;&#xB2F9;&#xD788; &#xB192;&#xAC8C; &#xC7A1;&#xB294; &#xAC83;&#xC774; &#xC911;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.   </li>
+</ol>
+<p>Hyperparameters&#xB294; machine learning &#xC774;&#xC804;&#xC5D0; &#xC124;&#xC815;&#xD558;&#xB294; parameter&#xB97C; &#xB9D0;&#xD569;&#xB2C8;&#xB2E4;.<br>LDA model&#xC5D0;&#xC11C; 2&#xAC1C;&#xC758; hyperparameter&#xAC00; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<ol>
+<li>Alpha: document-topic &#xBC00;&#xC9D1;&#xB3C4;. &#xAC12;&#xC774; &#xB192;&#xC73C;&#xBA74;, document&#xB4E4;&#xC774; &#xB354; &#xB9CE;&#xC740; topic&#xB4E4;&#xB85C; &#xAD6C;&#xC131;&#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </li>
+<li>Beta: topic-word &#xBC00;&#xC9D1;&#xB3C4;. &#xAC12;&#xC774; &#xB192;&#xC73C;&#xBA74;, topic&#xC774; &#xB354; &#xB9CE;&#xC740; words&#xB85C; &#xAD6C;&#xC131;&#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </li>
+</ol>
+
                                 
                                 </section>
                             
@@ -721,7 +769,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Training Tips","level":"9.1","depth":1,"next":{"title":"Document 살펴보기","level":"9.2","depth":1,"path":"chapter-8/exploring_document.md","ref":"chapter-8/exploring_document.md","articles":[]},"previous":{"title":"scikit-learn에서 topic models","level":"8.6","depth":1,"path":"chapter-7/scikit_topic_models.md","ref":"chapter-7/scikit_topic_models.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-8/training_tips.md","mtime":"2020-09-10T13:39:45.158Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-10T13:40:18.926Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Training Tips","level":"9.1","depth":1,"next":{"title":"Document 살펴보기","level":"9.2","depth":1,"path":"chapter-8/exploring_document.md","ref":"chapter-8/exploring_document.md","articles":[]},"previous":{"title":"scikit-learn에서 topic models","level":"8.6","depth":1,"path":"chapter-7/scikit_topic_models.md","ref":"chapter-7/scikit_topic_models.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-8/training_tips.md","mtime":"2020-09-10T14:21:08.293Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-10T14:21:12.327Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
