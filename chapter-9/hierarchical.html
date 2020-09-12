@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>텍스트 Clustering · GitBook</title>
+        <title>계층적 Clustering · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="k_means.html" />
+    <link rel="next" href="text_classify.html" />
     
     
-    <link rel="prev" href="../chapter-8/visualize.html" />
+    <link rel="prev" href="k_means.html" />
     
 
     </head>
@@ -633,7 +633,7 @@
         
         
     
-        <li class="chapter active" data-level="10.1" data-path="text_cluster.html">
+        <li class="chapter " data-level="10.1" data-path="text_cluster.html">
             
                 <a href="text_cluster.html">
             
@@ -659,7 +659,7 @@
             
         </li>
     
-        <li class="chapter " data-level="10.3" data-path="hierarchical.html">
+        <li class="chapter active" data-level="10.3" data-path="hierarchical.html">
             
                 <a href="hierarchical.html">
             
@@ -715,7 +715,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >텍스트 Clustering</a>
+        <a href=".." >계층적 Clustering</a>
     </h1>
 </div>
 
@@ -730,68 +730,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#xD14D;&#xC2A4;&#xD2B8;-clustering">&#xD14D;&#xC2A4;&#xD2B8; Clustering</h2>
-<hr>
-<p>&#xC9C0;&#xAE08;&#xAE4C;&#xC9C0; &#xC6B0;&#xB9AC;&#xB294; &#xD14D;&#xC2A4;&#xD2B8;&#xAC00; &#xC5B4;&#xB5BB;&#xAC8C; &#xAD6C;&#xC131;&#xB418;&#xC5B4; &#xC788;&#xB294;&#xC9C0;&#xC5D0; &#xB300;&#xD574; &#xC54C;&#xC544;&#xBCF4;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.<br>POS tag&#xC640; NER tag&#xB97C; &#xD588;&#xC744; &#xB54C;, &#xC5B4;&#xB5A4; &#xC885;&#xB958;&#xC758; &#xB2E8;&#xC5B4;&#xAC00; &#xC6B0;&#xB9AC;&#xC758; &#xBB38;&#xC11C;&#xC5D0; &#xB098;&#xC624;&#xB294;&#xC9C0; &#xC54C; &#xC218; &#xC788;&#xC5C8;&#xACE0;, topic modeling&#xC744; &#xD1B5;&#xD574; &#xC6B0;&#xB9AC; &#xD14D;&#xC2A4;&#xD2B8;&#xC5D0; &#xC5B4;&#xB5A4; &#xD1A0;&#xD53D;&#xC774; &#xC788;&#xB294;&#xC9C0; &#xC54C; &#xC218; &#xC788;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xB2F9;&#xC5F0;&#xD558;&#xAC8C;&#xB3C4;, &#xC6B0;&#xB9AC;&#xB294; &#xD1A0;&#xD53D; &#xBAA8;&#xB378;&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xBB38;&#xC11C;&#xB4E4;&#xC744; cluster&#xD560; &#xC218; &#xC788;&#xC9C0;&#xB9CC;, topic model&#xC740; &#xADF8;&#xB7F0; &#xBAA9;&#xC801;&#xC774; &#xC544;&#xB2D9;&#xB2C8;&#xB2E4;.<br>topic model&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xD55C;&#xB2E4;&#xBA74; &#xC88B;&#xC9C0; &#xC54A;&#xC740; &#xACB0;&#xACFC;&#xB97C; &#xC5BB;&#xC744; &#xAC00;&#xB2A5;&#xC131;&#xC774; &#xD07D;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC2DC;&#xC791;&#xD558;&#xAE30; &#xC804;&#xC5D0;, cluster&#xACFC; classification&#xC758; &#xCC28;&#xC774;&#xB97C; &#xC54C;&#xC544;&#xBD05;&#xC2DC;&#xB2E4;.<br>Clustering&#xACFC; Classification &#xBAA8;&#xB450; &#xB370;&#xC774;&#xD130;&#xB97C; &#xADF8;&#xB8F9;&#xD551;&#xD55C;&#xB2E4;&#xB294; &#xBAA9;&#xC801;&#xC5D0;&#xC11C; &#xACF5;&#xD1B5;&#xC810;&#xC774; &#xC788;&#xC9C0;&#xB9CC;, Clustering&#xC740; &#xBE44;&#xC9C0;&#xB3C4; &#xD559;&#xC2B5;&#xC774;&#xACE0;, Classification&#xC740; &#xC9C0;&#xB3C4; &#xD559;&#xC2B5;&#xC774;&#xB77C;&#xB294; &#xB370;&#xC11C; &#xD070; &#xCC28;&#xC774;&#xC810;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<h3 id="clustering-&#xC2DC;&#xC791;&#xD558;&#xAE30;">Clustering &#xC2DC;&#xC791;&#xD558;&#xAE30;</h3>
-<p>&#xB2E4;&#xB978; text analysis algorithm&#xCC98;&#xB7FC;, &#xAC00;&#xC7A5; &#xC911;&#xC694;&#xD55C; &#xAC83;&#xC740; &#xC5ED;&#xC2DC; &#xC804;&#xCC98;&#xB9AC;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xBD88;&#xC6A9;&#xC5B4;&#xC640; lemmatizing words&#xB97C; &#xC81C;&#xAC70;&#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB97C; &#xB2E4; &#xB9C8;&#xCE5C; &#xD6C4;&#xC5D0;&#xB294;, document&#xB97C; vector representation&#xC73C;&#xB85C; &#xBC14;&#xAFD4;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC774;&#xBC88;&#xC5D0;&#xB294; scikit-learn&#xC744; &#xC774;&#xC6A9;&#xD574;&#xC11C; Clustering&#xC744; &#xC2DC;&#xC791;&#xD558;&#xB3C4;&#xB85D; &#xD558;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>from sklearn.datasets import fetch_20newsgroups
-import numpy as np
-
-categories = [
-    &apos;alt.atheism&apos;,
-    &apos;talk.religion.misc&apos;,
-    &apos;comp.graphics&apos;,
-    &apos;sci.space&apos;,
-]
-
-dataset = fetch_20newsgroups(subset=&apos;all&apos;, categories=categories, shuffle=True, random_state=42)
-
-labels = dataset.target
-true_k = np.unique(labels).shape[0]
-data = dataset.data
-</code></pre><p>20 NewsGroups dataset&#xC744; &#xAC00;&#xC838;&#xC640;&#xC11C; 4&#xAC1C;&#xC758; &#xCE74;&#xD14C;&#xACE0;&#xB9AC;&#xB9CC; &#xBF51;&#xC544;&#xB0C8;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC774;&#xB807;&#xAC8C; &#xB370;&#xC774;&#xD130;&#xB97C; &#xBF51;&#xC544;&#xC628; &#xD6C4; &#xCEF4;&#xD4E8;&#xD130;&#xAC00; &#xC27D;&#xAC8C; &#xB2E4;&#xB8F0; &#xC218; &#xC788;&#xB294; &#xBCA1;&#xD130; &#xD0C0;&#xC785;&#xC73C;&#xB85C; document&#xB97C; &#xBCC0;&#xD658;&#xD574;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.<br>scikit-learn&#xC758; &#xB0B4;&#xC7A5; <code>TfidfVectorizer</code>&#xB97C; &#xC0AC;&#xC6A9;&#xD574;&#xC11C; &#xC190;&#xC27D;&#xAC8C; &#xBCC0;&#xD658;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>from sklearn.feature_extraction.text import TfidfVectorizer
-
-vectorizer = TfidfVectorizer(max_df=0.5, min_df=2, stop_words=&apos;english&apos;, use_idf=True)
-
-X = vectorizer.fit_transform(data)
-</code></pre><p><code>X</code>&#xB294; TF-IDF &#xD45C;&#xD604;&#xC73C;&#xB85C; &#xBCC0;&#xD658;&#xB41C; &#xBCA1;&#xD130;&#xB97C; &#xB2F4;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xB370;&#xC774;&#xD130;&#xB97C; &#xB354; &#xC798; &#xC774;&#xD574;&#xD558;&#xAE30; &#xC704;&#xD574;&#xC11C;, visualize&#xD558;&#xB294; &#xAC83;&#xB3C4; &#xC911;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xB294; PCA(&#xC8FC;&#xC131;&#xBD84; &#xBD84;&#xC11D;)&#xB97C; &#xD1B5;&#xD574; &#xACE0;&#xCC28;&#xC6D0;&#xC758; &#xB370;&#xC774;&#xD130;&#xB97C; 2&#xCC28;&#xC6D0;&#xC73C;&#xB85C; &#xBC14;&#xAFB8;&#xB824;&#xACE0; &#xD569;&#xB2C8;&#xB2E4;.<br>&#xB370;&#xC774;&#xD130;&#xB97C; &#xBC14;&#xAFBC; &#xD6C4; &#xADF8;&#xB798;&#xD504;&#xB85C; &#xADF8;&#xB9AC;&#xB294; &#xAC83;&#xAE4C;&#xC9C0; &#xD574;&#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.decomposition import PCA
-from sklearn.pipeline import Pipeline
-import matplotlib.pyplot as plt
-
-newsgroups_train = fetch_20newsgroups(subset=&apos;train&apos;, categories=[&apos;alt.atheism&apos;, &apos;sci.space&apos;])
-pipeline = Pipeline([
-    (&apos;vect&apos;, CountVectorizer()),
-    (&apos;tfidf&apos;, TfidfTransformer()),
-])
-X_visualise = pipeline.fit_transform(newsgroups_train.data).todense()
-
-pca = PCA(n_components=2).fit(X_visualise)
-data2D = pca.transform(X_visualise)
-plt.scatter(data2D[:,0], data2D[:,1], c=newsgroups_train.target)
-plt.show()
-</code></pre><p>&#xCF54;&#xB4DC;&#xB97C; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74;, data&#xB97C; 2&#xAC1C;&#xC758; &#xCE74;&#xD14C;&#xACE0;&#xB9AC;&#xB9CC; &#xB85C;&#xB4DC;&#xD574;&#xC11C; count-vectorizer&#xC640; TF-IDF transformation&#xB9CC; &#xC9C4;&#xD589;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xADF8; &#xD6C4;, PCA &#xBAA8;&#xB378;&#xC744; &#xC801;&#xC6A9;&#xD574;&#xC11C; 2&#xAC1C;&#xC758; key component&#xB9CC; &#xC0AC;&#xC6A9;&#xD558;&#xAC8C; &#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB807;&#xAC8C; &#xB418;&#xBA74; dataset&#xC774; 2&#xAC1C;&#xC758; &#xADF8;&#xB8F9;&#xC73C;&#xB85C; &#xBD84;&#xB9AC;&#xAC00; &#xB418;&#xC5B4; &#xC788;&#xB294; &#xBAA8;&#xC2B5;&#xC744; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC624;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
-<p><img src="image0001.png" alt="image0001"></p>
-<p>&#xC774;&#xC804;&#xC5D0; &#xBCF4;&#xB358; &#xBCA1;&#xD130; X&#xB85C; &#xB3CC;&#xC544;&#xC640;&#xC11C; clustering&#xC744; &#xC704;&#xD574; &#xC900;&#xBE44;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>from sklearn.pipeline import make_pipeline
-from sklearn.decomposition import TruncatedSVD
-from sklearn.preprocessing import Normalizer
-
-n_components = 5
-svd = TruncatedSVD(n_components)
-normalizer = Normalizer(copy=False)
-lsa = make_pipeline(svd, normalizer)
-X = lsa.fit_transform(X)
-</code></pre><p>&#xCD5C;&#xC885;&#xC801;&#xC73C;&#xB85C; X&#xB294; &#xC815;&#xC81C;&#xB418;&#xACE0;, TF-IDF transformed&#xB418;&#xACE0;, SVD&#xB97C; &#xD1B5;&#xD574; dimension&#xB3C4; &#xCD95;&#xC18C;&#xB418;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xC81C; clustering&#xC744; &#xD560; &#xC900;&#xBE44;&#xAC00; &#xB2E4; &#xB418;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-
+                                
                                 
                                 </section>
                             
@@ -818,12 +757,12 @@ X = lsa.fit_transform(X)
 
             
                 
-                <a href="../chapter-8/visualize.html" class="navigation navigation-prev " aria-label="Previous page: Topic Model 시각화">
+                <a href="k_means.html" class="navigation navigation-prev " aria-label="Previous page: K-means">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="k_means.html" class="navigation navigation-next " aria-label="Next page: K-means">
+                <a href="text_classify.html" class="navigation navigation-next " aria-label="Next page: 텍스트 Classifying">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -834,7 +773,7 @@ X = lsa.fit_transform(X)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"텍스트 Clustering","level":"10.1","depth":1,"next":{"title":"K-means","level":"10.2","depth":1,"path":"chapter-9/k_means.md","ref":"chapter-9/k_means.md","articles":[]},"previous":{"title":"Topic Model 시각화","level":"9.4","depth":1,"path":"chapter-8/visualize.md","ref":"chapter-8/visualize.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-9/text_cluster.md","mtime":"2020-09-12T12:09:14.929Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-12T12:10:20.056Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"계층적 Clustering","level":"10.3","depth":1,"next":{"title":"텍스트 Classifying","level":"10.4","depth":1,"path":"chapter-9/text_classify.md","ref":"chapter-9/text_classify.md","articles":[]},"previous":{"title":"K-means","level":"10.2","depth":1,"path":"chapter-9/k_means.md","ref":"chapter-9/k_means.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-9/hierarchical.md","mtime":"2020-09-12T12:10:14.124Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-12T12:10:20.056Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

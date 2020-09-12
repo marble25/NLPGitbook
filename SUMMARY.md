@@ -65,4 +65,6 @@
 ### Chapter 9 - Cluster & Classify Text
 
 * [텍스트 Clustering](chapter-9/text_cluster.md)
+* [K-means](chapter-9/k_means.md)
+* [계층적 Clustering](chapter-9/hierarchical.md)
 * [텍스트 Classifying](chapter-9/text_classify.md)
