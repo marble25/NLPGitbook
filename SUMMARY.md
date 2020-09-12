@@ -63,3 +63,6 @@
 * [Topic Model 시각화](chapter-8/visualize.md)
 
 ### Chapter 9 - Cluster & Classify Text
+
+* [텍스트 Clustering](chapter-9/text_cluster.md)
+* [텍스트 Classifying](chapter-9/text_classify.md)
