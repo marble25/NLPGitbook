@@ -774,7 +774,47 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="&#xD14D;&#xC2A4;&#xD2B8;-&#xC694;&#xC57D;">&#xD14D;&#xC2A4;&#xD2B8; &#xC694;&#xC57D;</h2>
+<hr>
+<p>&#xD14D;&#xC2A4;&#xD2B8; &#xBD84;&#xC11D;&#xC5D0;&#xC11C;, &#xAE34; &#xAE38;&#xC774;&#xC758; &#xD14D;&#xC2A4;&#xD2B8;&#xB97C; &#xC694;&#xC57D;&#xD558;&#xB294; &#xAC83;&#xC740; &#xAD49;&#xC7A5;&#xD788; &#xC911;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xBC88; &#xB2E8;&#xC6D0;&#xC5D0;&#xC11C;&#xB294; &#xC6B0;&#xB9AC;&#xB9CC;&#xC758; pipeline&#xC744; &#xAD6C;&#xCD95;&#xD558;&#xB294; &#xAC83;&#xBCF4;&#xB2E4;&#xB294; Gensim&#xC758; API&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xB294;&#xB370; &#xCD08;&#xC810;&#xC744; &#xB450;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xAE30;&#xC5B5;&#xD574;&#xC57C; &#xD560; &#xAC83;&#xC740; Gensim&#xC740; &#xC694;&#xC57D;&#xD560; &#xB54C; &#xC790;&#xC2E0;&#xB9CC;&#xC758; &#xBB38;&#xC7A5;&#xC744; &#xB9CC;&#xB4E4;&#xC9C0; &#xC54A;&#xACE0; &#xC8FC;&#xC5B4;&#xC9C4; text&#xC5D0;&#xC11C; key sentences&#xB97C; &#xBF51;&#xC544;&#xB0C5;&#xB2C8;&#xB2E4;.<br>&#xC774; summarizer&#xB294; TextRank algorithm&#xC5D0; &#xAE30;&#xBC18;&#xD574;&#xC11C; &#xB9CC;&#xB4E4;&#xC5B4;&#xC84C;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.summarization import summarize
+
+text = &quot;Eleven-year-old Harry Potter has been living an ordinary life, constantly abused by his surly and cold uncle and aunt, Vernon and Petunia Dursley, and bullied by their spoiled son, Dudley. Hagrid explains Harry&apos;s hidden past as the wizard son of James and Lily Potter, who are a wizard and witch, respectively, and how they were murdered by the most evil and powerful dark wizard in history, Lord Voldemort, which resulted in the one-year-old Harry being sent to live with his aunt and uncle. There, Harry also makes an enemy of yet another first-year, Draco Malfoy, who prejudices against Hermione due to her being the daughter of Muggles, a term used by wizards and witches, which describes ordinary humans with no magical ability. He winds up in Gryffindor instead with Ron and Hermione while Draco is sorted into Slytherin, like his whole family before him. As classes begin at Hogwarts, Harry discovers his innate talent for flying on broomsticks despite no prior experience and is recruited into his House&apos;s Quidditch (a competitive wizards&apos; sport, played in the air) team as a Seeker, which is said to be the most difficult role. When the school&apos;s headmaster Albus Dumbledore is lured from Hogwarts under false pretenses, Harry, Hermione, and Ron fear that the theft is imminent and descend through the trapdoor themselves. The eventful school year ends at the final feast, during which Gryffindor wins the House Cup. Harry returns to Privet Drive for the summer, neglecting to tell them that the use of spells is forbidden by under-aged wizards and witches and thus anticipating some fun and peace over the holidays.&quot;
+
+print(summarize(text))
+</code></pre><p>&apos;&#xD574;&#xB9AC; &#xD3EC;&#xD130;&#xC758; &#xD604;&#xC790;&#xC758; &#xB3CC;&apos;&#xC758; &#xC77C;&#xBD80;&#xBD84;&#xC744; &#xBC1C;&#xCDCC;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC694;&#xC57D;&#xC744; &#xC704;&#xD574; &#xAC04;&#xB2E8;&#xD788; summarize &#xD568;&#xC218;&#xB9CC; &#xBD88;&#xB7EC;&#xC624;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>Eleven-year-old Harry Potter has been living an ordinary life, constantly abused by his surly and cold uncle and aunt, Vernon and Petunia Dursley, and bullied by their spoiled son, Dudley.
+</code></pre><p>&#xB2E8;&#xC5B4;&#xC758; &#xAC1C;&#xC218;&#xB97C; &#xC81C;&#xD55C;&#xD574;&#xC11C; &#xC2E4;&#xD589;&#xD560; &#xC218;&#xB3C4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(summarize(text, word_count=50))
+</code></pre><pre><code>Eleven-year-old Harry Potter has been living an ordinary life, constantly abused by his surly and cold uncle and aunt, Vernon and Petunia Dursley, and bullied by their spoiled son, Dudley.
+There, Harry also makes an enemy of yet another first-year, Draco Malfoy, who prejudices against Hermione due to her being the daughter of Muggles, a term used by wizards and witches, which describes ordinary humans with no magical ability.
+</code></pre><p>&#xD0A4;&#xC6CC;&#xB4DC;&#xB97C; &#xBF51;&#xC544;&#xB0B4; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.summarization import keywords
+
+print(keywords(text))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>harry
+wizard
+wizards
+year
+ordinary
+son
+lord
+gryffindor
+albus
+life constantly
+school
+draco
+dark
+sport
+cup
+</code></pre><p>Gensim&#xC740; Montemurro&#xC640; Zanette&#xC758; entropy&#xB97C; &#xC774;&#xC6A9;&#xD574; keyword&#xB97C; &#xBF51;&#xC544;&#xB0B4;&#xB294; &#xB2E4;&#xB978; &#xBC29;&#xBC95;&#xB3C4; &#xAC16;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xBC29;&#xC2DD;&#xC740; &#xB354; &#xD070; corpus&#xC5D0;&#xC11C; &#xB354; &#xC798; &#xC791;&#xB3D9;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.summarization import mz_keywords
+
+print(mz_keywords(text, scores=True, weighted=False, threshold=1.0))
+</code></pre>
                                 
                                 </section>
                             
@@ -813,7 +853,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"텍스트 요약","level":"11.3","depth":1,"previous":{"title":"유사도 쿼리","level":"11.2","depth":1,"path":"chapter-10/similarity_queries.md","ref":"chapter-10/similarity_queries.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-10/summarize.md","mtime":"2020-09-13T06:49:08.744Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T08:04:42.622Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"텍스트 요약","level":"11.3","depth":1,"previous":{"title":"유사도 쿼리","level":"11.2","depth":1,"path":"chapter-10/similarity_queries.md","ref":"chapter-10/similarity_queries.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-10/summarize.md","mtime":"2020-09-13T08:40:37.312Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T08:40:44.720Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
