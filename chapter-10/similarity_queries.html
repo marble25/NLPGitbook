@@ -776,7 +776,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="&#xC720;&#xC0AC;&#xB3C4;-&#xCFFC;&#xB9AC;">&#xC720;&#xC0AC;&#xB3C4; &#xCFFC;&#xB9AC;</h2>
+<hr>
+<p>&#xC774;&#xC81C; &#xC6B0;&#xB9AC;&#xB294; 2&#xAC1C;&#xC758; document&#xB97C; &#xBE44;&#xAD50;&#xD560; &#xC218; &#xC788;&#xC73C;&#xBBC0;&#xB85C;, &#xAC00;&#xC7A5; &#xBE44;&#xC2B7;&#xD55C; document&#xB97C; &#xACE8;&#xB77C;&#xB0BC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>Gensim&#xC5D0;&#xC11C;&#xB294; input query&#xC640; &#xAC00;&#xC7A5; &#xBE44;&#xC2B7;&#xD55C; document&#xB97C; &#xCC3E;&#xC544;&#xB0BC; built-in structures&#xB97C; &#xC81C;&#xACF5;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim import similarities
+
+index = similarities.MatrixSimilarity(model[corpus])
+sims = index[lda_bow_finance]
+</code></pre><p><code>MatrixSimilarity</code>&#xB97C; &#xC774;&#xC6A9;&#xD574;&#xC11C; corpus&#xC5D0;&#xC11C; Similarity&#xB97C; &#xACC4;&#xC0B0;&#xD560; index&#xB97C; &#xB9CC;&#xB4E4;&#xC5B4; &#xB0C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>input query&#xB85C;&#xB294; <code>lda_bow_finance</code>&#xB97C; &#xC0AC;&#xC6A9;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(list(enumerate(sims)))
+</code></pre><p>sims&#xB97C; &#xCD9C;&#xB825;&#xD574; &#xBCF4;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(0, 0.35119006), (1, 0.24949455), (2, 0.30233026), (3, 0.3633883), (4, 0.2705042), (5, 0.99951863), (6, 0.99996334), (7, 0.9973844), (8, 0.99953634), (9, 0.9973635), (10, 0.99991035)]
+</code></pre><p>document id&#xC640; query&#xC640; &#xBE44;&#xC2B7;&#xD55C; &#xC815;&#xB3C4;&#xAC00; &#xCD9C;&#xB825;&#xB418;&#xC5B4; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB97C; &#xC815;&#xB82C;&#xD558;&#xC5EC; texts&#xC640; &#xB9E4;&#xCE58;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>sims = sorted(enumerate(sims), key=lambda item: -item[1])
+
+for doc_id, similarity in sims:
+    print(texts[doc_id], similarity)
+</code></pre><p>&#xC774; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[&apos;bank&apos;, &apos;borrow&apos;, &apos;money&apos;] 0.99996334
+[&apos;bank&apos;, &apos;loan&apos;, &apos;sell&apos;] 0.99991035
+[&apos;finance&apos;, &apos;money&apos;, &apos;sell&apos;, &apos;bank&apos;] 0.99953634
+[&apos;money&apos;, &apos;transaction&apos;, &apos;bank&apos;, &apos;finance&apos;] 0.99951863
+[&apos;bank&apos;, &apos;finance&apos;] 0.9973844
+[&apos;borrow&apos;, &apos;sell&apos;] 0.9973635
+[&apos;bank&apos;, &apos;bank&apos;, &apos;water&apos;, &apos;rain&apos;, &apos;river&apos;] 0.3633883
+[&apos;bank&apos;, &apos;river&apos;, &apos;shore&apos;, &apos;water&apos;] 0.35119006
+[&apos;bank&apos;, &apos;water&apos;, &apos;fall&apos;, &apos;flow&apos;] 0.30233026
+[&apos;river&apos;, &apos;water&apos;, &apos;mud&apos;, &apos;tree&apos;] 0.2705042
+[&apos;river&apos;, &apos;water&apos;, &apos;flow&apos;, &apos;fast&apos;, &apos;tree&apos;] 0.24949455
+</code></pre><p>&#xB3C8;&#xC5D0; &#xAD00;&#xB828;&#xB41C; &#xBB38;&#xC11C;&#xB4E4;&#xC740; &#xBAA8;&#xB450; &#xB192;&#xC740; &#xD655;&#xB960;&#xC774; &#xB098;&#xC624;&#xACE0;, &#xAC15;&#xC5D0; &#xAD00;&#xB828;&#xB41C; &#xBB38;&#xC11C;&#xB4E4;&#xC740; &#xBAA8;&#xB450; &#xB0AE;&#xC740; &#xD655;&#xB960;&#xC774; &#xB098;&#xC624;&#xB294; &#xAC83;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -819,7 +848,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"유사도 쿼리","level":"11.2","depth":1,"next":{"title":"텍스트 요약","level":"11.3","depth":1,"path":"chapter-10/summarize.md","ref":"chapter-10/summarize.md","articles":[]},"previous":{"title":"유사도 행렬","level":"11.1","depth":1,"path":"chapter-10/similarity_metrics.md","ref":"chapter-10/similarity_metrics.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-10/similarity_queries.md","mtime":"2020-09-13T06:49:04.408Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T07:45:02.024Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"유사도 쿼리","level":"11.2","depth":1,"next":{"title":"텍스트 요약","level":"11.3","depth":1,"path":"chapter-10/summarize.md","ref":"chapter-10/summarize.md","articles":[]},"previous":{"title":"유사도 행렬","level":"11.1","depth":1,"path":"chapter-10/similarity_metrics.md","ref":"chapter-10/similarity_metrics.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-10/similarity_queries.md","mtime":"2020-09-13T08:04:34.116Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T08:04:42.622Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
