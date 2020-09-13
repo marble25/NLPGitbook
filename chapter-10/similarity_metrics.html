@@ -776,7 +776,124 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="&#xC720;&#xC0AC;&#xB3C4;-&#xD589;&#xB82C;">&#xC720;&#xC0AC;&#xB3C4; &#xD589;&#xB82C;</h2>
+<hr>
+<p>&#xC720;&#xC0AC;&#xB3C4; &#xD589;&#xB82C;&#xC740; nlp&#xC5D0;&#xC11C; &#xC790;&#xC8FC; &#xC0AC;&#xC6A9;&#xB418;&#xB294; &#xC218;&#xD559;&#xC801; &#xAD6C;&#xC870;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC720;&#xC0AC;&#xB3C4; &#xD589;&#xB82C; &#xC911; &#xD558;&#xB098;&#xC778; Euclidean metric&#xC5D0; &#xB300;&#xD574;&#xC11C; &#xBC30;&#xC6E0;&#xC744; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC720;&#xC0AC;&#xB3C4; &#xD589;&#xB82C;&#xC740; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xD2B9;&#xC9D5;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<ul>
+<li>d(x, y) &gt;= 0</li>
+<li>d(x, y) = 0 &lt;=&gt; x = y</li>
+<li>d(x, y) = d(y, x)</li>
+<li>d(x, z) &lt;= d(x, y) + d(y, z)</li>
+</ul>
+<p>Gensim&#xC5D0;&#xC11C;&#xB294; &#xC774;&#xB7EC;&#xD55C; distance metric&#xC744; package &#xC548;&#xC5D0; &#xD3EC;&#xD568;&#xC2DC;&#xCF1C;&#xC11C; document&#xC640; topic &#xCC28;&#xC6D0;&#xC5D0;&#xC11C; &#xC27D;&#xAC8C; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xB3C4;&#xB85D; &#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>Chapter-8&#xC5D0;&#xC11C; &#xC0B4;&#xD3B4;&#xBCF4;&#xC558;&#xB358; &#xCF54;&#xB4DC;&#xB97C; &#xC0AC;&#xC6A9;&#xD574;&#xC11C; &#xD558;&#xB3C4;&#xB85D; &#xD558;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
+from gensim.corpora import Dictionary
+
+texts = [[&apos;bank&apos;, &apos;river&apos;, &apos;shore&apos;, &apos;water&apos;],
+         [&apos;river&apos;, &apos;water&apos;, &apos;flow&apos;, &apos;fast&apos;, &apos;tree&apos;],
+         [&apos;bank&apos;, &apos;water&apos;, &apos;fall&apos;, &apos;flow&apos;],
+         [&apos;bank&apos;, &apos;bank&apos;, &apos;water&apos;, &apos;rain&apos;, &apos;river&apos;],
+         [&apos;river&apos;, &apos;water&apos;, &apos;mud&apos;, &apos;tree&apos;],
+         [&apos;money&apos;, &apos;transaction&apos;, &apos;bank&apos;, &apos;finance&apos;],
+         [&apos;bank&apos;, &apos;borrow&apos;, &apos;money&apos;],
+         [&apos;bank&apos;, &apos;finance&apos;],
+         [&apos;finance&apos;, &apos;money&apos;, &apos;sell&apos;, &apos;bank&apos;],
+         [&apos;borrow&apos;, &apos;sell&apos;],
+         [&apos;bank&apos;, &apos;loan&apos;, &apos;sell&apos;]]
+
+dictionary = Dictionary(texts)
+corpus = [dictionary.doc2bow(text) for text in texts]
+</code></pre><p>text&#xB97C; &#xB9CC;&#xB4E4;&#xACE0;, bow &#xD615;&#xD0DC;&#xC758; corpus&#xB3C4; &#xB9CC;&#xB4E4;&#xC5B4; &#xC8FC;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>TF-IDF &#xD615;&#xD0DC;&#xB85C; &#xBCC0;&#xD658;&#xD558;&#xACE0;, LDA &#xBAA8;&#xB378;&#xB3C4; &#xB9CC;&#xB4E4;&#xC5B4; &#xC8FC;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models import ldamodel
+from gensim.models import TfidfModel
+
+tfidf = TfidfModel(corpus)
+model = ldamodel.LdaModel(corpus, id2word=dictionary, num_topics=2)
+
+print(model.show_topics())
+</code></pre><p>&#xD1A0;&#xD53D;&#xC774; &#xC5B4;&#xB5BB;&#xAC8C; &#xB098;&#xC624;&#xB294;&#xC9C0; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(0, &apos;0.202*&quot;bank&quot; + 0.113*&quot;money&quot; + 0.105*&quot;finance&quot; + 0.094*&quot;sell&quot; + 0.077*&quot;borrow&quot; + 0.065*&quot;water&quot; + 0.050*&quot;river&quot; + 0.048*&quot;transaction&quot; + 0.042*&quot;flow&quot; + 0.039*&quot;shore&quot;&apos;), (1, &apos;0.155*&quot;bank&quot; + 0.151*&quot;water&quot; + 0.129*&quot;river&quot; + 0.083*&quot;tree&quot; + 0.065*&quot;flow&quot; + 0.051*&quot;rain&quot; + 0.050*&quot;fast&quot; + 0.048*&quot;mud&quot; + 0.048*&quot;sell&quot; + 0.037*&quot;finance&quot;&apos;)]
+</code></pre><p>&#xBE44;&#xAD50;&#xD560; 3&#xAC1C;&#xC758; &#xB3C4;&#xD050;&#xBA3C;&#xD2B8;&#xB97C; &#xB9CC;&#xB4E4;&#xACE0;(&#xD558;&#xB098;&#xB294; &#xAC15;&#xC5D0; &#xB300;&#xD55C; &#xAC83;, &#xD558;&#xB098;&#xB294; &#xB3C8;&#xC5D0; &#xB300;&#xD55C; &#xAC83;, &#xD558;&#xB098;&#xB294; &#xB458; &#xB2E4; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xB294; &#xAC83;) &#xC774;&#xB97C; bow&#xB85C; &#xBCC0;&#xD658;&#xD558;&#xACE0;, TF-IDF&#xC640; Lda&#xB85C; &#xBC14;&#xAFD4;&#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>doc_water = [&apos;river&apos;, &apos;water&apos;, &apos;shore&apos;]
+doc_finance = [&apos;finance&apos;, &apos;money&apos;, &apos;sell&apos;]
+doc_bank = [&apos;finance&apos;, &apos;bank&apos;, &apos;tree&apos;, &apos;water&apos;]
+
+bow_water = model.id2word.doc2bow(doc_water)
+bow_finance = model.id2word.doc2bow(doc_finance)
+bow_bank = model.id2word.doc2bow(doc_bank)
+
+lda_bow_water = model[bow_water]
+lda_bow_finance = model[bow_finance]
+lda_bow_bank = model[bow_bank]
+
+tfidf_bow_water = tfidf[bow_water]
+tfidf_bow_finance = tfidf[bow_finance]
+tfidf_bow_bank = tfidf[bow_bank]
+</code></pre><p><code>lda_bow_water</code>&#xB97C; &#xBCF4;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xAC12;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(0, 0.8464617), (1, 0.15353829)]
+</code></pre><p>&#xC774; document&#xB294; &#xAC15;&#xC5D0; &#xAD00;&#xB828;&#xB41C; &#xB2E8;&#xC5B4;&#xB97C; &#xB354; &#xB9CE;&#xC774; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC73C;&#xBBC0;&#xB85C;, &#xAC15;&#xC5D0; &#xB300;&#xD55C; topic&#xC774; &#xD6E8;&#xC52C; &#xB192;&#xAC8C; &#xB098;&#xC624;&#xB294; &#xAC83;&#xC774; &#xB2F9;&#xC5F0;&#xD569;&#xB2C8;&#xB2E4;.<br><code>lda_bow_finance</code>&#xB97C; &#xBCF4;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xAC12;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(0, 0.13444014), (1, 0.8655599)]
+</code></pre><p>&#xC774; document&#xB294; &#xB3C8;&#xC5D0; &#xAD00;&#xB828;&#xB41C; &#xB2E8;&#xC5B4;&#xB97C; &#xB354; &#xB9CE;&#xC774; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC73C;&#xBBC0;&#xB85C;, &#xB3C8;&#xC5D0; &#xB300;&#xD55C; topic&#xC774; &#xD6E8;&#xC52C; &#xB192;&#xAC8C; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.<br><code>lda_bow_bank</code>&#xB97C; &#xBCF4;&#xBA74; &#xB2E4;&#xC74C; &#xAC12;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(0, 0.5956138), (1, 0.4043862)]
+</code></pre><p>&#xAC15;&#xC5D0; &#xB300;&#xD55C; &#xB2E8;&#xC5B4;&#xAC00; &#xB354; &#xB9CE;&#xC774; &#xC788;&#xB2E4;&#xACE0;&#xB294; &#xB098;&#xC624;&#xC9C0;&#xB9CC;, &#xADF8; &#xCC28;&#xC774;&#xAC00; &#xD06C;&#xC9C0;&#xB294; &#xC54A;&#xB2E4;&#xACE0; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<p>Gensim&#xC5D0;&#xB294; <strong>Hellinger metric</strong>, <strong>Kullback-Leiber divergence function</strong>, <strong>Jaccard index</strong>&#xB77C;&#xB294; &#xAC70;&#xB9AC; &#xD568;&#xC218;&#xAC00; &#xD3EC;&#xD568;&#xB418;&#xC5B4; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xB450; &#xAC1C;&#xC758; document&#xB97C; &#xBE44;&#xAD50;&#xD560; &#xB54C;&#xC5D0; &#xC644;&#xBCBD;&#xD55C; &#xAC70;&#xB9AC; &#xD568;&#xC218;&#xB294; &#xC5C6;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xC798; &#xBE44;&#xAD50;&#xD574; &#xBCF4;&#xBA74;&#xC11C; &#xC0AC;&#xC6A9;&#xD558;&#xB294; &#xAC83;&#xC774; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.matutils import kullback_leibler, jaccard, hellinger
+
+print(hellinger(lda_bow_water, lda_bow_finance))
+print(hellinger(lda_bow_finance, lda_bow_bank))
+print(hellinger(lda_bow_water, lda_bow_bank))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>0.5459944566444418
+0.3541193455521899
+0.20193702755596438
+</code></pre><p>water&#xACFC; finance &#xC0AC;&#xC774;&#xC758; &#xAC70;&#xB9AC;&#xAC00; &#xAC00;&#xC7A5; &#xBA3C; &#xAC83;&#xC73C;&#xB85C; &#xB098;&#xC624;&#xACE0;, finance&#xC640; bank, water&#xACFC; bank&#xB294; &#xADF8;&#xC5D0; &#xBE44;&#xD558;&#xBA74; &#xBE44;&#xAD50;&#xC801; &#xAC00;&#xAE4C;&#xC6B4; &#xAC83;&#xC73C;&#xB85C; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.<br>0&#xC5D0; &#xAC00;&#xAE4C;&#xC6B8; &#xC218;&#xB85D; &#xBE44;&#xC2B7;&#xD55C; &#xBB38;&#xC11C;&#xC774;&#xACE0;, 1&#xC5D0; &#xAC00;&#xAE4C;&#xC6B8; &#xC218;&#xB85D; &#xCC28;&#xC774;&#xAC00; &#xB9CE;&#xC740; &#xBB38;&#xC11C;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>Kullback-Leiber Function&#xC5D0; &#xB300;&#xD574; &#xAE30;&#xC5B5;&#xD560; &#xC911;&#xC694;&#xD55C; &#xC0AC;&#xC2E4;&#xC774; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC815;&#xD655;&#xD788; &#xB9D0;&#xD558;&#xBA74; &#xC774; function&#xC740; &#xAC70;&#xB9AC; &#xD568;&#xC218;&#xAC00; &#xC544;&#xB2CC;&#xB370;, &#xADF8; &#xC774;&#xC720;&#xB294; symmetric&#xD558;&#xC9C0; &#xC54A;&#xAE30; &#xB54C;&#xBB38;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xB2E4;&#xC2DC; &#xB9D0;&#xD558;&#xC790;&#xBA74;, <code>kullback_leibler(lda_bow_bank, lda_bow_finance)</code>&#xC640; <code>kullback_leibler(lda_bow_finance, lda_bow_bank)</code>&#xAC00; &#xB3D9;&#xC77C;&#xD558;&#xC9C0; &#xC54A;&#xB2E4;&#xB294; &#xC774;&#xC57C;&#xAE30;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xB458;&#xC758; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB2E4;&#xB985;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>0.57881486
+0.45858586
+</code></pre><p>&#xADF8; &#xBC18;&#xBA74;&#xC5D0; <code>hellinger(lda_bow_bank, lda_bow_finance)</code>&#xC640; <code>hellinger(lda_bow_finance, lda_bow_bank)</code>&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB3D9;&#xC77C;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>0.3541193455521899
+0.3541193455521899
+</code></pre><p>KL function&#xC740; &#xC644;&#xC804;&#xD788; &#xAC70;&#xB9AC; &#xD568;&#xC218;&#xC758; &#xC131;&#xC9C8;&#xC744; &#xAC16;&#xC9C0;&#xB294; &#xC54A;&#xC9C0;&#xB9CC; 0&#xC5D0; &#xAC00;&#xAE4C;&#xC6B8; &#xC218;&#xB85D; &#xBE44;&#xC2B7;&#xD558;&#xACE0;, 1&#xC5D0; &#xAC00;&#xAE4C;&#xC6B8; &#xC218;&#xB85D; &#xB2E4;&#xB974;&#xB2E4;&#xB294; &#xC131;&#xC9C8;&#xC740; &#xAC00;&#xC9C0;&#xACE0; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB9C8;&#xC9C0;&#xB9C9; &#xD568;&#xC218;&#xB294; Jaccard metric&#xC73C;&#xB85C;, &#xC774; &#xD568;&#xC218;&#xB294; &#xB2E4;&#xB978; 2&#xAC1C;&#xC758; &#xD568;&#xC218;&#xC640; &#xB2E4;&#xB974;&#xAC8C; bow&#xC640; doc&#xC5D0; &#xB300;&#xD574;&#xC11C;&#xB3C4; &#xB3D9;&#xC791;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(jaccard(bow_water, bow_bank))
+print(jaccard(doc_water, doc_bank))
+print(jaccard([&apos;word&apos;], [&apos;word&apos;]))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>0.8571428571428572
+0.8333333333333334
+0.0
+</code></pre><p>&#xC774; &#xD568;&#xC218; &#xC5ED;&#xC2DC; 0&#xC5D0; &#xAC00;&#xAE4C;&#xC6B8; &#xC218;&#xB85D; &#xBE44;&#xC2B7;&#xD558;&#xACE0;, 1&#xC5D0; &#xAC00;&#xAE4C;&#xC6B8; &#xC218;&#xB85D; &#xCC28;&#xC774;&#xAC00; &#xD07D;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774;&#xC81C; topic&#xB4E4; &#xC0AC;&#xC774;&#xC5D0; &#xC5BC;&#xB9C8;&#xB098; &#xCC28;&#xC774;&#xAC00; &#xC788;&#xB294;&#xC9C0; &#xC54C;&#xC544;&#xBCF4;&#xB294; &#xC791;&#xC5C5;&#xC744; &#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>def make_topics_bow(topic):
+    topic = topic.split(&apos;+&apos;)
+    topic_bow = []
+    for word in topic:
+        prob, word = word.split(&apos;*&apos;)
+        word = word.replace(&apos; &apos;, &apos;&apos;).replace(&apos;&quot;&apos;, &apos;&apos;)
+        word = model.id2word.doc2bow([word])[0][0]
+        topic_bow.append((word, float(prob)))
+    return topic_bow
+
+topic_water, topic_finance = model.show_topics()
+finance_distribution = make_topics_bow(topic_finance[1])
+water_distribution = make_topics_bow(topic_water[1])
+</code></pre><p>topic&#xB4E4;&#xC744; word id&#xC640; &#xD560;&#xB2F9;&#xB41C; &#xBAAB;&#xC758; &#xD615;&#xD0DC;&#xB85C; &#xBCC0;&#xD658;&#xD574; &#xBCF4;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.<br><code>finance_distribution</code>&#xC744; &#xCD9C;&#xB825;&#xD574; &#xBCF4;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(0, 0.232),
+ (10, 0.111),
+ (11, 0.111),
+ (14, 0.1),
+ (13, 0.072),
+ (1, 0.053),
+ (12, 0.048),
+ (15, 0.046),
+ (3, 0.043),
+ (2, 0.036)]
+</code></pre><p>&#xC774;&#xC81C; <code>hellinger</code>&#xD568;&#xC218;&#xB85C; &#xB450; &#xAC1C;&#xC758; distribution&#xC744; &#xBE44;&#xAD50;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(hellinger(water_distribution, finance_distribution))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>0.6564931577500894
+</code></pre>
                                 
                                 </section>
                             
@@ -819,7 +936,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"유사도 행렬","level":"11.1","depth":1,"next":{"title":"유사도 쿼리","level":"11.2","depth":1,"path":"chapter-10/similarity_queries.md","ref":"chapter-10/similarity_queries.md","articles":[]},"previous":{"title":"텍스트 Classifying","level":"10.4","depth":1,"path":"chapter-9/text_classify.md","ref":"chapter-9/text_classify.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-10/similarity_metrics.md","mtime":"2020-09-13T06:48:59.516Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T06:49:15.426Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"유사도 행렬","level":"11.1","depth":1,"next":{"title":"유사도 쿼리","level":"11.2","depth":1,"path":"chapter-10/similarity_queries.md","ref":"chapter-10/similarity_queries.md","articles":[]},"previous":{"title":"텍스트 Classifying","level":"10.4","depth":1,"path":"chapter-9/text_classify.md","ref":"chapter-9/text_classify.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-10/similarity_metrics.md","mtime":"2020-09-13T07:44:58.251Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T07:45:02.024Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
