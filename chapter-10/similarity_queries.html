@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Document 살펴보기 · GitBook</title>
+        <title>유사도 쿼리 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="evaluate_topic_models.html" />
+    <link rel="next" href="summarize.html" />
     
     
-    <link rel="prev" href="training_tips.html" />
+    <link rel="prev" href="similarity_metrics.html" />
     
 
     </head>
@@ -574,9 +574,9 @@
         
         
     
-        <li class="chapter " data-level="9.1" data-path="training_tips.html">
+        <li class="chapter " data-level="9.1" data-path="../chapter-8/training_tips.html">
             
-                <a href="training_tips.html">
+                <a href="../chapter-8/training_tips.html">
             
                     
                     Training Tips
@@ -587,9 +587,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="9.2" data-path="exploring_document.html">
+        <li class="chapter " data-level="9.2" data-path="../chapter-8/exploring_document.html">
             
-                <a href="exploring_document.html">
+                <a href="../chapter-8/exploring_document.html">
             
                     
                     Document 살펴보기
@@ -600,9 +600,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.3" data-path="evaluate_topic_models.html">
+        <li class="chapter " data-level="9.3" data-path="../chapter-8/evaluate_topic_models.html">
             
-                <a href="evaluate_topic_models.html">
+                <a href="../chapter-8/evaluate_topic_models.html">
             
                     
                     Topic Model 평가
@@ -613,9 +613,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.4" data-path="visualize.html">
+        <li class="chapter " data-level="9.4" data-path="../chapter-8/visualize.html">
             
-                <a href="visualize.html">
+                <a href="../chapter-8/visualize.html">
             
                     
                     Topic Model 시각화
@@ -692,9 +692,9 @@
         
         
     
-        <li class="chapter " data-level="11.1" data-path="../chapter-10/similarity_metrics.html">
+        <li class="chapter " data-level="11.1" data-path="similarity_metrics.html">
             
-                <a href="../chapter-10/similarity_metrics.html">
+                <a href="similarity_metrics.html">
             
                     
                     유사도 행렬
@@ -705,9 +705,9 @@
             
         </li>
     
-        <li class="chapter " data-level="11.2" data-path="../chapter-10/similarity_queries.html">
+        <li class="chapter active" data-level="11.2" data-path="similarity_queries.html">
             
-                <a href="../chapter-10/similarity_queries.html">
+                <a href="similarity_queries.html">
             
                     
                     유사도 쿼리
@@ -718,9 +718,9 @@
             
         </li>
     
-        <li class="chapter " data-level="11.3" data-path="../chapter-10/summarize.html">
+        <li class="chapter " data-level="11.3" data-path="summarize.html">
             
-                <a href="../chapter-10/summarize.html">
+                <a href="summarize.html">
             
                     
                     텍스트 요약
@@ -761,7 +761,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Document 살펴보기</a>
+        <a href=".." >유사도 쿼리</a>
     </h1>
 </div>
 
@@ -776,122 +776,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="document-&#xC0B4;&#xD3B4;&#xBCF4;&#xAE30;">Document &#xC0B4;&#xD3B4;&#xBCF4;&#xAE30;</h2>
-<hr>
-<h3 id="document-&#xB2E4;&#xB8E8;&#xAE30;">Document &#xB2E4;&#xB8E8;&#xAE30;</h3>
-<p>topic &#xBAA8;&#xB378;&#xC744; &#xD558;&#xB098; &#xAC00;&#xC9C0;&#xAC8C; &#xB418;&#xBA74;, &#xC6B0;&#xB9AC;&#xB294; &#xC5B4;&#xB5A4; &#xC8FC;&#xC81C;&#xB4E4;&#xC774; &#xB098;&#xC654;&#xB294;&#xC9C0; &#xBCF4;&#xB294; &#xAC83; &#xBFD0;&#xB9CC; &#xC544;&#xB2C8;&#xB77C;, &#xBB38;&#xC11C;&#xB4E4;&#xC744; &#xD1A0;&#xD53D;&#xC5D0; &#xB530;&#xB77C; &#xBD84;&#xB958;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xC804; &#xCC55;&#xD130;&#xC5D0;&#xC11C; &#xBC30;&#xC6E0;&#xB358; &#xCF54;&#xB4DC;&#xB97C; &#xD1B5;&#xD574; &#xC5B4;&#xB5BB;&#xAC8C; topic&#xC774; &#xC0DD;&#xC131;&#xB418;&#xB294;&#xC9C0; &#xC54C;&#xC544;&#xBD05;&#xC2DC;&#xB2E4;.   </p>
-<pre><code>import os
-import gensim
-
-test_data_dir = &apos;{}&apos;.format(os.sep).join([gensim.__path__[0], &apos;test&apos;, &apos;test_data&apos;])
-lee_train_file = test_data_dir + os.sep + &apos;lee_background.cor&apos;
-text = open(lee_train_file).read()
-
-import spacy
-nlp = spacy.load(&quot;en&quot;)
-
-my_stop_words = [u&apos;say&apos;, u&apos;\&apos;s&apos;, u&apos;Mr&apos;, u&apos;be&apos;, u&apos;said&apos;, u&apos;says&apos;, u&apos;saying&apos;]
-for stopword in my_stop_words:
-    lexeme = nlp.vocab[stopword]
-    lexeme.is_stop = True
-
-doc = nlp(text)
-
-from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
-from gensim.corpora import Dictionary
-
-# we add some words to the stop word list
-texts, article, skl_texts = [], [], []
-for w in doc:
-    # if it&apos;s not a stop word or punctuation mark, add it to our article!
-    if w.text != &apos;\n&apos; and not w.is_stop and not w.is_punct and not w.like_num:
-        # we add the lematized version of the word
-        article.append(w.lemma_)
-    # if it&apos;s a new line, it means we&apos;re onto our next document
-    if w.text == &apos;\n&apos;:
-        skl_texts.append(&apos; &apos;.join(article))
-        texts.append(article)
-        article = []
-
-bigram = gensim.models.Phrases(texts)
-texts = [bigram[line] for line in texts]
-
-dictionary = Dictionary(texts)
-corpus = [dictionary.doc2bow(text) for text in texts]
-
-ldamodel = LdaModel(corpus=corpus, num_topics=10, id2word=dictionary)
-
-print(ldamodel[corpus[0]])
-</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC62C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.(&#xAC12; &#xC790;&#xCCB4;&#xB294; &#xC870;&#xAE08; &#xB2E4;&#xB97C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;)   </p>
-<pre><code>[(3, 0.9938318)]
-</code></pre><p>&#xC774; tuple&#xC740; topic &#xBC88;&#xD638;&#xC640; &#xD574;&#xB2F9; topic&#xC774; &#xB9DE;&#xC744; &#xD655;&#xB960;&#xC744; &#xB098;&#xD0C0;&#xB0C5;&#xB2C8;&#xB2E4;.<br>&#xC774; list&#xC5D0; &#xD558;&#xB098;&#xC758; tuple&#xB9CC; &#xC788;&#xB2E4;&#xB294; &#xAC83;&#xC740;, &#xB2E4;&#xB978; topic&#xC758; &#xAC00;&#xB2A5;&#xC131;&#xC740; &#xBB34;&#xC2DC;&#xD560; &#xB9CC;&#xD07C; &#xC791;&#xB2E4;&#xB294; &#xC774;&#xC57C;&#xAE30;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC2E4;&#xC81C;&#xB85C; 3&#xBC88; &#xD1A0;&#xD53D;&#xC774; &#xBB34;&#xC5C7;&#xC778;&#xC9C0; &#xD655;&#xC778;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>print(ldamodel.show_topics()[3])
-</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>(3, &apos;0.004*&quot;man&quot; + 0.004*&quot;Australia&quot; + 0.004*&quot;australian&quot; + 0.004*&quot;Arafat&quot; + 0.003*&quot;area&quot; + 0.003*&quot;Government&quot; + 0.003*&quot;claim&quot; + 0.003*&quot;come&quot; + 0.003*&quot;day&quot; + 0.003*&quot;fire&quot;&apos;)
-</code></pre><p>&#xADF8;&#xB807;&#xB2E4;&#xBA74; &#xC2E4;&#xC81C; text&#xC758; &#xBA87; &#xBB38;&#xC7A5;&#xC744; &#xD655;&#xC778;&#xD574;&#xC11C; &#xD574;&#xB2F9; topic&#xC758; &#xB2E8;&#xC5B4;&#xAC00; &#xC788;&#xB294;&#xC9C0; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
-<pre><code>print(texts[0][:15])
-</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>[&apos;hundred&apos;, &apos;people&apos;, &apos;force&apos;, &apos;vacate&apos;, &apos;home&apos;, &apos;Southern&apos;, &apos;Highlands&apos;, &apos;New_South&apos;, &apos;Wales&apos;, &apos;strong&apos;, &apos;wind&apos;, &apos;today&apos;, &apos;push&apos;, &apos;huge&apos;, &apos;bushfire&apos;]
-</code></pre><p>topic&#xC5D0; &#xB098;&#xC624;&#xB294; &#xB2E8;&#xC5B4;&#xB4E4;&#xC774; text&#xC5D0; &#xB4E4;&#xC5B4;&#xAC00; &#xC788;&#xB294; &#xAC83;&#xC744; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xD558;&#xB098; &#xC911;&#xC694;&#xD55C; &#xC0AC;&#xC2E4;&#xC740; &#xC2E4;&#xD589;&#xD560; &#xB54C;&#xB9C8;&#xB2E4; &#xB2E4;&#xB978; topic, &#xB2E4;&#xB978; &#xD655;&#xB960;, &#xB2E4;&#xB978; &#xB2E8;&#xC5B4;&#xB4E4;&#xC744; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xB294; topic &#xBAA8;&#xB378;&#xC774; &#xD655;&#xB960;&#xC744; &#xAE30;&#xBC18;&#xC73C;&#xB85C; &#xD558;&#xAE30; &#xB54C;&#xBB38;&#xC774;&#xACE0;, &#xD56D;&#xC0C1; &#xC2E4;&#xD589;&#xD560; &#xB54C;&#xB9C8;&#xB2E4; &#xB2E4;&#xB978; &#xACB0;&#xACFC;&#xB97C; &#xBCFC; &#xC218; &#xC788;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xB2E4;&#xB978; &#xAC04;&#xB2E8;&#xD55C; &#xC608;&#xC2DC;&#xB97C; &#xB4E4;&#xC5B4;&#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>from gensim.models import CoherenceModel, LdaModel, LsiModel, HdpModel
-from gensim.corpora import Dictionary
-
-texts = [[&apos;bank&apos;, &apos;river&apos;, &apos;shore&apos;, &apos;water&apos;],
-         [&apos;river&apos;, &apos;water&apos;, &apos;flow&apos;, &apos;fast&apos;, &apos;tree&apos;],
-         [&apos;bank&apos;, &apos;water&apos;, &apos;fall&apos;, &apos;flow&apos;],
-         [&apos;bank&apos;, &apos;bank&apos;, &apos;water&apos;, &apos;rain&apos;, &apos;river&apos;],
-         [&apos;river&apos;, &apos;water&apos;, &apos;mud&apos;, &apos;tree&apos;],
-         [&apos;money&apos;, &apos;transaction&apos;, &apos;bank&apos;, &apos;finance&apos;],
-         [&apos;bank&apos;, &apos;borrow&apos;, &apos;money&apos;],
-         [&apos;bank&apos;, &apos;finance&apos;],
-         [&apos;finance&apos;, &apos;money&apos;, &apos;sell&apos;, &apos;bank&apos;],
-         [&apos;borrow&apos;, &apos;sell&apos;],
-         [&apos;bank&apos;, &apos;loan&apos;, &apos;sell&apos;]]
-
-dictionary = Dictionary(texts)
-corpus = [dictionary.doc2bow(text) for text in texts]
-
-ldamodel = LdaModel(corpus=corpus, num_topics=2, minimum_probability=1e-8, id2word=dictionary)
-</code></pre><p>&#xC704;&#xC758; corpus&#xB294; &#xAE08;&#xC735;&#xACFC; &#xAC15;, &#xB450; &#xAC1C;&#xC758; &#xB2E4;&#xB978; &#xD1A0;&#xD53D;&#xC73C;&#xB85C; &#xC774;&#xB8E8;&#xC5B4;&#xC9C4; &#xBB38;&#xC7A5;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xD55C; &#xAC00;&#xC9C0; &#xC54C;&#xC544;&#xC57C; &#xD560; &#xC810;&#xC740; bank&#xB77C;&#xB294; &#xB2E8;&#xC5B4;&#xAC00; &#xB450; &#xBB38;&#xB9E5; &#xBAA8;&#xB450; &#xB098;&#xC62C; &#xC218; &#xC788;&#xB2E4;&#xB294; &#xC810;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>print(ldamodel.show_topics())
-</code></pre><p>&#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xC2DC;&#xD0A8; &#xACB0;&#xACFC;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>[(0, &apos;0.156*&quot;water&quot; + 0.150*&quot;bank&quot; + 0.142*&quot;river&quot; + 0.077*&quot;tree&quot; + 0.071*&quot;flow&quot; + 0.049*&quot;mud&quot; + 0.048*&quot;shore&quot; + 0.046*&quot;fast&quot; + 0.044*&quot;rain&quot; + 0.044*&quot;finance&quot;&apos;), (1, &apos;0.209*&quot;bank&quot; + 0.119*&quot;sell&quot; + 0.116*&quot;money&quot; + 0.101*&quot;finance&quot; + 0.083*&quot;borrow&quot; + 0.055*&quot;water&quot; + 0.050*&quot;transaction&quot; + 0.049*&quot;loan&quot; + 0.035*&quot;flow&quot; + 0.033*&quot;river&quot;&apos;)]
-</code></pre><p>&#xC2E4;&#xC81C;&#xB85C;&#xB294; &#xB2E4;&#xB974;&#xAC8C; &#xB098;&#xC62C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xD558;&#xC9C0;&#xB9CC; &#xD55C; topic&#xC740; river&#xC5D0; &#xAD00;&#xB828;&#xB41C; topic&#xC774;&#xACE0;, &#xD55C; topic&#xC740; &#xB3C8;&#xC5D0; &#xAD00;&#xB828;&#xB41C; topic&#xC774;&#xB77C;&#xBA74; &#xC131;&#xACF5;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC5EC;&#xAE30;&#xC5D0;&#xC11C; &#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
-<pre><code>print(ldamodel.get_term_topics(&apos;water&apos;))
-</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xD615;&#xD0DC;&#xB85C; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.(&#xC2E4;&#xC81C; &#xACB0;&#xACFC;&#xAC12;&#xC740; &#xB2E4;&#xB97C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;)   </p>
-<pre><code>[(0, 0.14162402), (1, 0.03815759)]
-</code></pre><p>0&#xBC88; &#xD1A0;&#xD53D;&#xC5D0; &#xB354; &#xB9CE;&#xC774; &#xB098;&#xC628;&#xB2E4;&#xB294; &#xAC83;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774;&#xBC88;&#xC5D0;&#xB294; &#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>print(ldamodel.get_term_topics(&apos;finance&apos;))
-</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>[(0, 0.028981706), (1, 0.08443523)]
-</code></pre><p>finance&#xC758; &#xACBD;&#xC6B0; 1&#xBC88; &#xD1A0;&#xD53D;&#xC5D0; &#xB354; &#xB9CE;&#xC774; &#xB098;&#xC624;&#xB294; &#xAC83;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
-<pre><code>bow_water = [&apos;bank&apos;, &apos;water&apos;, &apos;bank&apos;]
-bow_finance = [&apos;bank&apos;, &apos;finance&apos;, &apos;bank&apos;]
-
-bow = ldamodel.id2word.doc2bow(bow_water)
-doc_topics, word_topics, phi_values = ldamodel.get_document_topics(bow, per_word_topics=True)
-
-print(word_topics)
-</code></pre><p>&#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xD615;&#xD0DC;&#xC758; &#xACB0;&#xACFC;&#xAC00; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>[(0, [0, 1]), (3, [0, 1])]
-</code></pre><p>&#xC774; &#xACB0;&#xACFC;&#xAC00; &#xC758;&#xBBF8;&#xD558;&#xB294; &#xBC14;&#xB294; &#xBB34;&#xC5C7;&#xC77C;&#xAE4C;&#xC694;?<br>tuple&#xC5D0;&#xC11C; &#xCCAB; &#xBC88;&#xC9F8;&#xB294; word&#xC758; index&#xC774;&#xACE0;, &#xB450; &#xBC88;&#xC9F8;&#xB294; &#xD574;&#xB2F9; word&#xC640; &#xAC00;&#xAE4C;&#xC6B4; topic&#xC774; &#xC21C;&#xC11C;&#xB300;&#xB85C; &#xB098;&#xC5F4;&#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.<br>0&#xBC88; word&#xC778; bank&#xC640; 3&#xBC88; word&#xC778; water &#xBAA8;&#xB450; 0&#xBC88; topic(&#xAC15;&#xBB3C; &#xAD00;&#xB828;)&#xC5D0; &#xAC00;&#xAE5D;&#xAC8C; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.<br><code>phi_values</code>&#xC5D0; &#xB300;&#xD574;&#xC11C;&#xB3C4; &#xC54C;&#xC544;&#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>print(phi_values)
-</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>[(0, [(0, 1.2964872), (1, 0.70351094)]), (3, [(0, 0.9074108), (1, 0.09258791)])]
-</code></pre><p>word_topics&#xC640; &#xBE44;&#xC2B7;&#xD558;&#xC9C0;&#xB9CC;, phi_values&#xB294; &#xD574;&#xB2F9; topic&#xC774; &#xAD00;&#xB828;&#xB420; &#xD655;&#xB960;&#xB3C4; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.<br>&#xC798; &#xBCF4;&#xBA74; bank&#xC758; &#xACBD;&#xC6B0; bow&#xC5D0;&#xC11C; 2&#xBC88; &#xB098;&#xC624;&#xAE30; &#xB54C;&#xBB38;&#xC5D0;, phi_values&#xC758; &#xD569;&#xC740; 1&#xC774; &#xC544;&#xB2C8;&#xB77C; 2&#xAC00; &#xB418;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.<br>&#xC989;, 2&#xBC30;&#xB85C; scaling&#xB418;&#xC5C8;&#xB2E4;&#xB294; &#xC758;&#xBBF8;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<p>finance&#xC5D0; &#xB300;&#xD574;&#xC11C;&#xB3C4; &#xAC19;&#xC740; &#xC791;&#xC5C5;&#xC744; &#xC9C4;&#xD589;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>bow = ldamodel.id2word.doc2bow(bow_finance)
-doc_topics, word_topics, phi_values = ldamodel.get_document_topics(bow, per_word_topics=True)
-
-print(word_topics)
-</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>[(0, [1, 0]), (10, [1, 0])]
-</code></pre><p>&#xD765;&#xBBF8;&#xB86D;&#xAC8C;&#xB3C4;, &#xC774; &#xACBD;&#xC6B0;&#xC5D0;&#xB294; &#xC704;&#xC5D0;&#xC11C; &#xBCF4;&#xC558;&#xB358; bank&#xAC00; 1&#xBC88; &#xD1A0;&#xD53D;(finance &#xAD00;&#xB828;)&#xC5D0; &#xB354; &#xAD00;&#xB828;&#xC131;&#xC774; &#xB192;&#xB2E4;&#xACE0; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xAC83;&#xC740; finance&#xB77C;&#xB294; context &#xB355;&#xBD84;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC9C0;&#xAE08;&#xAE4C;&#xC9C0; Gensim&#xC5D0;&#xC11C; LDA &#xBAA8;&#xB378;&#xC744; &#xB2E4;&#xB8E8;&#xB294; &#xBC29;&#xBC95;&#xC744; &#xC54C;&#xC544;&#xBCF4;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xAC19;&#xC740; &#xB2E8;&#xC5B4;&#xB77C;&#xB3C4; &#xBB38;&#xB9E5;&#xC5D0; &#xB530;&#xB77C; &#xB2E4;&#xB978; topic&#xC5D0; &#xBC30;&#xC815;&#xB420; &#xC218; &#xC788;&#xB2E4;&#xB294; &#xC810;&#xB3C4; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-
+                                
                                 
                                 </section>
                             
@@ -918,12 +803,12 @@ print(word_topics)
 
             
                 
-                <a href="training_tips.html" class="navigation navigation-prev " aria-label="Previous page: Training Tips">
+                <a href="similarity_metrics.html" class="navigation navigation-prev " aria-label="Previous page: 유사도 행렬">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="evaluate_topic_models.html" class="navigation navigation-next " aria-label="Next page: Topic Model 평가">
+                <a href="summarize.html" class="navigation navigation-next " aria-label="Next page: 텍스트 요약">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -934,7 +819,7 @@ print(word_topics)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Document 살펴보기","level":"9.2","depth":1,"next":{"title":"Topic Model 평가","level":"9.3","depth":1,"path":"chapter-8/evaluate_topic_models.md","ref":"chapter-8/evaluate_topic_models.md","articles":[]},"previous":{"title":"Training Tips","level":"9.1","depth":1,"path":"chapter-8/training_tips.md","ref":"chapter-8/training_tips.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-8/exploring_document.md","mtime":"2020-09-10T15:41:36.161Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T06:49:15.426Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"유사도 쿼리","level":"11.2","depth":1,"next":{"title":"텍스트 요약","level":"11.3","depth":1,"path":"chapter-10/summarize.md","ref":"chapter-10/summarize.md","articles":[]},"previous":{"title":"유사도 행렬","level":"11.1","depth":1,"path":"chapter-10/similarity_metrics.md","ref":"chapter-10/similarity_metrics.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-10/similarity_queries.md","mtime":"2020-09-13T06:49:04.408Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-13T06:49:15.426Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

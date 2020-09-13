@@ -68,3 +68,9 @@
 * [K-means](chapter-9/k_means.md)
 * [계층적 Clustering](chapter-9/hierarchical.md)
 * [텍스트 Classifying](chapter-9/text_classify.md)
+
+### Chapter 10 - Similarity Queries and Summarization
+
+* [유사도 행렬](chapter-10/similarity_metrics.md)
+* [유사도 쿼리](chapter-10/similarity_queries.md)
+* [텍스트 요약](chapter-10/summarize.md)
