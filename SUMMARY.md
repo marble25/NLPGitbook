@@ -80,7 +80,4 @@
 * [Word2Vec](chapter-11/word2vec.md)
 * [Doc2Vec](chapter-11/doc2vec.md)
 * [GloVe](chapter-11/glove.md)
-* [FastText](chapter-11/fasttext.md)
-* [WordRank](chapter-11/wordrank.md)
-* [Varembed](chapter-11/varembed.md)
-* [Poincare](chapter-11/poincare.md)
+* [기타](chapter-11/etc.md)
