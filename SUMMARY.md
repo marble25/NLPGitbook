@@ -79,7 +79,6 @@
 
 * [Word2Vec](chapter-11/word2vec.md)
 * [Doc2Vec](chapter-11/doc2vec.md)
-* [기타 Word Embeddings](chapter-11/etc.md)
 * [GloVe](chapter-11/glove.md)
 * [FastText](chapter-11/fasttext.md)
 * [WordRank](chapter-11/wordrank.md)

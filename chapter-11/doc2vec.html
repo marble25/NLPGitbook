@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="etc.html" />
+    <link rel="next" href="glove.html" />
     
     
     <link rel="prev" href="word2vec.html" />
@@ -764,20 +764,7 @@
             
         </li>
     
-        <li class="chapter " data-level="12.3" data-path="etc.html">
-            
-                <a href="etc.html">
-            
-                    
-                    기타 Word Embeddings
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="12.4" data-path="glove.html">
+        <li class="chapter " data-level="12.3" data-path="glove.html">
             
                 <a href="glove.html">
             
@@ -790,7 +777,7 @@
             
         </li>
     
-        <li class="chapter " data-level="12.5" data-path="fasttext.html">
+        <li class="chapter " data-level="12.4" data-path="fasttext.html">
             
                 <a href="fasttext.html">
             
@@ -803,7 +790,7 @@
             
         </li>
     
-        <li class="chapter " data-level="12.6" data-path="wordrank.html">
+        <li class="chapter " data-level="12.5" data-path="wordrank.html">
             
                 <a href="wordrank.html">
             
@@ -816,7 +803,7 @@
             
         </li>
     
-        <li class="chapter " data-level="12.7" data-path="varembed.html">
+        <li class="chapter " data-level="12.6" data-path="varembed.html">
             
                 <a href="varembed.html">
             
@@ -829,7 +816,7 @@
             
         </li>
     
-        <li class="chapter " data-level="12.8" data-path="poincare.html">
+        <li class="chapter " data-level="12.7" data-path="poincare.html">
             
                 <a href="poincare.html">
             
@@ -887,7 +874,55 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="doc2vec">Doc2Vec</h2>
+<hr>
+<p>Word2Vec&#xB97C; &#xB9CC;&#xB4E4;&#xBA74;&#xC11C;, &#xC5F0;&#xAD6C;&#xC790;&#xB4E4;&#xC740; Doc2Vec&#xB77C;&#xACE0; &#xBD88;&#xB9AC;&#xB294; paragraph&#xB098; document&#xC758; &#xBCA1;&#xD130; &#xD45C;&#xD604;&#xBC95;&#xC744; &#xB9CC;&#xB4E4;&#xC5B4; &#xB0C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>Word2Vec&#xACFC; &#xC720;&#xC0AC;&#xD558;&#xAC8C; Doc2Vec&#xB294; 2&#xAC00;&#xC9C0;&#xC758; training method&#xAC00; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>CBOW&#xC640; Skip Gram&#xC758; &#xBCC0;&#xD615;&#xC778; PV-DM&#xACFC; PV-DBOW&#xB97C; &#xC0AC;&#xC6A9;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB2E4;&#xC74C; &#xC608;&#xC2DC;&#xB97C; &#xC0B4;&#xD3B4;&#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models.doc2vec import TaggedDocument, LabeledSentence
+
+sentence = TaggedDocument(words=[&apos;some&apos;, &apos;words&apos;, &apos;here&apos;], tags=[&apos;SENT_1&apos;])
+</code></pre><p>&#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC740; &#xD615;&#xC2DD;&#xC73C;&#xB85C; &#xD0DC;&#xAE45;&#xB41C; &#xBB38;&#xC11C;&#xB97C; &#xC27D;&#xAC8C; &#xB9CC;&#xB4E4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC2E4;&#xC81C;&#xB85C; lee corpus&#xB97C; &#xC774;&#xC6A9;&#xD574;&#xC11C; &#xBAA8;&#xB378;&#xC744; &#xD55C;&#xBC88; &#xB9CC;&#xB4E4;&#xC5B4; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models.doc2vec import TaggedDocument, LabeledSentence
+import os
+import gensim
+
+test_data_dir = &apos;{}&apos;.format(os.sep).join([gensim.__path__[0], &apos;test&apos;, &apos;test_data&apos;])
+lee_train_file = test_data_dir + os.sep + &apos;lee_background.cor&apos;
+lee_test_file = test_data_dir + os.sep + &apos;lee.cor&apos;
+
+def read_corpus(file_name, tokens_only=False):
+    with open(file_name, encoding=&apos;iso-8859-1&apos;) as f:
+        for i, line in enumerate(f):
+            if tokens_only:
+                yield gensim.utils.simple_preprocess(line)
+            else:
+                yield TaggedDocument(gensim.utils.simple_preprocess(line), [i])
+
+train_corpus = list(read_corpus(lee_train_file))
+test_corpus = list(read_corpus(lee_test_file, tokens_only=True))
+
+model = gensim.models.doc2vec.Doc2Vec(vector_size=50, min_count=2, epochs=100)
+</code></pre><p>&#xC6B0;&#xB9AC;&#xAC00; &#xB9CC;&#xB4E0; &#xBAA8;&#xB378;&#xC740; 50&#xCC28;&#xC6D0;&#xC744; &#xAC00;&#xC9C0;&#xACE0;, 2&#xBC88;&#xBCF4;&#xB2E4; &#xC791;&#xAC8C; &#xB098;&#xC624;&#xB294; &#xB2E8;&#xC5B4;&#xB97C; &#xC81C;&#xAC70;&#xD55C; &#xD6C4; 100&#xBC88;&#xC758; &#xBC18;&#xBCF5;&#xC744; &#xD1B5;&#xD574; &#xB9CC;&#xB4E4;&#xC5B4;&#xC9C0;&#xB3C4;&#xB85D; &#xC138;&#xD305;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC2E4;&#xC81C;&#xB85C; train_corpus&#xB85C; &#xD559;&#xC2B5;&#xC744; &#xC2DC;&#xCF1C;&#xBCF4;&#xB3C4;&#xB85D; &#xD558;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>model.build_vocab(train_corpus)
+model.train(train_corpus, total_examples=model.corpus_count, epochs=model.epochs)
+</code></pre><p>Doc2Vec&#xB97C; &#xD6C8;&#xB828;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xC740; 2&#xAC00;&#xC9C0;&#xAC00; &#xC874;&#xC7AC;&#xD558;&#xB294;&#xB370;, &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xC9C4;&#xD589;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models import Doc2Vec
+
+moels = [
+    # PV-DBOW
+    Doc2Vec(dm=0, dbow_words=1, vector_size=200, window=8, min_count=10, epochs=50),
+    # PV-DM
+    Doc2Vec(dm=1, dm_mean=1, vector_size=100, window=8, min_count=10, epochs=50),
+]
+</code></pre><p>&#xC2E4;&#xC81C; &#xC2E4;&#xD589;&#xC740; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>inferred_vector = model.infer_vector(train_corpus[0].words)
+sims = model.docvecs.most_similar([inferred_vector])
+print(sims)
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(0, 0.9918602705001831), (48, 0.8025969862937927), (40, 0.7799824476242065), (255, 0.732052743434906), (272, 0.7134027481079102), (33, 0.6928234100341797), (8, 0.6837693452835083), (19, 0.6445119976997375), (9, 0.6101011633872986), (264, 0.5773211121559143)]
+</code></pre><p>0 document&#xC758; words&#xC640; &#xAC00;&#xC7A5; &#xBE44;&#xC2B7;&#xD55C; &#xAC83;&#xC744; &#xCC3E;&#xC558;&#xB294;&#xB370; 0 document&#xB97C; &#xC81C;&#xC678;&#xD558;&#xBA74; &#xAC00;&#xC7A5; &#xBE44;&#xC2B7;&#xD55C; &#xAC83;&#xC740; 48 document&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC2E4;&#xC81C;&#xB85C; &#xB0B4;&#xC6A9;&#xC744; &#xC0B4;&#xD3B4;&#xBCF4;&#xBA74; 0&#xBC88; document&#xB294; &#xD654;&#xC7AC; &#xBC1C;&#xC0DD;&#xACFC; &#xC18C;&#xBC29;&#xAD00;&#xC758; &#xB300;&#xC751;&#xC5D0; &#xB300;&#xD55C; &#xB0B4;&#xC6A9;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xADF8;&#xB9AC;&#xACE0; 48&#xBC88; document &#xC5ED;&#xC2DC; &#xC18C;&#xBC29;&#xAD00;&#xC758; &#xD654;&#xC7AC; &#xC9C4;&#xC555;&#xC5D0; &#xB300;&#xD55C; &#xB0B4;&#xC6A9;&#xC785;&#xB2C8;&#xB2E4;.<br>Doc2Vec&#xB97C; &#xD1B5;&#xD574; &#xBE44;&#xC2B7;&#xD55C; document&#xB97C; &#xC27D;&#xAC8C; &#xCC3E;&#xC544;&#xB0BC; &#xC218; &#xC788;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -919,7 +954,7 @@
                 </a>
                 
                 
-                <a href="etc.html" class="navigation navigation-next " aria-label="Next page: 기타 Word Embeddings">
+                <a href="glove.html" class="navigation navigation-next " aria-label="Next page: GloVe">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -930,7 +965,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Doc2Vec","level":"12.2","depth":1,"next":{"title":"기타 Word Embeddings","level":"12.3","depth":1,"path":"chapter-11/etc.md","ref":"chapter-11/etc.md","articles":[]},"previous":{"title":"Word2Vec","level":"12.1","depth":1,"path":"chapter-11/word2vec.md","ref":"chapter-11/word2vec.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-11/doc2vec.md","mtime":"2020-09-14T13:06:06.758Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-14T14:07:05.349Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Doc2Vec","level":"12.2","depth":1,"next":{"title":"GloVe","level":"12.3","depth":1,"path":"chapter-11/glove.md","ref":"chapter-11/glove.md","articles":[]},"previous":{"title":"Word2Vec","level":"12.1","depth":1,"path":"chapter-11/word2vec.md","ref":"chapter-11/word2vec.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-11/doc2vec.md","mtime":"2020-09-14T14:39:27.066Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-14T14:39:30.496Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
