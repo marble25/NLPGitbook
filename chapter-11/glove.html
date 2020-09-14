@@ -874,7 +874,22 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="glove">GloVe</h2>
+<hr>
+<p>GloVe&#xB294; Word2Vec&#xCC98;&#xB7FC; context&#xB97C; &#xC774;&#xC6A9;&#xD574;&#xC11C; &#xB2E8;&#xC5B4;&#xB97C; vector&#xB85C; &#xD45C;&#xD604;&#xD558;&#xB294; &#xBC29;&#xBC95;&#xC785;&#xB2C8;&#xB2E4;.<br>GloVe&#xB97C; &#xD6C8;&#xB828;&#xD558;&#xB294; &#xB2E4;&#xC591;&#xD55C; &#xBC29;&#xBC95;&#xC774; &#xC788;&#xC9C0;&#xB9CC;, &#xC774;&#xBC88;&#xC5D0;&#xB294; GloVe &#xC0AC;&#xC6A9;&#xC5D0;&#xB9CC; &#xC9D1;&#xC911;&#xD560; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xBBF8;&#xB9AC; &#xD6C8;&#xB828;&#xB41C; GloVe&#xB294; <a href="http://nlp.stanford.edu/data/glove.6B.zip" target="_blank">GloVe Download</a>&#xC5D0;&#xC11C; &#xBC1B;&#xC744; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.scripts.glove2word2vec import glove2word2vec
+
+glove_input_file = &apos;glove.6B.100d.txt&apos;
+word2vec_output_file = &apos;glove.6B.100d.txt.word2vec&apos;
+glove2word2vec(glove_input_file, word2vec_output_file)
+</code></pre><p>GloVe&#xBCA1;&#xD130;&#xB97C; &#xB85C;&#xB4DC;&#xD55C; &#xD6C4;&#xC5D0; Word2Vec&#xC5D0;&#xC11C; &#xD588;&#xB358; &#xC608;&#xC81C;&#xB97C; &#xADF8;&#xB300;&#xB85C; &#xC2E4;&#xD589;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models import KeyedVectors
+model = KeyedVectors.load_word2vec_format(word2vec_output_file, binary=False)
+print(model.most_similar(positive=[&apos;woman&apos;, &apos;king&apos;], negative=[&apos;man&apos;], topn=1))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(&apos;queen&apos;, 0.7698541283607483)]
+</code></pre>
                                 
                                 </section>
                             
@@ -917,7 +932,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"GloVe","level":"12.3","depth":1,"next":{"title":"FastText","level":"12.4","depth":1,"path":"chapter-11/fasttext.md","ref":"chapter-11/fasttext.md","articles":[]},"previous":{"title":"Doc2Vec","level":"12.2","depth":1,"path":"chapter-11/doc2vec.md","ref":"chapter-11/doc2vec.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-11/glove.md","mtime":"2020-09-14T13:06:10.418Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-14T14:39:30.496Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"GloVe","level":"12.3","depth":1,"next":{"title":"FastText","level":"12.4","depth":1,"path":"chapter-11/fasttext.md","ref":"chapter-11/fasttext.md","articles":[]},"previous":{"title":"Doc2Vec","level":"12.2","depth":1,"path":"chapter-11/doc2vec.md","ref":"chapter-11/doc2vec.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-11/glove.md","mtime":"2020-09-14T15:08:56.970Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-14T15:09:18.259Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
