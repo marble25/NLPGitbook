@@ -887,7 +887,55 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h2 id="word2vec">Word2Vec</h2>
+<hr>
+<p>Word2Vec &#xC54C;&#xACE0;&#xB9AC;&#xC998;&#xC740; &#xAD49;&#xC7A5;&#xD788; &#xB9E4;&#xB825;&#xC801;&#xC774;&#xACE0; &#xC720;&#xC6A9;&#xD55C; &#xD234;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xC54C;&#xACE0;&#xB9AC;&#xC998;&#xC740; &#xB2E8;&#xC5B4;&#xB97C; &#xBCA1;&#xD130; &#xD615;&#xD0DC;&#xC758; &#xD45C;&#xD604;&#xC73C;&#xB85C; &#xBC14;&#xAFB8;&#xB294; &#xC77C;&#xC744; &#xD569;&#xB2C8;&#xB2E4;.<br><em>Efficient Estimation of Word Representations in Vector Space</em> &#xACFC; <em>Linguistic Regularities in Continuous Space Word</em> &#xB77C;&#xB294; &#xB17C;&#xBB38;&#xC5D0;&#xC11C; Word2Vec&#xC758; &#xCD08;&#xC11D;&#xC744; &#xB2E4;&#xC84C;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774; &#xAC83;&#xC774; &#xC815;&#xD655;&#xD788; &#xC5B4;&#xB5A4; &#xC77C;&#xC744; &#xD560;&#xAE4C;&#xC694;?<br>&#xB17C;&#xBB38;&#xC5D0;&#xC11C; &#xB4E0; &#xC608;&#xB97C; &#xB4E4;&#xC5B4;&#xC11C; &#xC124;&#xBA85;&#xD558;&#xC790;&#xBA74;, V(King) - V(Man) + V(Woman) = V(Queen), &#xC989; &#xC655;&#xC5D0;&#xC11C; &#xB0A8;&#xC790; &#xC18D;&#xC131;&#xC744; &#xBE7C;&#xACE0; &#xC5EC;&#xC790; &#xC18D;&#xC131;&#xC744; &#xB354;&#xD558;&#xBA74; &#xC5EC;&#xC655;&#xC774; &#xB41C;&#xB2E4;&#xB294; &#xB9D0;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xAC83;&#xC774; &#xC65C; &#xC8FC;&#xBAA9;&#xC744; &#xBC1B;&#xB294;&#xC9C0;&#xB294; &#xBC14;&#xB85C; &#xC5EC;&#xAE30;&#xC5D0; &#xB2F4;&#xACA8; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xAC00; &#xB2E8;&#xC5B4;&#xB97C; &#xC778;&#xC9C0;&#xD558;&#xB294; &#xAC83;&#xACFC; &#xC720;&#xC0AC;&#xD558;&#xAC8C; &#xBCA1;&#xD130;&#xB85C; &#xD45C;&#xD604;&#xD558;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC5B4;&#xB5BB;&#xAC8C; Word2Vec&#xC774; &#xB3D9;&#xC791;&#xD558;&#xAC8C; &#xB420;&#xAE4C;&#xC694;?<br>Word2Vec&#xC740; &#xBB38;&#xB9E5;&#xC744; &#xC774;&#xD574;&#xD558;&#xB294;&#xB370;, &#xAD6C;&#xCCB4;&#xC801;&#xC73C;&#xB85C; sliding window size&#xB97C; &#xC815;&#xD574;&#xC11C; &#xADF8; &#xB2E8;&#xC5B4;&#xB4E4; &#xC0AC;&#xC774;&#xC5D0;&#xC11C; &#xBAA9;&#xD45C; &#xB2E8;&#xC5B4;&#xAC00; &#xB098;&#xC62C; &#xD655;&#xB960;&#xC744; &#xCC3E;&#xC544;&#xB0C5;&#xB2C8;&#xB2E4;.<br>Word2Vec&#xB97C; &#xD559;&#xC2B5;&#xD558;&#xB294;&#xB370;&#xB294; <strong>Continuous Bag of Words</strong>(CBOW)&#xC640; Skip Gram model &#xBA54;&#xC18C;&#xB4DC;&#xAC00; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<h3 id="gensim&#xC5D0;&#xC11C;-word2vec-&#xC0AC;&#xC6A9;&#xD558;&#xAE30;">Gensim&#xC5D0;&#xC11C; Word2Vec &#xC0AC;&#xC6A9;&#xD558;&#xAE30;</h3>
+<p>&#xBA3C;&#xC800; &#xC774; &#xC608;&#xC81C;&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xD560; &#xD30C;&#xC77C;&#xC744; &#xB2E4;&#xC6B4;&#xB85C;&#xB4DC; &#xBC1B;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.<br><a href="http://mattmahoney.net/dc/text8.zip" target="_blank">text8.zip</a>&#xC744; &#xB2E4;&#xC6B4;&#xBC1B;&#xC544;&#xC11C; &#xAC19;&#xC740; &#xD3F4;&#xB354;&#xC5D0; &#xC555;&#xCD95;&#xC744; &#xD480;&#xC5B4;&#xC90D;&#xB2C8;&#xB2E4;.<br>&#xADF8; &#xD6C4;, &#xC608;&#xC81C;&#xB97C; &#xC9C4;&#xD589;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models import word2vec
+
+sentences = word2vec.Text8Corpus(&apos;text8&apos;)
+model = word2vec.Word2Vec(sentences, size=200, hs=1)
+print(model)
+</code></pre><p>&#xAF64; &#xC624;&#xB79C; &#xC2DC;&#xAC04;&#xC744; &#xAE30;&#xB2E4;&#xB9B0; &#xD6C4; &#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>Word2Vec(vocab=71290, size=200, alpha=0.025)
+</code></pre><p>&#xC774;&#xC81C; &#xC6B0;&#xB9AC;&#xB294; &#xD559;&#xC2B5;&#xB41C; model&#xC744; &#xAC00;&#xC9C0;&#xAC8C; &#xB418;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC720;&#xBA85;&#xD55C; King - Man + Woman &#xC608;&#xC81C;&#xB97C; &#xC2E4;&#xD589;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(model.wv.most_similar(positive=[&apos;woman&apos;, &apos;king&apos;], negative=[&apos;man&apos;], topn=1))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(&apos;queen&apos;, 0.5745400190353394)]
+</code></pre><p>&#xC6B0;&#xB9AC;&#xAC00; &#xC608;&#xC0C1;&#xD588;&#xB4EF;&#xC774;, queen&#xC774; &#xACB0;&#xACFC;&#xB85C; &#xB098;&#xC654;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xAC83;&#xC740; &#xC5ED;&#xC2DC; &#xD655;&#xB960;&#xC801;&#xC778; &#xACFC;&#xC815;&#xC774;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xB2E4;&#xB978; &#xB2E8;&#xC5B4;&#xB97C; &#xC5BB;&#xC744; &#xAC00;&#xB2A5;&#xC131;&#xC774; &#xC788;&#xC9C0;&#xB9CC;, &#xB300;&#xBD80;&#xBD84;&#xC758; &#xACBD;&#xC6B0;&#xB294; queen&#xC774; &#xB098;&#xC62C; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xB2E4;&#xC74C; &#xCF54;&#xB4DC;&#xB97C; &#xC2E4;&#xD589;&#xD574; &#xBD05;&#xC2DC;&#xB2E4;.   </p>
+<pre><code>print(model.wv.most_similar(positive=[&apos;woman&apos;, &apos;king&apos;], negative=[&apos;man&apos;]))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xB098;&#xC635;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>[(&apos;queen&apos;, 0.5745400190353394),
+ (&apos;throne&apos;, 0.5453873872756958),
+ (&apos;regent&apos;, 0.5417712926864624),
+ (&apos;emperor&apos;, 0.532577395439148),
+ (&apos;empress&apos;, 0.5271527171134949),
+ (&apos;princess&apos;, 0.5225112438201904),
+ (&apos;consort&apos;, 0.5199817419052124),
+ (&apos;monarch&apos;, 0.5107275247573853),
+ (&apos;prince&apos;, 0.5055060982704163),
+ (&apos;sigismund&apos;, 0.48685187101364136)]
+</code></pre><p>&#xC2E4;&#xC81C;&#xB85C; &#xB2E8;&#xC5B4;&#xAC00; &#xC5B4;&#xB5BB;&#xAC8C; &#xBCA1;&#xD130;&#xB85C; &#xD45C;&#xD604;&#xB418;&#xC5C8;&#xB294;&#xC9C0;&#xB97C; &#xC54C;&#xB824;&#xBA74; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xC785;&#xB825;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(model.wv[&apos;computer&apos;])
+</code></pre><p>size&#xB97C; &#xC804;&#xC5D0; 200&#xC73C;&#xB85C; &#xC124;&#xC815;&#xD588;&#xAE30; &#xB54C;&#xBB38;&#xC5D0; &#xACB0;&#xACFC;&#xB294; 200&#xCC28;&#xC6D0;&#xC758; &#xBCA1;&#xD130;&#xAC00; &#xB098;&#xC624;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p><code>doesnt_match</code> &#xBA54;&#xC18C;&#xB4DC;&#xB97C; &#xD1B5;&#xD574; &#xB9AC;&#xC2A4;&#xD2B8;&#xC5D0;&#xC11C; &#xB2E4;&#xB978; &#xB2E8;&#xC5B4;&#xB4E4;&#xACFC; &#xAC00;&#xC7A5; &#xBA40;&#xB9AC; &#xB5A8;&#xC5B4;&#xC9C4; &#xB2E8;&#xC5B4;&#xB3C4; &#xC54C;&#xC544;&#xB0BC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(model.wv.doesnt_match(&apos;breakfast cereal dinner lunch&apos;.split()))
+</code></pre><p>&#xACB0;&#xACFC;&#xB294; &apos;cereal&apos;&#xC774; &#xB098;&#xC624;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xB610;&#xD55C;, &#xC5BC;&#xB9C8;&#xB098; &#xB2E8;&#xC5B4;&#xAC00; &#xB2E4;&#xB978; &#xB2E8;&#xC5B4;&#xC640; &#xAC00;&#xAE4C;&#xC6B4;&#xC9C0;&#xB3C4; &#xC54C;&#xC544;&#xB0BC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>print(model.wv.similarity(&apos;woman&apos;, &apos;man&apos;))
+print(model.wv.similarity(&apos;woman&apos;, &apos;cereal&apos;))
+print(model.wv.distance(&apos;woman&apos;, &apos;man&apos;))
+</code></pre><p>&#xACB0;&#xACFC;&#xB97C; &#xBCF4;&#xBA74; &apos;woman&apos;&#xACFC; &apos;cereal&apos;&#xC740; &#xC720;&#xC0AC;&#xD558;&#xC9C0; &#xC54A;&#xB2E4;&#xACE0; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<p>&#xC774;&#xBBF8; &#xD559;&#xC2B5;&#xB41C; &#xAD6C;&#xAE00; word2vec &#xBAA8;&#xB378;&#xC744; &#xB2E4;&#xC6B4;&#xB85C;&#xB4DC;&#xBC1B;&#xC744; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xADF8; &#xD6C4; &#xB2E4;&#xC74C;&#xACFC; &#xAC19;&#xC774; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>from gensim.models import KeyedVectors
+
+filename = &apos;GoogleNews-vectors-negative300.bin&apos;
+model = KeyedVectors.load_word2vec_format(filename, binary=True)
+</code></pre><p>&#xC774; &#xBAA8;&#xB378;&#xC740; 300 &#xCC28;&#xC6D0;&#xC73C;&#xB85C; &#xAD6C;&#xC131;&#xB41C; word vector&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xBAA8;&#xB378;&#xC744; &#xC2E4;&#xD589;&#xD558;&#xB294; &#xAC83;&#xC740; &#xC55E;&#xC758; &#xC608;&#xC81C;&#xC640; &#xC720;&#xC0AC;&#xD558;&#xAC8C; &#xC9C4;&#xD589;&#xD558;&#xBA74; &#xB429;&#xB2C8;&#xB2E4;.   </p>
+
                                 
                                 </section>
                             
@@ -930,7 +978,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Word2Vec","level":"12.1","depth":1,"next":{"title":"Doc2Vec","level":"12.2","depth":1,"path":"chapter-11/doc2vec.md","ref":"chapter-11/doc2vec.md","articles":[]},"previous":{"title":"텍스트 요약","level":"11.3","depth":1,"path":"chapter-10/summarize.md","ref":"chapter-10/summarize.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-11/word2vec.md","mtime":"2020-09-14T13:06:03.798Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-14T13:06:28.457Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Word2Vec","level":"12.1","depth":1,"next":{"title":"Doc2Vec","level":"12.2","depth":1,"path":"chapter-11/doc2vec.md","ref":"chapter-11/doc2vec.md","articles":[]},"previous":{"title":"텍스트 요약","level":"11.3","depth":1,"path":"chapter-10/summarize.md","ref":"chapter-10/summarize.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-11/word2vec.md","mtime":"2020-09-14T14:06:57.741Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-14T14:07:05.349Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
