@@ -74,3 +74,14 @@
 * [유사도 행렬](chapter-10/similarity_metrics.md)
 * [유사도 쿼리](chapter-10/similarity_queries.md)
 * [텍스트 요약](chapter-10/summarize.md)
+
+### Chapter 11 - Vector Presentation
+
+* [Word2Vec](chapter-11/word2vec.md)
+* [Doc2Vec](chapter-11/doc2vec.md)
+* [기타 Word Embeddings](chapter-11/etc.md)
+* [GloVe](chapter-11/glove.md)
+* [FastText](chapter-11/fasttext.md)
+* [WordRank](chapter-11/wordrank.md)
+* [Varembed](chapter-11/varembed.md)
+* [Poincare](chapter-11/poincare.md)
