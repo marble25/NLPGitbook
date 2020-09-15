@@ -81,3 +81,8 @@
 * [Doc2Vec](chapter-11/doc2vec.md)
 * [GloVe](chapter-11/glove.md)
 * [기타](chapter-11/etc.md)
+
+### Chapter 12 - Deep Learning for Text
+
+* [텍스트를 위한 딥러닝](chapter-12/dl4text.md)
+* [텍스트 생성](chapter-12/generate.md)
