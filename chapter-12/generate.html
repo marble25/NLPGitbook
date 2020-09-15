@@ -873,63 +873,90 @@
 pip install keras
 pip install tensorflow
 </code></pre><p>&#xC774;&#xC804;&#xC5D0; &#xC0AC;&#xC6A9;&#xD588;&#xB358; &apos;HP1.txt&apos;&#xB97C; &#xC0AC;&#xC6A9;&#xD574;&#xC11C; &#xC9C4;&#xD589;&#xD558;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>import keras
-from keras.models import Sequential
-from keras.layers import LSTM, Dense, Dropout
-from keras.callbacks import ModelCheckpoint
-from keras.utils import np_utils
+<pre><code>from tensorflow import keras
+from tensorflow.keras import layers
+
 import numpy as np
+import random
+import io
 
-filename = &apos;HP1.txt&apos;
-raw_text = open(filename).read()
-raw_text = raw_text.lower()
+path = keras.utils.get_file(
+    &quot;nietzsche.txt&quot;, origin=&quot;https://s3.amazonaws.com/text-datasets/nietzsche.txt&quot;
+)
+with io.open(path, encoding=&quot;utf-8&quot;) as f:
+    text = f.read().lower()
+text = text.replace(&quot;\n&quot;, &quot; &quot;)  # We remove newlines chars for nicer display
+print(&quot;Corpus length:&quot;, len(text))
 
-chars = sorted(list(set(raw_text)))
-chars_to_int = dict((c, i) for i, c in enumerate(chars))
-ix_to_char = dict((i, c) for i, c in enumerate(chars))
-vocab_size = len(chars)
-</code></pre><p>HP1&#xC744; &#xC77D;&#xC5B4;&#xC11C; <code>chars</code>&#xC5D0;&#xB294; &#xC774; &#xD14D;&#xC2A4;&#xD2B8;&#xC5D0; &#xB098;&#xC624;&#xB294; &#xBAA8;&#xB4E0; &#xBB38;&#xC790;&#xB97C; &#xC800;&#xC7A5;&#xD558;&#xACE0;, &#xC778;&#xB371;&#xC2A4;&#xC640; &#xBB38;&#xC790; &#xC0AC;&#xC774;&#xC758; &#xB9E4;&#xD551; &#xD14C;&#xC774;&#xBE14;&#xC744; &#xB9CC;&#xB4E4;&#xC5B4; &#xC8FC;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>seq_length = 100
-list_X = []
-list_Y = []
-for i in range(0, len(raw_text) - seq_length, 1):
-    seq_in = raw_text[i:i + seq_length]
-    seq_out = raw_text[i + seq_length]
-    list_X.append([chars_to_int[char] for char in seq_in])
-    list_Y.append([chars_to_int[seq_out]])
+chars = sorted(list(set(text)))
+print(&quot;Total chars:&quot;, len(chars))
+char_indices = dict((c, i) for i, c in enumerate(chars))
+indices_char = dict((i, c) for i, c in enumerate(chars))
+</code></pre><p>&#xB2C8;&#xCCB4; &#xD30C;&#xC77C;&#xC744; &#xC6F9;&#xC5D0;&#xC11C; &#xC77D;&#xC5B4;&#xB4E4;&#xC5EC;&#xC11C; <code>chars</code>&#xC5D0;&#xB294; &#xC774; &#xD14D;&#xC2A4;&#xD2B8;&#xC5D0; &#xB098;&#xC624;&#xB294; &#xBAA8;&#xB4E0; &#xBB38;&#xC790;&#xB97C; &#xC800;&#xC7A5;&#xD558;&#xACE0;, &#xC778;&#xB371;&#xC2A4;&#xC640; &#xBB38;&#xC790; &#xC0AC;&#xC774;&#xC758; &#xB9E4;&#xD551; &#xD14C;&#xC774;&#xBE14;&#xC744; &#xB9CC;&#xB4E4;&#xC5B4; &#xC8FC;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>maxlen = 40
+step = 3
+sentences = []
+next_chars = []
+for i in range(0, len(text) - maxlen, step):
+    sentences.append(text[i : i + maxlen])
+    next_chars.append(text[i + maxlen])
+print(&quot;Number of sequences:&quot;, len(sentences))
 
-n_patterns = len(list_X)
+x = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
+y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
+for i, sentence in enumerate(sentences):
+    for t, char in enumerate(sentence):
+        x[i, t, char_indices[char]] = 1
+    y[i, char_indices[next_chars[i]]] = 1
+</code></pre><p>40&#xAC1C;&#xC758; &#xBB38;&#xC790;&#xB85C; sliding window&#xB97C; &#xB9CC;&#xB4E4;&#xC5B4;&#xC11C; &#xBB38;&#xB9E5;&#xC744; &#xC81C;&#xACF5;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xADF8;&#xB798;&#xC11C; 100&#xAC1C;&#xC758; &#xBB38;&#xC790;&#xB97C; &#xC81C;&#xACF5;&#xD558;&#xBA74; &#xADF8; &#xB2E4;&#xC74C; &#xBB38;&#xC790;&#xB97C; &#xB9DE;&#xCD9C; &#xC218; &#xC788;&#xB3C4;&#xB85D; list_X&#xC640; list_Y&#xC5D0; &#xBB38;&#xC790;&#xC758; index &#xD615;&#xD0DC;&#xB85C; &#xBC14;&#xAFB8;&#xC5B4; &#xC800;&#xC7A5;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>model = keras.Sequential(
+    [
+        keras.Input(shape=(maxlen, len(chars))),
+        layers.LSTM(128),
+        layers.Dense(len(chars), activation=&quot;softmax&quot;),
+    ]
+)
+optimizer = keras.optimizers.RMSprop(learning_rate=0.01)
+model.compile(loss=&quot;categorical_crossentropy&quot;, optimizer=optimizer)
+</code></pre><p>&#xC774; &#xACBD;&#xC6B0;&#xC5D0;&#xB294; LSTM&#xC744; &#xD558;&#xB098;&#xC758; &#xB808;&#xC774;&#xC5B4;&#xB85C; &#xC81C;&#xACF5;&#xD558;&#xACE0;, SoftMax activation, &#xADF8;&#xB9AC;&#xACE0; RMSprop optimizer&#xB97C; &#xC801;&#xC6A9;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>Activation&#xC740; &#xB124;&#xD2B8;&#xC6CC;&#xD06C;&#xC5D0;&#xC11C; &#xC5B4;&#xB5A4; &#xB274;&#xB7F0;&#xC744; &#xD65C;&#xC131;&#xC2DC;&#xD0AC;&#xC9C0;&#xB97C; &#xACB0;&#xC815;&#xD574;&#xC8FC;&#xACE0;, optimizer&#xB294; &#xC5D0;&#xB7EC;&#xB97C; &#xC904;&#xC5EC;&#xC8FC;&#xB294; &#xC5ED;&#xD560;&#xC744; &#xD1B5;&#xD574; &#xC2E4;&#xC9C8;&#xC801;&#xC778; &#xD559;&#xC2B5;&#xC744; &#xC9C4;&#xD589;&#xD569;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>def sample(preds, temperature=1.0):
+    # helper function to sample an index from a probability array
+    preds = np.asarray(preds).astype(&quot;float64&quot;)
+    preds = np.log(preds) / temperature
+    exp_preds = np.exp(preds)
+    preds = exp_preds / np.sum(exp_preds)
+    probas = np.random.multinomial(1, preds, 1)
+    return np.argmax(probas)
+</code></pre><p>&#xBAA8;&#xB378;&#xC5D0;&#xC11C; &#xC608;&#xCE21;&#xD55C; &#xAC12;&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xAC00;&#xB2A5;&#xC131; &#xB192;&#xC740; &#xB2E4;&#xC74C; &#xC778;&#xB371;&#xC2A4;&#xB97C; &#xBC18;&#xD658;&#xD574;&#xC8FC;&#xB294; &#xD568;&#xC218;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+<pre><code>epochs = 40
+batch_size = 128
 
-X = np.reshape(list_X, (n_patterns, seq_length, 1))
-Y = np_utils.to_categorical(list_Y)
-</code></pre><p>100&#xAC1C;&#xC758; &#xBB38;&#xC790;&#xB85C; sliding window&#xB97C; &#xB9CC;&#xB4E4;&#xC5B4;&#xC11C; &#xBB38;&#xB9E5;&#xC744; &#xC81C;&#xACF5;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xADF8;&#xB798;&#xC11C; 100&#xAC1C;&#xC758; &#xBB38;&#xC790;&#xB97C; &#xC81C;&#xACF5;&#xD558;&#xBA74; &#xADF8; &#xB2E4;&#xC74C; &#xBB38;&#xC790;&#xB97C; &#xB9DE;&#xCD9C; &#xC218; &#xC788;&#xB3C4;&#xB85D; list_X&#xC640; list_Y&#xC5D0; &#xBB38;&#xC790;&#xC758; index &#xD615;&#xD0DC;&#xB85C; &#xBC14;&#xAFB8;&#xC5B4; &#xC800;&#xC7A5;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>model = Sequential()
-model.add(LSTM(256, input_shape=(X.shape[1], X.shape[2])))
-model.add(Dropout(0.2))
-model.add(Dense(Y.shape[1], activation=&apos;softmax&apos;))
-model.compile(loss=&apos;categorical_crossentropy&apos;, optimizer=&apos;adam&apos;)
-</code></pre><p>&#xC774; &#xACBD;&#xC6B0;&#xC5D0;&#xB294; LSTM&#xC744; &#xD558;&#xB098;&#xC758; &#xB808;&#xC774;&#xC5B4;&#xB85C; &#xC81C;&#xACF5;&#xD558;&#xACE0;, 0.2&#xC758; Dropout, SoftMax activation, &#xADF8;&#xB9AC;&#xACE0; ADAM optimizer&#xB97C; &#xC801;&#xC6A9;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>Dropout&#xC740; &#xD558;&#xB098;&#xC758; &#xB370;&#xC774;&#xD130;&#xC14B;&#xC5D0;&#xB9CC; overfitting&#xB418;&#xC9C0; &#xC54A;&#xB3C4;&#xB85D; &#xB178;&#xB4DC;&#xC758; &#xC218;&#xB97C; &#xC904;&#xC5EC;&#xC8FC;&#xB294; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.<br>Activation&#xC740; &#xB124;&#xD2B8;&#xC6CC;&#xD06C;&#xC5D0;&#xC11C; &#xC5B4;&#xB5A4; &#xB274;&#xB7F0;&#xC744; &#xD65C;&#xC131;&#xC2DC;&#xD0AC;&#xC9C0;&#xB97C; &#xACB0;&#xC815;&#xD574;&#xC8FC;&#xACE0;, optimizer&#xB294; &#xC5D0;&#xB7EC;&#xB97C; &#xC904;&#xC5EC;&#xC8FC;&#xB294; &#xC5ED;&#xD560;&#xC744; &#xD1B5;&#xD574; &#xC2E4;&#xC9C8;&#xC801;&#xC778; &#xD559;&#xC2B5;&#xC744; &#xC9C4;&#xD589;&#xD569;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>filepath=&apos;weights-improvement-{epoch:02d}-{loss:.4f}.hdf5&apos;
-checkpoint = ModelCheckpoint(filepath, monitor=&apos;loss&apos;, verbose=1, save_best_only=True, mode=&apos;min&apos;)
-callbacks_list = [checkpoint]
-model.fit(X, Y, epochs=20, batch_size=128, callbacks=callbacks_list)
-</code></pre><p>&#xBAA8;&#xB378;&#xC744; &#xC644;&#xC131;&#xD588;&#xC73C;&#xBA74; &#xC2E4;&#xC81C;&#xB85C; &#xD559;&#xC2B5;&#xC744; &#xC9C4;&#xD589;&#xD574; &#xBCF4;&#xACA0;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xD559;&#xC2B5;&#xC740; &#xAF64; &#xC624;&#xB79C; &#xC2DC;&#xAC04;&#xC774; &#xC9C0;&#xB09C; &#xD6C4;&#xC5D0; &#xC644;&#xB8CC;&#xAC00; &#xB429;&#xB2C8;&#xB2E4;.<br><code>fit</code> &#xD568;&#xC218;&#xC5D0;&#xC11C; &#xC2E4;&#xC81C;&#xB85C; &#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xB4E4;&#xC744; &#xAC00;&#xC9C0;&#xACE0; &#xD559;&#xC2B5;&#xC744; &#xC9C4;&#xD589;&#xD558;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.   </p>
-<pre><code>start = np.random.randint(0, len(X) - 1)
-pattern = np.ravel(X[start]).tolist()
+for epoch in range(epochs):
+    model.fit(x, y, batch_size=batch_size, epochs=1)
+    print()
+    print(&quot;Generating text after epoch: %d&quot; % epoch)
 
-output = []
-for i in range(250):
-    x = np.reshape(pattern, (1, len(pattern), 1))
-    x = x / float(vocab_size)
-    prediction = model.predict(x, verbose=0)
-    index = np.argmax(prediction)
-    result = index
-    output.append(result)
-    pattern.append(index)
-    pattern = pattern[1:len(pattern)]
+    start_index = random.randint(0, len(text) - maxlen - 1)
+    for diversity in [0.2, 0.5, 1.0, 1.2]:
+        print(&quot;...Diversity:&quot;, diversity)
 
-print(&apos;&quot;{}&quot;&apos;.format(&apos;&apos;.join([ix_to_char[value] for value in output])))
-</code></pre><p>&#xCC98;&#xC74C;&#xC5D0; &#xB79C;&#xB364;&#xC73C;&#xB85C; &#xD558;&#xB098;&#xC758; &#xCE90;&#xB9AD;&#xD130;&#xB85C; &#xC2DC;&#xC791;&#xD574;&#xC11C; argmax&#xB97C; &#xC774;&#xC6A9;&#xD574;&#xC11C; &#xADF8; &#xB2E4;&#xC74C;&#xC5D0; &#xC62C; &#xAC00;&#xC7A5; &#xB192;&#xC740; character&#xB97C; &#xACE8;&#xB77C;&#xC11C; &#xBD99;&#xC5EC;&#xB098;&#xAC00;&#xB294; &#xD615;&#xC2DD;&#xC785;&#xB2C8;&#xB2E4;.   </p>
+        generated = &quot;&quot;
+        sentence = text[start_index : start_index + maxlen]
+        print(&apos;...Generating with seed: &quot;&apos; + sentence + &apos;&quot;&apos;)
+
+        for i in range(400):
+            x_pred = np.zeros((1, maxlen, len(chars)))
+            for t, char in enumerate(sentence):
+                x_pred[0, t, char_indices[char]] = 1.0
+            preds = model.predict(x_pred, verbose=0)[0]
+            next_index = sample(preds, diversity)
+            next_char = indices_char[next_index]
+            sentence = sentence[1:] + next_char
+            generated += next_char
+
+        print(&quot;...Generated: &quot;, generated)
+        print()
+</code></pre><p>&#xC2E4;&#xC81C;&#xB85C; &#xD559;&#xC2B5;&#xC744; &#xD558;&#xACE0; &#xD14C;&#xC2A4;&#xD2B8;&#xB97C; &#xC9C4;&#xD589;&#xD558;&#xB294; &#xACFC;&#xC815;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xD55C; epoch&#xB9C8;&#xB2E4; &#xD559;&#xC2B5; &#xD6C4;&#xC5D0; &#xB79C;&#xB364;&#xC73C;&#xB85C; &#xBB38;&#xC790;&#xC5F4;&#xC744; &#xAC00;&#xC838;&#xC640;&#xC11C; &#xADF8; &#xB4A4;&#xB97C; &#xC608;&#xCE21;&#xD574; &#xBCF4;&#xB294; &#xACFC;&#xC815;&#xC785;&#xB2C8;&#xB2E4;.   </p>
 <p>&#xC704;&#xC758; LSTM &#xC608;&#xC2DC;&#xC5D0;&#xC11C;&#xB294; &#xADF8;&#xB807;&#xAC8C; &#xB9CE;&#xC740; &#xB808;&#xC774;&#xC5B4;&#xB97C; &#xC313;&#xC9C0; &#xC54A;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xD558;&#xC9C0;&#xB9CC;, &#xB354; &#xB9CE;&#xC740; &#xB808;&#xC774;&#xC5B4;&#xB97C; &#xC313;&#xACE0; &#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xB97C; &#xC870;&#xC815;&#xD55C;&#xB2E4;&#xBA74;, &#xD6E8;&#xC52C; &#xC88B;&#xC740; &#xACB0;&#xACFC;&#xB97C; &#xAC00;&#xC838;&#xC62C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
 
                                 
@@ -970,7 +997,7 @@ print(&apos;&quot;{}&quot;&apos;.format(&apos;&apos;.join([ix_to_char[value] for
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"텍스트 생성","level":"13.2","depth":1,"previous":{"title":"텍스트를 위한 딥러닝","level":"13.1","depth":1,"path":"chapter-12/dl4text.md","ref":"chapter-12/dl4text.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-12/generate.md","mtime":"2020-09-15T15:06:25.411Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-15T15:06:31.600Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"텍스트 생성","level":"13.2","depth":1,"previous":{"title":"텍스트를 위한 딥러닝","level":"13.1","depth":1,"path":"chapter-12/dl4text.md","ref":"chapter-12/dl4text.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-12/generate.md","mtime":"2020-09-15T18:04:16.749Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-15T18:04:21.904Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
