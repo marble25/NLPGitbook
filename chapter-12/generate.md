@@ -10,7 +10,7 @@ pip install keras
 pip install tensorflow
 ```
 
-이전에 사용했던 'HP1.txt'를 사용해서 진행하겠습니다.   
+설치 완료 후 진행해 보겠습니다.   
 
 ```
 from tensorflow import keras
