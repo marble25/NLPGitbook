@@ -86,3 +86,8 @@
 
 * [텍스트를 위한 딥러닝](chapter-12/dl4text.md)
 * [텍스트 생성](chapter-12/generate.md)
+
+### Chapter 13 - Deep Learning for Text Advanced
+
+* [Keras와 딥러닝](chapter-13/keras.md)
+* [spaCy와 딥러닝](chapter-13/spaCy.md)
