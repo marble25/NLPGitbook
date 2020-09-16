@@ -296,3 +296,6 @@ Test accuracy:  0.7211803197860718
 dataset을 토큰화하는 등의 preprocessing을 진행한 후에 glove data를 이용해서 embedding 층을 만들어냅니다.   
 그 후, Conv1D와 MaxPooling을 여러개 쌓아서 모델을 구성합니다.   
 마지막으로 모델을 훈련시키면 작업은 끝납니다.   
+
+Word Embedding은 model에 대한 더 많은 context를 포함하고 있고, 단어를 더 잘 설명할 수 있기 때문에, 성능 향상이 일어나는 것은 당연합니다.   
+
