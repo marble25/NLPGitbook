@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>텍스트를 위한 딥러닝 · GitBook</title>
+        <title>데이터 수집 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="generate.html" />
+    <link rel="next" href="chatbot.html" />
     
     
-    <link rel="prev" href="../chapter-11/etc.html" />
+    <link rel="prev" href="sentiment_analysis.html" />
     
 
     </head>
@@ -797,9 +797,9 @@
         
         
     
-        <li class="chapter active" data-level="13.1" data-path="dl4text.html">
+        <li class="chapter " data-level="13.1" data-path="../chapter-12/dl4text.html">
             
-                <a href="dl4text.html">
+                <a href="../chapter-12/dl4text.html">
             
                     
                     텍스트를 위한 딥러닝
@@ -810,9 +810,9 @@
             
         </li>
     
-        <li class="chapter " data-level="13.2" data-path="generate.html">
+        <li class="chapter " data-level="13.2" data-path="../chapter-12/generate.html">
             
-                <a href="generate.html">
+                <a href="../chapter-12/generate.html">
             
                     
                     텍스트 생성
@@ -863,9 +863,9 @@
         
         
     
-        <li class="chapter " data-level="15.1" data-path="../chapter-14/sentiment_analysis.html">
+        <li class="chapter " data-level="15.1" data-path="sentiment_analysis.html">
             
-                <a href="../chapter-14/sentiment_analysis.html">
+                <a href="sentiment_analysis.html">
             
                     
                     감정 분석
@@ -876,9 +876,9 @@
             
         </li>
     
-        <li class="chapter " data-level="15.2" data-path="../chapter-14/data_mining.html">
+        <li class="chapter active" data-level="15.2" data-path="data_mining.html">
             
-                <a href="../chapter-14/data_mining.html">
+                <a href="data_mining.html">
             
                     
                     데이터 수집
@@ -889,9 +889,9 @@
             
         </li>
     
-        <li class="chapter " data-level="15.3" data-path="../chapter-14/chatbot.html">
+        <li class="chapter " data-level="15.3" data-path="chatbot.html">
             
-                <a href="../chapter-14/chatbot.html">
+                <a href="chatbot.html">
             
                     
                     챗봇
@@ -932,7 +932,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >텍스트를 위한 딥러닝</a>
+        <a href=".." >데이터 수집</a>
     </h1>
 </div>
 
@@ -947,14 +947,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="&#xD14D;&#xC2A4;&#xD2B8;&#xB97C;-&#xC704;&#xD55C;-&#xB525;&#xB7EC;&#xB2DD;">&#xD14D;&#xC2A4;&#xD2B8;&#xB97C; &#xC704;&#xD55C; &#xB525;&#xB7EC;&#xB2DD;</h2>
-<hr>
-<p>&#xC6B0;&#xB9AC;&#xB294; word embeddings&#xB97C; &#xC0AC;&#xC6A9;&#xD558;&#xBA74;&#xC11C; neural network&#xC758; &#xAC15;&#xB825;&#xD568;&#xC744; &#xC774;&#xBBF8; &#xACBD;&#xD5D8;&#xD588;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC774; &#xC678;&#xC5D0;&#xB3C4; &#xB2E4;&#xC591;&#xD55C; &#xD14D;&#xC2A4;&#xD2B8; &#xBD84;&#xC11D; &#xC791;&#xC5C5;&#xC5D0; neural network&#xB97C; &#xC0AC;&#xC6A9;&#xD560; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC720;&#xBA85;&#xD55C; &#xC608;&#xC2DC; &#xC911; &#xD558;&#xB098;&#xB294; Language Translation&#xC73C;&#xB85C; &#xD2B9;&#xD788; Google&#xC758; Neural Translation &#xBAA8;&#xB378;&#xC774; &#xC720;&#xBA85;&#xD569;&#xB2C8;&#xB2E4;.<br>&#xAD6C;&#xAE00;&#xC5D0;&#xC11C;&#xB294; <strong>zero-shot translation</strong> &#xBC29;&#xC2DD;&#xC73C;&#xB85C; &#xBC88;&#xC5ED;&#xD558;&#xB294;&#xB370;, &#xC774;&#xB294; &#xC5B8;&#xC5B4;&#xB97C; &#xBC88;&#xC5ED;&#xD560; &#xB54C;&#xC5D0; &#xC911;&#xAC04; &#xC5B8;&#xC5B4;&#xB97C; &#xAC70;&#xCCD0;&#xC11C; &#xBC88;&#xC5ED;&#xD55C;&#xB2E4;&#xB294; &#xC774;&#xC57C;&#xAE30;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xC608;&#xB97C; &#xB4E4;&#xC790;&#xBA74;, &#xB9D0;&#xB808;&#xC774;&#xC2DC;&#xC544;&#xC5B4;&#xC5D0;&#xC11C; &#xC544;&#xB78D;&#xC5B4;&#xB85C; &#xBC88;&#xC5ED;&#xD560; &#xB54C;&#xC5D0; &#xC601;&#xC5B4;&#xB85C; &#xBC88;&#xC5ED;&#xD55C; &#xD6C4;, &#xC601;&#xC5B4;&#xB97C; &#xC544;&#xB78D;&#xC5B4;&#xB85C; &#xBC88;&#xC5ED;&#xD558;&#xB294; &#xBC29;&#xC2DD;&#xC785;&#xB2C8;&#xB2E4;.<br>&#xBB38;&#xC7A5;&#xC744; &#xCABC;&#xAC1C;&#xAC70;&#xB098;, rule-base &#xAE30;&#xBC18;&#xC758; &#xBC88;&#xC5ED;&#xC744; &#xD558;&#xAE30;&#xBCF4;&#xB2E4;, &#xC774;&#xC81C;&#xB294; neural network&#xB97C; &#xC774;&#xC6A9;&#xD574;&#xC11C; &#xBC88;&#xC5ED;&#xC744; &#xD558;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.<br>&#xD558;&#xC9C0;&#xB9CC; &#xAE30;&#xACC4; &#xBC88;&#xC5ED;&#xC5D0; &#xC788;&#xC5B4;&#xC11C;&#xC758; &#xBC1C;&#xC804;&#xC5D0;&#xB3C4; &#xBD88;&#xAD6C;&#xD558;&#xACE0;, &#xC774; &#xAC83;&#xC740; &#xC5EC;&#xC804;&#xD788; &#xC5B4;&#xB824;&#xC6B4; &#xC791;&#xC5C5;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<p>Word Embeddings&#xB294; Text&#xC5D0;&#xC11C; &#xB525; &#xB7EC;&#xB2DD;&#xC774; &#xC4F0;&#xC774;&#xB294; &#xB610;&#xB2E4;&#xB978; &#xC608;&#xC2DC; &#xC911; &#xD558;&#xB098;&#xC785;&#xB2C8;&#xB2E4;.<br>Word Vectors&#xC640; Document Vectors&#xAC00; &#xC5BC;&#xB9C8;&#xB098; &#xB9CE;&#xC740; NLP task&#xC5D0;&#xC11C; &#xC0AC;&#xC6A9;&#xB418;&#xB294;&#xC9C0;&#xB97C; &#xACE0;&#xB824;&#xD558;&#xBA74;, &#xD14D;&#xC2A4;&#xD2B8; &#xCC98;&#xB9AC;&#xC5D0; &#xB525; &#xB7EC;&#xB2DD;&#xC774; &#xAD49;&#xC7A5;&#xD788; &#xC911;&#xC694;&#xD568;&#xC744; &#xC54C; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xB610;&#xD55C;, clustering&#xACFC; classification&#xC758; &#xAE30;&#xC220;&#xB4E4;&#xC5D0;&#xB3C4; neural network&#xAC00; &#xC790;&#xC8FC; &#xC4F0;&#xC785;&#xB2C8;&#xB2E4;.<br>Sentiment Analysis(&#xAC10;&#xC815; &#xBD84;&#xC11D;)&#xC5D0;&#xB294; CNN&#xC774;&#xB098; RNN&#xACFC; &#xAC19;&#xC740; &#xB354; &#xBCF5;&#xC7A1;&#xD55C; neural networks&#xAC00; &#xC4F0;&#xC774;&#xAE30;&#xB294; &#xD558;&#xC9C0;&#xB9CC;, &#xAE30;&#xBCF8;&#xC801;&#xC73C;&#xB85C; &#xAC04;&#xB2E8;&#xD55C; neural network&#xB3C4; &#xC0AC;&#xC6A9;&#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.   </p>
-<p>POS tagger&#xC640; NER tagger&#xB97C; &#xD559;&#xC2B5;&#xC2DC;&#xD0AC; &#xB54C;&#xC5D0;&#xB3C4; &#xB0B4;&#xBD80;&#xC801;&#xC73C;&#xB85C; neural network&#xAC00; &#xC0AC;&#xC6A9;&#xB418;&#xC5C8;&#xC2B5;&#xB2C8;&#xB2E4;.<br>&#xC6B0;&#xB9AC;&#xAC00; spaCy&#xC5D0;&#xC11C; &#xD6C8;&#xB828;&#xB41C; POS tagger&#xB9CC; &#xC4F4;&#xB2E4; &#xD558;&#xB354;&#xB77C;&#xB3C4;, &#xB525; &#xB7EC;&#xB2DD; &#xC694;&#xC18C;&#xB97C; &#xC0AC;&#xC6A9;&#xD55C;&#xB2E4;&#xACE0; &#xB9D0;&#xD560; &#xC218; &#xC788;&#xB294; &#xC148;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-<p>&#xC6B0;&#xB9AC;&#xB294; &#xB2E8;&#xC5B4;&#xB098; &#xBB38;&#xC790;&#xAC00; &#xC55E;&#xC5D0; &#xC62C; &#xD655;&#xB960;&#xC744; &#xC774;&#xC6A9;&#xD558;&#xBA74; sequence generator&#xB97C; &#xB9CC;&#xB4E4;&#xC5B4; &#xB0BC; &#xC218; &#xC788;&#xACE0;, &#xC774;&#xC81C; neural network &#xBAA8;&#xB378;&#xC740; generative model&#xC774; &#xB429;&#xB2C8;&#xB2E4;.<br>&#xB2E4;&#xC74C; &#xC7A5;&#xC5D0;&#xC11C;&#xB294; &#xC774; &#xD765;&#xBBF8;&#xB85C;&#xC6B4; &#xC8FC;&#xC81C;&#xC5D0; &#xB300;&#xD574;&#xC11C; &#xB354; &#xC790;&#xC138;&#xD788; &#xC54C;&#xC544;&#xBCFC; &#xAC83;&#xC785;&#xB2C8;&#xB2E4;.   </p>
-
+                                
                                 
                                 </section>
                             
@@ -981,12 +974,12 @@
 
             
                 
-                <a href="../chapter-11/etc.html" class="navigation navigation-prev " aria-label="Previous page: 기타">
+                <a href="sentiment_analysis.html" class="navigation navigation-prev " aria-label="Previous page: 감정 분석">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="generate.html" class="navigation navigation-next " aria-label="Next page: 텍스트 생성">
+                <a href="chatbot.html" class="navigation navigation-next " aria-label="Next page: 챗봇">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -997,7 +990,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"텍스트를 위한 딥러닝","level":"13.1","depth":1,"next":{"title":"텍스트 생성","level":"13.2","depth":1,"path":"chapter-12/generate.md","ref":"chapter-12/generate.md","articles":[]},"previous":{"title":"기타","level":"12.4","depth":1,"path":"chapter-11/etc.md","ref":"chapter-11/etc.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-12/dl4text.md","mtime":"2020-09-15T13:09:14.911Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-17T05:50:23.314Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"데이터 수집","level":"15.2","depth":1,"next":{"title":"챗봇","level":"15.3","depth":1,"path":"chapter-14/chatbot.md","ref":"chapter-14/chatbot.md","articles":[]},"previous":{"title":"감정 분석","level":"15.1","depth":1,"path":"chapter-14/sentiment_analysis.md","ref":"chapter-14/sentiment_analysis.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"chapter-14/data_mining.md","mtime":"2020-09-17T05:50:16.576Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-17T05:50:23.314Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
