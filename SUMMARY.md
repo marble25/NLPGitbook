@@ -91,9 +91,3 @@
 
 * [Keras와 딥러닝](chapter-13/keras.md)
 * [spaCy와 딥러닝](chapter-13/spaCy.md)
-
-### Chapter 14 - Sentiment Analysis & Chatbot
-
-* [감정 분석](chapter-14/sentiment_analysis.md)
-* [데이터 수집](chapter-14/data_mining.md)
-* [챗봇](chapter-14/chatbot.md)
