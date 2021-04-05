@@ -11,7 +11,7 @@
 
 ### Chapter 2 - Language Model
 
-* [spaCy](chatper-2/spaCy.md)
+* [spaCy](chapter-2/spaCy.md)
 * [Language Model 설치](chapter-2/install_lm.md)
 * [텍스트 토큰화](chapter-2/tokenize_text.md)
 * [POS 태깅](chapter-2/pos_tagging.md)
